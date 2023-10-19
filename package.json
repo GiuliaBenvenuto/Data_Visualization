@@ -1,0 +1,16 @@
+{
+  "name": "data_visualization_gnz",
+  "version": "1.0.0",
+  "description": "Nicolò Guainazzo - 4486891",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./src/input.css -o ./public/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}
