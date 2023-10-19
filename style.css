@@ -16,15 +16,36 @@
 .link {
     font-size:  26px;
     font-family: 'Fira Sans', sans-serif;
+    font-weight: 600;
     text-decoration: none;
     display: inline-block;
     text-align: center;
-    padding: 30px;
+    padding: 20px;
     color: #333;
 }
+
 
 .link:hover {
     color: #777;
     font-family: 'Fira Sans', sans-serif;
     text-decoration: none;
+}
+
+#logo{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.nav-item{
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 600;
+    font-size:  18px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.footer {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 600;
+    font-size:  15px;
 }
