@@ -11,58 +11,81 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap -->
+    <!-- tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="stylesheet" href="output.css">
 </head>
 
 <body class="bg-grey-200">
     <!-- Navbar -->
-    <nav class="bg-grey-200 p-2">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <!-- Logo -->
-          <img src="../img/Logo4.png" alt="Your Logo" class="h-8 w-8 mr-2" id="logo">
-          <a href="./index.html" class="text-grey-600 hover:text-ciano">Home</a>
-          <a href="#" class="text-grey-600 hover:text-ciano ml-4">About</a>
-          <a href="#" class="text-grey-600 hover:text-ciano ml-4">Services</a>
-          <a href="#" class="text-grey-600 hover:text-ciano ml-4">Contact</a>
-        </div>
-        <!--
-        <div>
-          <a href="#" class="text-black hover:text-blue-200">Contact</a>
-        </div>
-        -->
+    <nav
+    class="relative flex w-full flex-wrap items-center justify-between bg-neutral-200 py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
+    <div class="flex w-full flex-wrap items-center justify-between px-3">
+      <div>
+        <a
+          class="mx-2 my-1 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 lg:mb-0 lg:mt-0"
+          href="https://github.com/GiuliaBenvenuto/Data_Visualization_GNZ">
+          <img
+            src="../img/Logo4.png"
+            style="height: 40px"
+            alt=""
+          />
+        </a>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    
     <div class="text-center title">
       <div class="text-5xl"></div>
-      <h1 class="text-grey-600 text-5xl" >Data visualization</h1>
+      <h1 class="text-grey-600 text-5xl font-medium font-family: Roboto  leading-tight text-primary" >Data visualization</h1>
       <h2 class="text-grey-600 text-2xl">Assignments & Project of the GNZ Team</h2>
       </div>
     </div>
 
-    <!-- !!! Add links to assignment pages !!! -->
-    <div class="justify-center items-center">
-      <ul class="text-center text-2xl">
-        <li class="list"><a href="./Assignment_1/index.html" class="text-grey-600 hover:text-ciano  transition-colors">Assignment 1</a></li>
-        <li class="list"><a href="#" class="text-grey-600 hover:text-ciano transition-colors">Assignment 2</a></li>
-        <li class="list"><a href="#" class="text-grey-600 hover:text-ciano  transition-colors">Assignment 3</a></li>
-        <li class="list"><a href="#" class="text-grey-600 hover:text-ciano  transition-colors">Assignment 4</a></li>
-        <!-- Add more links as needed -->
-      </ul>
+    <div class="flex justify-center items-center h-screen">
+      <div class="rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+        <a href="#!">
+          <img class="rounded-t-lg" src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" alt="" />
+        </a>
+        <div class="p-6">
+          <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">Assignment 1</h5>
+          <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">Explore 5M trees dataset from Kaggle.</p>
+          <a href="./Assignment_1/index.html" class="inline-block rounded bg-blue-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]" data-te-ripple-init data-te-ripple-color="light">
+            Take a look!</a>
+        </div>
+      </div>
     </div>
 
-  
     <!-- Footer -->
-    <footer class="bg-light fixed-bottom text-center text-lg-start footer">
-      <!-- Copyright Footer -->
-      <div class="footer text-center p-3">
-        &copy; 2023 Copyright: GNZ Team
-      </div>
-    </footer> 
+<!--Footer container-->
+<footer
+  class="flex flex-col items-center bg-neutral-200 text-center text-white dark:bg-neutral-600">
+  <div class="container pt-9">
+    <div class="mb-9 flex justify-center">
+      <a href="https://www.youtube.com/watch?v=oHg5SJYRHA0" class="text-neutral-800 dark:text-neutral-200">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          fill="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!--Copyright section-->
+  <div
+    class="w-full bg-neutral-300 p-4 text-center text-neutral-700 dark:bg-neutral-700 dark:text-neutral-200">
+    © 2023 Copyright:
+    <a
+      class="text-neutral-800 dark:text-neutral-400"
+      href="https://tw-elements.com/"
+      >TW elements</a
+    >
+  </div>
+</footer>
 
 
 </body>
