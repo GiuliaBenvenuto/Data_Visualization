@@ -39,10 +39,10 @@
   </nav>
 
     
-    <div class="text-center title">
+    <div class="text-center title mt-10">
       <div class="text-5xl"></div>
       <h1 class="text-grey-600 text-5xl" >Assignment 1</h1>
-      <h2 class="text-grey-600 text-2xl">Data visualizaion for 🌳 5M Trees Dataset</h2>
+      <h2 class="text-grey-600 text-2xl" style="margin-top: 20px;">Data visualizaion for 🌳 5M Trees Dataset</h2>
       </div>
     </div>
 
@@ -66,15 +66,8 @@
         </a>
       </div>
     </div>
-    <!--Copyright section-->
     <div
       class="w-full bg-neutral-300 p-4 text-center text-neutral-700 dark:bg-neutral-700 dark:text-neutral-200">
-      © 2023 Copyright:
-      <a
-        class="text-neutral-800 dark:text-neutral-400"
-        href="https://tw-elements.com/"
-        >TW elements</a
-      >
     </div>
   </footer>
 
@@ -84,27 +77,54 @@
 <script>
 
 
-  // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 30, bottom: 90, left: 40},
-      width = 460 - margin.left - margin.right,
-      height = 450 - margin.top - margin.bottom;
-  
-  // append the svg object to the body of the page
-  var svg = d3.select("#my_dataviz")
-    .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-  
-  // Parse the Data
-  d3.csv("https://docs.google.com/spreadsheets/d/1Vimg7fp5B-m9eesbuc8-4hz_20FdmxcdKnGCZvOQETI/edit?usp=sharing", function(data) {
-  
-    //problem with y data beacuse it is a string 
-    
-    })
-  
+// set the dimensions and margins of the graph
+var margin = {top: 30, right: 30, bottom: 70, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Parse the Data
+d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6yZX8H1uafXM0VjCDKiObj--4cGOnayvqd3aO25kB2DPHZklTK8Gtl2t/pub?gid=1229357561&single=true&output=csv", function(data) {
+
+// X axis
+var x = d3.scaleBand()
+  .range([ 0, width ])
+  .domain(data.map(function(d) { return d.state; }))
+  .padding(0.2);
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x))
+  .selectAll("text")
+    .attr("transform", "translate(-10,0)rotate(-45)")
+    .style("text-anchor", "end");
+
+// Add Y axis
+var y = d3.scaleLinear()
+  .domain([0, data[0].value])
+  .range([ height, 0]);
+svg.append("g")
+  .call(d3.axisLeft(y));
+
+// Bars
+svg.selectAll("mybar")
+  .data(data)
+  .enter()
+  .append("rect")
+    .attr("x", function(d) { return x(d.state); })
+    .attr("y", function(d) { return y(d.value); })
+    .attr("width", x.bandwidth())
+    .attr("height", function(d) { return height - y(d.value); })
+    .attr("fill", "#69b3a2")
+
+})
   </script>
     
 </html>
