@@ -45,7 +45,7 @@ svg.selectAll("mybar")
     .attr("y", function(d) { return y(0); })
     .attr("width", x.bandwidth())
     .attr("height", function(d) { return height - y(0); })
-    .attr("fill", "#23691a")
+    .attr("fill", "#008000")
 
  //add title
   svg.append("text")
