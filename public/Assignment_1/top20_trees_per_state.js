@@ -1,6 +1,6 @@
 
 // set the dimensions and margins of the graph
-var margin = {top: 20, right: 20, bottom: 80, left: 60},
+var margin = {top: 20, right: 20, bottom: 110, left: 60},
     width = 700 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -23,6 +23,7 @@ var x = d3.scaleBand()
   .padding(0.2);
 svg.append("g")
   .attr("transform", "translate(0," + height + ")")
+  .style("font","14px Roboto Slab")
   .call(d3.axisBottom(x))
   .selectAll("text")
     .attr("transform", "translate(-10,0)rotate(-45)")
