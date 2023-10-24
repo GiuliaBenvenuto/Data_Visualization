@@ -23,7 +23,7 @@ var x = d3.scaleBand()
   .padding(0.2);
 svg.append("g")
   .attr("transform", "translate(0," + height + ")")
-  .style("font","14px Roboto Slab")
+  .style("font","16px Roboto sans-serif")
   .call(d3.axisBottom(x))
   .selectAll("text")
     .attr("transform", "translate(-10,0)rotate(-45)")

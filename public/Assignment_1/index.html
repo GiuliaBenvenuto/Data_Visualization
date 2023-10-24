@@ -6,6 +6,9 @@
     <title>Assignment 1</title>
     <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
 
+    <!-- Style -->
+    <link rel="stylesheet" href="../style.css">
+
     <!-- Font -->
     <!-- Fira Sans & Roboto Slab -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,28 +24,27 @@
 
 <body class="bg-grey-200">
     <!-- Navbar -->
-    <nav
-    class="relative flex w-full flex-wrap items-center justify-between bg-neutral-200 py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
-    <div class="flex w-full flex-wrap items-center justify-between px-3">
-      <div>
-        <a
-          class="mx-2 my-1 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 lg:mb-0 lg:mt-0"
-          href="../../public/index.html">
-          <img
-            src="../../img/Logo4.png"
-            style="height: 40px"
-            alt=""
-          />
-        </a>
+    <nav class="relative flex w-full flex-wrap items-center justify-between bg-neutral-200 py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
+      <div class="flex w-full flex-wrap items-center justify-between px-3">
+        <div>
+          <a
+            class="mx-2 my-0 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 lg:mb-0 lg:mt-0"
+            href="../../public/index.html">
+            <img
+              src="../../img/Logo4.png"
+              style="height: 60px"
+              alt=""
+            />
+          </a>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
     
     <div class="text-center title mt-10">
       <div class="text-5xl"></div>
-      <h1 class="text-green-900 text-5xl" >Assignment 1</h1>
-      <h2 class="text-green-600 text-2xl" style="margin-top: 20px;">Data visualizaion for 🌳 5M Trees Dataset</h2>
+        <h1 class="text-green-900 text-5xl" >Assignment 1</h1>
+        <h2 class="text-green-600 text-2xl" style="margin-top: 20px;">Data visualizaion for 🌳 5M Trees Dataset</h2>
       </div>
       <div class="text-center">
         <p class="text-green-600 text-center">Describe here the purpose of the first assignment and the dataset.</p>
@@ -59,14 +61,22 @@
       <p class="text-green-600 text-center">Describe here the vertical barchart.</p>
     </div>
 
-    
+    <!-- js -->
     <div class="flex justify-center items-center ">
       <div id="my_dataviz"  style="margin-top: 50px;">
-        <script src="../Assignment_1/top20_trees_per_state.js"></script>
+          <script src="../Assignment_1/top20_trees_per_state.js"></script>
       </div>
     </div>
-   
 
+    
+    <div class="flex justify-center items-center ">
+      <div id="my_heatmap" style="margin-top: 100px; ">
+        <script src="../Assignment_1/heatmap.js"></script>
+      </div>
+    </div> 
+  
+    
+    
     <!-- Horizontal Barchart -->
     <div class="text-center title mt-20">
       <div class="text-5xl"></div>
