@@ -44,7 +44,7 @@ svg.selectAll("mybar")
     .attr("y", function(d) { return y(0); })
     .attr("width", x.bandwidth())
     .attr("height", function(d) { return height - y(0); })
-    .attr("fill", "#008000")
+    .attr("fill", "#14532d")
 
  //add title
   svg.append("text")
@@ -62,4 +62,5 @@ svg.selectAll("mybar")
     .attr("height", function(d) { return height - y(d.value); })
     .delay(function(d,i){console.log(i) ; return(i*100)})
 
+    // Add variable selection top 5, 10, 20
 })
