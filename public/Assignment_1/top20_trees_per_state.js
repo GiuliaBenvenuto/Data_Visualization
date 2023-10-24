@@ -53,6 +53,7 @@ svg.selectAll("mybar")
     .attr("y", 20) // Adjust the y-coordinate to position the title
     .attr("text-anchor", "middle")
     .style("font-size", "24px")
+    .style("fill", "#14532d")
     .text("Top-20 Number of trees per state");
 
   // Animation
@@ -64,4 +65,8 @@ svg.selectAll("mybar")
     .delay(function(d,i){console.log(i) ; return(i*100)})
 
     // Add variable selection top 5, 10, 20
+
+    //https://docs.google.com/spreadsheets/d/1U-4xtEDnL8R_dUhLyPykkP3Bo-oDHMCPDXOaYS72-R8/edit#gid=579621399
+    //link to other already done csv file
+
 })
