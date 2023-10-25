@@ -43,9 +43,14 @@
       </div>
     </nav>
       <div>
-        <a class="mx-10 my-1 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 lg:mb-0 lg:mt-0" href="../../public/index.html">
-          <i class="fas fa-home fa-lg"></i>
+        <a id="go-to-home" href="../index.html" title="Go To Home" class="fixed z-90 bottom-10 left-7 border-0 w-12 h-12 rounded-full drop-shadow-md bg-green-900 text-white text-3xl font-bold">
+          <i class="fas fa-home"></i>
         </a>
+
+        <!--
+        <a class="mx-10 my-10 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 lg:mb-0 lg:mt-0" href="../../public/index.html">
+          <i class="fas fa-home fa-lg"></i>
+        </a> -->
       </div>
     </div>
   </nav>
@@ -85,7 +90,7 @@
       </div>
     </div> 
   
-    
+
     
     <!-- Horizontal Barchart -->
     <div class="text-center title mt-20">
@@ -107,12 +112,12 @@
       <p class="text-green-600 text-center">Describe here the stacked barchart.</p>
     </div>
 
-  
+    
     <!-- Footer -->
     <footer
     class="flex flex-col items-center bg-neutral-200 text-center text-white dark:bg-neutral-600">
-    <div class="container pt-9">
-      <div class="mb-9 flex justify-center">
+    <div class="container pt-6">
+      <div class="mb-6 flex justify-center">
         <a href="https://www.youtube.com/watch?v=oHg5SJYRHA0" class="text-neutral-800 dark:text-neutral-200">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -130,6 +135,14 @@
     </div>
   </footer>
 
+  <!-- Fixed position -->
+  <!-- Back to top button -->
+  <button id="to-top-button" onclick="goToTop()" title="Go To Top"
+    class="hidden fixed z-90 bottom-10 right-10 border-0 w-12 h-12 rounded-full drop-shadow-md bg-green-900 text-white text-3xl font-bold">&uarr;
+  </button>
+
+  <!-- Back to top button script -->
+  <script src="../Assignment_1/back_to_top_btn.js"></script>
 
 </body>
 </html>

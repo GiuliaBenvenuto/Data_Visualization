@@ -9,3 +9,12 @@ p, span {
     font-family: 'Fira Sans', sans-serif;
     /* Add fallback fonts here in case 'Fira Sans' isn't available */
 }
+
+#go-to-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* You can also set a specific width and height if needed */
+  width: 50px;
+  height: 50px;
+}
