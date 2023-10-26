@@ -39,9 +39,22 @@ d3.csv(
         .attr("transform", "translate(0," + height_city + ")")
         .call(d3.axisTop(x_city))
         .selectAll("text")
-        .attr("transform", "translate(5,15)rotate(-45)")
+        .attr("transform", "translate(10, 20)rotate(-45)")
         .style("font", "12px Fira Sans")
         .style("text-anchor", "end");
+
+    /*
+    var colorScale = d3.scaleSequential(function(t) {
+      // Reverse the gradient to start with dark green for high values
+      return d3.rgb(0, 200 + (1 - t) * 5, 0);
+    })
+      .domain([0, d3.max(data, function(d) { return d.Total; })]);*/
+
+
+    var colorScale = d3.scaleLinear();
+      colorScale.domain([0, data[0].Total])
+      colorScale.range(['#bbf7d0', '#15803d'])
+      
 
     // Bars
     svg_city
@@ -49,7 +62,7 @@ d3.csv(
       .data(data)
       .enter()
       .append("rect")
-      .attr("x", 0)
+      .attr("x", function(d) { return x_city(0);})
       .attr("y", function (d) {
         return y_city(d.city);
       })
@@ -57,7 +70,11 @@ d3.csv(
         return x_city(d.Total);
       })
       .attr("height", y_city.bandwidth())
-      .attr("fill", "#14532d");
+      //.attr("fill", "#14532d");
+      // .attr("fill", function(d) { return colorScale(d.Total); });
+      .attr('fill', function(data, index){
+        return colorScale(data.Total)
+      })
 
     // Add title
     svg_city

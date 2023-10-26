@@ -1,7 +1,7 @@
 
 // set the dimensions and margins of the graph
 var margin_h = {top: 10, right: 60, bottom: 110, left: 60},
-    width_h = 700 - margin_h.left - margin_h.right,
+    width_h = 800 - margin_h.left - margin_h.right,
     height_h = 500 - margin_h.top - margin_h.bottom;
 
 // append the svg object to the body of the page
@@ -12,6 +12,7 @@ var svg_h = d3.select("#my_dataviz")
   .append("g")
     .attr("transform",
           "translate(" + margin_h.left + "," + margin_h.top + ")");
+
 
 // load the data
 d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6yZX8H1uafXM0VjCDKiObj--4cGOnayvqd3aO25kB2DPHZklTK8Gtl2t/pub?gid=1229357561&single=true&output=csv", function(data) {
@@ -38,6 +39,17 @@ var y_h = d3.scaleLinear()
 svg_h.append("g")
   .call(d3.axisLeft(y_h));
 
+  /*
+  var colorScale = d3.scaleSequential(function(t) {
+    // Reverse the gradient to start with dark green for high values
+    return d3.rgb(0, 200 + (1 - t) * 5, 0);
+  })
+    .domain([0, d3.max(data, function(d) { return d.value; })]);*/
+  var colorScale = d3.scaleLinear();
+    colorScale.domain([0, data[0].value])
+    colorScale.range(['#bbf7d0', '#15803d'])
+
+
 // Bars
 svg_h.selectAll("mybar")
   .data(data)
@@ -47,7 +59,12 @@ svg_h.selectAll("mybar")
     .attr("y", function(d) { return y_h(0); })
     .attr("width", x_h.bandwidth())
     .attr("height", function(d) { return height_h - y_h(0); })
-    .attr("fill", "#14532d")
+    // .attr("fill", "#14532d")
+    // .attr("fill", function(d) { return colorScale(d.value); });
+    .attr('fill', function(data, index){
+      return colorScale(data.value)
+    })
+
 
  //add title
   svg_h.append("text")
