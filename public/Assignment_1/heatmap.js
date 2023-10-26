@@ -24,12 +24,12 @@ var x_heatmap = d3.scaleBand()
   .domain(myGroups)
   .padding(0.01);
   svg_heatmap.append("g")
-  .attr("transform", "translate(0," + height + ")")
+  .attr("transform", "translate(0," + height_heatmap + ")")
   .call(d3.axisBottom(x_heatmap))
 
 // Build X scales and axis:
 var y_heatmap = d3.scaleBand()
-  .range([ height, 0 ])
+  .range([ height_heatmap, 0 ])
   .domain(myVars)
   .padding(0.01);
 svg_heatmap.append("g")

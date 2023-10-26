@@ -1,67 +1,69 @@
 
 // set the dimensions and margins of the graph
-var margin = {top: 20, right: 20, bottom: 110, left: 60},
-    width = 700 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var margin_h = {top: 10, right: 60, bottom: 110, left: 60},
+    width_h = 700 - margin_h.left - margin_h.right,
+    height_h = 500 - margin_h.top - margin_h.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg_h = d3.select("#my_dataviz")
   .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", width_h + margin_h.left + margin_h.right)
+    .attr("height", height_h + margin_h.top + margin_h.bottom)
   .append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+          "translate(" + margin_h.left + "," + margin_h.top + ")");
 
 // load the data
 d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6yZX8H1uafXM0VjCDKiObj--4cGOnayvqd3aO25kB2DPHZklTK8Gtl2t/pub?gid=1229357561&single=true&output=csv", function(data) {
 
 // X axis
-var x = d3.scaleBand()
-  .range([ 0, width ])
+var x_h = d3.scaleBand()
+  .range([ 0, width_h ])
   .domain(data.map(function(d) { return d.state; }))
   .padding(0.2);
-svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .style("font","16px Roboto sans-serif")
-  .call(d3.axisBottom(x))
+
+svg_h.append("g")
+  .attr("transform", "translate(0," + height_h + ")")
+  .style("font", "17px Fira Sans")
+  .call(d3.axisBottom(x_h))
   .selectAll("text")
     .attr("transform", "translate(-10,0)rotate(-45)")
-    .style("text-anchor", "end");
+    .style("text-anchor", "end")
+    .style("font", "15px Fira Sans");
 
 // Add Y axis
-var y = d3.scaleLinear()
+var y_h = d3.scaleLinear()
   .domain([0, data[0].value])
-  .range([ height, 0]);
-svg.append("g")
-  .call(d3.axisLeft(y));
+  .range([ height_h, 0]);
+svg_h.append("g")
+  .call(d3.axisLeft(y_h));
 
 // Bars
-svg.selectAll("mybar")
+svg_h.selectAll("mybar")
   .data(data)
   .enter()
   .append("rect")
-    .attr("x", function(d) { return x(d.state); })
-    .attr("y", function(d) { return y(0); })
-    .attr("width", x.bandwidth())
-    .attr("height", function(d) { return height - y(0); })
+    .attr("x", function(d) { return x_h(d.state); })
+    .attr("y", function(d) { return y_h(0); })
+    .attr("width", x_h.bandwidth())
+    .attr("height", function(d) { return height_h - y_h(0); })
     .attr("fill", "#14532d")
 
  //add title
-  svg.append("text")
-    .attr("x", width / 2)
-    .attr("y", 20) // Adjust the y-coordinate to position the title
+  svg_h.append("text")
+    .attr("x", width_h / 2)
+    .attr("y", 10) // Adjust the y-coordinate to position the title
     .attr("text-anchor", "middle")
-    .style("font-size", "24px")
+    .style("font-size", "20px")
     .style("fill", "#14532d")
-    .text("Top-20 Number of trees per state");
+    .text("Top-20 number of trees per state");
 
   // Animation
-  svg.selectAll("rect")
+  svg_h.selectAll("rect")
     .transition()
     .duration(700)
-    .attr("y", function(d) { return y(d.value); })
-    .attr("height", function(d) { return height - y(d.value); })
+    .attr("y", function(d) { return y_h(d.value); })
+    .attr("height", function(d) { return height_h - y_h(d.value); })
     .delay(function(d,i){console.log(i) ; return(i*100)})
 
     // Add variable selection top 5, 10, 20
