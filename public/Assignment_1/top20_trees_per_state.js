@@ -78,7 +78,7 @@ svg_h.selectAll("mybar")
   // Animation
   svg_h.selectAll("rect")
     .transition()
-    .duration(700)
+    .duration(600)
     .attr("y", function(d) { return y_h(d.value); })
     .attr("height", function(d) { return height_h - y_h(d.value); })
     .delay(function(d,i){console.log(i) ; return(i*100)})

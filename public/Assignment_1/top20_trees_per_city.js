@@ -25,6 +25,7 @@ d3.csv(
         return d.city;
       }))
       .padding(0.2);
+      // change something because the bar overlap the y-axis
     svg_city
       .append("g")
       .call(d3.axisLeft(y_city))
@@ -42,7 +43,7 @@ d3.csv(
         .attr("transform", "translate(10, 20)rotate(-45)")
         .style("font", "12px Fira Sans")
         .style("text-anchor", "end");
-
+      // the ticks are not aligned with the bar and is the direction is wrong  
     /*
     var colorScale = d3.scaleSequential(function(t) {
       // Reverse the gradient to start with dark green for high values
@@ -91,7 +92,7 @@ d3.csv(
     svg_city
       .selectAll("rect")
       .transition()
-      .duration(700)
+      .duration(600)
       .attr("x", 0)
       .attr("width", function (d) {
         return x_city(d.Total);
