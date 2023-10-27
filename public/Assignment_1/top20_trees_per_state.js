@@ -17,27 +17,27 @@ var svg_h = d3.select("#my_dataviz")
 // load the data
 d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6yZX8H1uafXM0VjCDKiObj--4cGOnayvqd3aO25kB2DPHZklTK8Gtl2t/pub?gid=1229357561&single=true&output=csv", function(data) {
 
-// X axis
-var x_h = d3.scaleBand()
-  .range([ 0, width_h ])
-  .domain(data.map(function(d) { return d.state; }))
-  .padding(0.2);
+    // X axis
+    var x_h = d3.scaleBand()
+      .range([ 0, width_h ])
+      .domain(data.map(function(d) { return d.state; }))
+      .padding(0.2);
 
-svg_h.append("g")
-  .attr("transform", "translate(0," + height_h + ")")
-  .style("font", "17px Fira Sans")
-  .call(d3.axisBottom(x_h))
-  .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-45)")
-    .style("text-anchor", "end")
-    .style("font", "15px Fira Sans");
+    svg_h.append("g")
+      .attr("transform", "translate(0," + height_h + ")")
+      .style("font", "17px Fira Sans")
+      .call(d3.axisBottom(x_h))
+      .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-45)")
+        .style("text-anchor", "end")
+        .style("font", "15px Fira Sans");
 
-// Add Y axis
-var y_h = d3.scaleLinear()
-  .domain([0, data[0].value])
-  .range([ height_h, 0]);
-svg_h.append("g")
-  .call(d3.axisLeft(y_h));
+    // Add Y axis
+    var y_h = d3.scaleLinear()
+      .domain([0, data[0].value]) 
+      .range([ height_h, 0]);
+    svg_h.append("g")
+      .call(d3.axisLeft(y_h));
 
   /*
   var colorScale = d3.scaleSequential(function(t) {
@@ -50,20 +50,47 @@ svg_h.append("g")
     colorScale.range(['#bbf7d0', '#15803d'])
 
 
-// Bars
-svg_h.selectAll("mybar")
-  .data(data)
-  .enter()
-  .append("rect")
-    .attr("x", function(d) { return x_h(d.state); })
-    .attr("y", function(d) { return y_h(0); })
-    .attr("width", x_h.bandwidth())
-    .attr("height", function(d) { return height_h - y_h(0); })
-    // .attr("fill", "#14532d")
-    // .attr("fill", function(d) { return colorScale(d.value); });
-    .attr('fill', function(data, index){
-      return colorScale(data.value)
-    })
+  // Define the div for the tooltip (show value in a small div on mouse hover)
+  var tooltip = d3.select("body").append("div")
+    .style("position", "absolute")
+    .style("background", "white")
+    .style("padding", "5px")
+    .style("border", "1px solid #214328")
+    .style("border-radius", "5px")
+    .style("pointer-events", "none")
+    .style("opacity", 0)
+    .style("font", "15px Fira Sans")
+    .style("color", "#214328");
+
+    
+
+  // Bars
+  svg_h.selectAll("mybar")
+    .data(data)
+    .enter()
+    .append("rect")
+      .attr("x", function(d) { return x_h(d.state); })
+      .attr("y", function(d) { return y_h(0); })
+      .attr("width", x_h.bandwidth())
+      .attr("height", function(d) { return height_h - y_h(0); })
+      // .attr("fill", "#14532d")
+      // .attr("fill", function(d) { return colorScale(d.value); });
+      .attr('fill', function(data, index){
+        return colorScale(data.value)
+      })
+      .on("mouseover", function(d) {
+        tooltip.transition()
+          .duration(100)
+          .style("opacity", 0.8);
+        tooltip.html("Value: " + d.value)
+          .style("left", (d3.event.pageX + 10) + "px")
+          .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+        tooltip.transition()
+          .duration(300)
+          .style("opacity", 0);
+      });
 
 
  //add title
@@ -78,7 +105,7 @@ svg_h.selectAll("mybar")
   // Animation
   svg_h.selectAll("rect")
     .transition()
-    .duration(600)
+    .duration(400)
     .attr("y", function(d) { return y_h(d.value); })
     .attr("height", function(d) { return height_h - y_h(d.value); })
     .delay(function(d,i){console.log(i) ; return(i*100)})

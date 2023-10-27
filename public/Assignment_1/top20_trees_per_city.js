@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-var margin_city = { top: 40, right: 20, bottom: 100, left: 100 },
+var margin_city = { top: 40, right: 100, bottom: 100, left: 110 },
   width_city = 800 - margin_city.left - margin_city.right,
   height_city = 700 - margin_city.top - margin_city.bottom;
 
@@ -17,6 +17,12 @@ d3.csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYwM2PtZzr74DXvzNH2rv4cQ33ip3bG5MB0mB7jTT0OV2db0H-PB8gw_zmyGddtOTxHY9ldCVCDcHE/pub?output=csv",
   function (data) {
 
+    // X axis
+    var x_city = d3.scaleLinear()
+      .range([0, width_city])
+      .domain([0, data[1].Total]);
+      
+
     // Y axis
     var y_city = d3
       .scaleBand()
@@ -26,15 +32,12 @@ d3.csv(
       }))
       .padding(0.2);
       // change something because the bar overlap the y-axis
+    
     svg_city
       .append("g")
       .call(d3.axisLeft(y_city))
       .style("font", "15px Fira Sans");
 
-    // X axis
-    var x_city = d3.scaleLinear()
-      .domain([0, data[1].Total])
-      .range([0, width_city]);
 
     svg_city.append("g")
         .attr("transform", "translate(0," + height_city + ")")
@@ -55,6 +58,18 @@ d3.csv(
     var colorScale = d3.scaleLinear();
       colorScale.domain([0, data[0].Total])
       colorScale.range(['#bbf7d0', '#15803d'])
+
+    // Define the div for the tooltip (show value in a small div on mouse hover)
+    var tooltip = d3.select("body").append("div")
+      .style("position", "absolute")
+      .style("background", "white")
+      .style("padding", "5px")
+      .style("border", "1px solid #214328")
+      .style("border-radius", "5px")
+      .style("pointer-events", "none")
+      .style("opacity", 0)
+      .style("font", "15px Fira Sans")
+      .style("color", "#214328");
       
 
     // Bars
@@ -63,7 +78,7 @@ d3.csv(
       .data(data)
       .enter()
       .append("rect")
-      .attr("x", function(d) { return x_city(0);})
+      .attr("x", function(d) { return x_city(0) + 1;})
       .attr("y", function (d) {
         return y_city(d.city);
       })
@@ -76,6 +91,20 @@ d3.csv(
       .attr('fill', function(data, index){
         return colorScale(data.Total)
       })
+      .on("mouseover", function(d) {
+        tooltip.transition()
+          .duration(100)
+          .style("opacity", 0.8);
+        tooltip.html("Value: " + d.Total)
+          .style("left", (d3.event.pageX + 10) + "px")
+          .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+        tooltip.transition()
+          .duration(300)
+          .style("opacity", 0);
+      });
+
 
     // Add title
     svg_city
@@ -89,6 +118,7 @@ d3.csv(
 
     // Animation
     // DA CORREGGERE
+    /*
     svg_city
       .selectAll("rect")
       .transition()
@@ -99,6 +129,6 @@ d3.csv(
       })
       .delay(function (d, i) {
         return i * 100;
-      });
+      });*/
   }
 );
