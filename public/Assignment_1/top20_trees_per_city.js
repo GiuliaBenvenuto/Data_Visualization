@@ -21,6 +21,20 @@ d3.csv(
     var x_city = d3.scaleLinear()
       .range([0, width_city])
       .domain([0, data[1].Total]);
+
+    // Add X axis grid lines
+    svg_city
+    .selectAll("xGrid")
+    .data(x_city.ticks(10)) // You can change the number of ticks as per your preference
+    .enter()
+    .append("line")
+      .attr("x1", function(d) { return x_city(d); })
+      .attr("x2", function(d) { return x_city(d); })
+      .attr("y1", 0)
+      .attr("y2", height_city)
+      .attr("stroke", "lightgray") // Adjust the color as needed
+      .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
+
       
 
     // Y axis

@@ -1,6 +1,6 @@
 
 // set the dimensions and margins of the graph
-var margin_h = {top: 10, right: 60, bottom: 110, left: 60},
+var margin_h = {top: 30, right: 60, bottom: 110, left: 60},
     width_h = 800 - margin_h.left - margin_h.right,
     height_h = 500 - margin_h.top - margin_h.bottom;
 
@@ -38,6 +38,18 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
       .range([ height_h, 0]);
     svg_h.append("g")
       .call(d3.axisLeft(y_h));
+
+    // Add Y axis grid lines
+    svg_h.selectAll("yGrid")
+    .data(y_h.ticks(10)) // You can change the number of ticks as per your preference
+    .enter()
+    .append("line")
+      .attr("x1", 0)
+      .attr("x2", width_h)
+      .attr("y1", function(d) { return y_h(d); })
+      .attr("y2", function(d) { return y_h(d); })
+      .attr("stroke", "lightgray") // Adjust the color as needed
+      .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
 
   /*
   var colorScale = d3.scaleSequential(function(t) {
@@ -96,7 +108,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
  //add title
   svg_h.append("text")
     .attr("x", width_h / 2)
-    .attr("y", 10) // Adjust the y-coordinate to position the title
+    .attr("y", -10) // Adjust the y-coordinate to position the title
     .attr("text-anchor", "middle")
     .style("font-size", "20px")
     .style("fill", "#14532d")
