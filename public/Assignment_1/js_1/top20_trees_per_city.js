@@ -20,7 +20,9 @@ d3.csv(
     // X axis
     var x_city = d3.scaleLinear()
       .range([0, width_city])
-      .domain([0, data[1].Total]);
+      .domain([0, data[0].Total]);
+  
+
 
     // Add X axis grid lines
     svg_city
