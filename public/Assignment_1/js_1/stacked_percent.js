@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var margin_percent = {top: 10, right: 30, bottom: 100, left: 50},
-    width_percent = 1200 - margin_percent.left - margin_percent.right,
-    height_percent = 700 - margin_percent.top - margin_percent.bottom;
+    width_percent = 900 - margin_percent.left - margin_percent.right,
+    height_percent = 600 - margin_percent.top - margin_percent.bottom;
 
 // append the svg object to the body of the page
 var svg_percent = d3.select("#stacked_percent")
@@ -26,6 +26,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
       .domain(groups)
       .range([0, width_percent])
       .padding([0.2])
+
   svg_percent.append("g")
     .attr("transform", "translate(0," + height_percent + ")")
     .call(d3.axisBottom(x).tickSizeOuter(0))
@@ -34,6 +35,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
     .style("font", "12px Fira Sans")
     .style("text-anchor", "end");
 
+
   // Add Y axis
   var y = d3.scaleLinear()
     .domain([0, 100])
@@ -41,6 +43,17 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
   svg_percent.append("g")
     .call(d3.axisLeft(y))
     .style("font", "15px Fira Sans");
+
+  svg_percent.selectAll("yGrid")
+    .data(y.ticks(10)) // You can change the number of ticks as per your preference
+    .enter()
+    .append("line")
+      .attr("x1", 0)
+      .attr("x2", width_percent)
+      .attr("y1", function(d) { return y(d); })
+      .attr("y2", function(d) { return y(d); })
+      .attr("stroke", "lightgray") // Adjust the color as needed
+      .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
 
   // color palette = one color per subgroup
   var color = d3.scaleOrdinal()
@@ -62,6 +75,8 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
   var stackedData = d3.stack()
     .keys(subgroups)
     (data)
+
+    
 
   // Show the bars
   svg_percent.append("g")

@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var margin_stack = {top: 10, right: 30, bottom: 100, left: 60},
-    width_stack = 1200 - margin_stack.left - margin_stack.right,
-    height_stack = 700 - margin_stack.top - margin_stack.bottom;
+    width_stack = 900 - margin_stack.left - margin_stack.right,
+    height_stack = 600 - margin_stack.top - margin_stack.bottom;
 
 // append the svg object to the body of the page
 var svg_stack = d3.select("#stacked_barchart")
@@ -46,13 +46,12 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
       .call(d3.axisLeft(y_stack))
       .style("font", "15px Fira Sans");
 
-
     svg_stack.append("g")
         .attr("transform", "translate(0," + height_stack + ")")
         .call(d3.axisBottom(x_stack).tickSizeOuter(0))
         .selectAll("text")
         .attr("transform", "translate(-5, 10)rotate(-45)")
-        .style("font", "12px Fira Sans")
+        .style("font", "14px Fira Sans")
         .style("text-anchor", "end");
 
     svg_stack.selectAll("yGrid")
@@ -109,10 +108,10 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
             .duration(100)
             .style("opacity", 0.8);
           tooltip.html( //show clearly the number of differtent species in a city on mouse hover
-            "Acer Platanoides: " + d.data.Acer_Platanoides + "<br>" +
-            "Lagerstroemia Indica: " + d.data.Lagerstroemia_Indica + "<br>" +
-            "Platanus Acerifolia: " + d.data.Platanus_Acerifolia + "<br>" +
-            "Other: " + d.data.Other
+          "<span style='color: #14532d;'>Acer Platanoides: " + d.data.Acer_Platanoides + "</span><br>" +
+          "<span style='color: #15803d;'>Lagerstroemia Indica: " + d.data.Lagerstroemia_Indica + "</span><br>" +
+          "<span style='color: #22c55e;'>Platanus Acerifolia: " + d.data.Platanus_Acerifolia + "</span><br>" +
+          "<span style='color: #86efac;'>Other: " + d.data.Other + "</span>"
             )
             .style("left", (d3.event.pageX + 10) + "px")
             .style("top", (d3.event.pageY - 28) + "px");

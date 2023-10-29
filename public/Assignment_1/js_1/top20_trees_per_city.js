@@ -21,13 +21,12 @@ d3.csv(
     var x_city = d3.scaleLinear()
       .range([0, width_city])
       .domain([0, data[0].Total]);
-  
 
 
     // Add X axis grid lines
     svg_city
     .selectAll("xGrid")
-    .data(x_city.ticks(10)) // You can change the number of ticks as per your preference
+    .data(x_city.ticks(12)) // You can change the number of ticks as per your preference
     .enter()
     .append("line")
       .attr("x1", function(d) { return x_city(d); })
@@ -57,7 +56,7 @@ d3.csv(
 
     svg_city.append("g")
         .attr("transform", "translate(0," + height_city + ")")
-        .call(d3.axisTop(x_city))
+        .call(d3.axisTop(x_city).ticks(12))
         .selectAll("text")
         .attr("transform", "translate(10, 20)rotate(-45)")
         .style("font", "12px Fira Sans")
@@ -141,7 +140,7 @@ d3.csv(
     .attr("width", 0) // set the initial width to 0
     .transition()
     .duration(600)
-    .attr("x", x_city(0))
+    .attr("x", function(d) { return x_city(0) + 1;})
     .attr("width", function (d) {
       return x_city(d.Total); // set the final width with the value of the data
     })
