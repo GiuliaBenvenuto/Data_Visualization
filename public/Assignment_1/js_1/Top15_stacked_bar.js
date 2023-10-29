@@ -88,6 +88,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
       .style("font", "15px Fira Sans")
       .style("color", "#214328");
 
+  // ERROR: we need to fix the bars because the dimension of each type don't correspond to the data
   // Show the bars
   svg_stack.append("g")
     .selectAll("g")
