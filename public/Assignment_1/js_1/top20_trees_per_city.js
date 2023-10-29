@@ -133,18 +133,20 @@ d3.csv(
       .text("Top-20 number of trees per city");
 
     // Animation
-    // DA CORREGGERE
-    /*
+    // the bars start to became bigger and bigger form the top to the bottom.
+    // maybe is better if the transition works from the bottom to the top
+    
     svg_city
-      .selectAll("rect")
-      .transition()
-      .duration(600)
-      .attr("x", 0)
-      .attr("width", function (d) {
-        return x_city(d.Total);
-      })
-      .delay(function (d, i) {
-        return i * 100;
-      });*/
+    .selectAll("rect")
+    .attr("width", 0) // set the initial width to 0
+    .transition()
+    .duration(600)
+    .attr("x", x_city(0))
+    .attr("width", function (d) {
+      return x_city(d.Total); // set the final width with the value of the data
+    })
+    .delay(function (d, i) {
+      return i * 100;
+    });
   }
 );

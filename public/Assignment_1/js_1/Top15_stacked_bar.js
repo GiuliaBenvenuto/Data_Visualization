@@ -1,6 +1,3 @@
-// https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv
-// https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6cBW1DumszVHmQOu51s4vWOuRdLUoB5TzdX_pgO_Kf_1dlsVoU9waEkO5/pub?output=csv
-
 // set the dimensions and margins of the graph
 var margin_stack = {top: 10, right: 30, bottom: 100, left: 60},
     width_stack = 1200 - margin_stack.left - margin_stack.right,
@@ -54,9 +51,21 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
         .attr("transform", "translate(0," + height_stack + ")")
         .call(d3.axisBottom(x_stack).tickSizeOuter(0))
         .selectAll("text")
-        .attr("transform", "translate(10, 20)rotate(-45)")
+        .attr("transform", "translate(-5, 10)rotate(-45)")
         .style("font", "12px Fira Sans")
         .style("text-anchor", "end");
+
+    svg_stack.selectAll("yGrid")
+      .data(y_stack.ticks(10)) // You can change the number of ticks as per your preference
+      .enter()
+      .append("line")
+        .attr("x1", 0)
+        .attr("x2", width_stack)
+        .attr("y1", function(d) { return y_stack(d); })
+        .attr("y2", function(d) { return y_stack(d); })
+        .attr("stroke", "lightgray") // Adjust the color as needed
+        .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
+    
 
   // color palette = one color per subgroup
   var color_stack = d3.scaleOrdinal()
@@ -99,7 +108,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
           tooltip.transition()
             .duration(100)
             .style("opacity", 0.8);
-          tooltip.html(
+          tooltip.html( //show clearly the number of differtent species in a city on mouse hover
             "Acer Platanoides: " + d.data.Acer_Platanoides + "<br>" +
             "Lagerstroemia Indica: " + d.data.Lagerstroemia_Indica + "<br>" +
             "Platanus Acerifolia: " + d.data.Platanus_Acerifolia + "<br>" +
