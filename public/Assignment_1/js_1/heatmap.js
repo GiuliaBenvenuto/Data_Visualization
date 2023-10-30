@@ -1,9 +1,10 @@
 
 // HEATMAP
 // https://docs.google.com/spreadsheets/d/e/2PACX-1vR9sVhFoMblAAKjiTYvx4z2CMadwPYrFnI3Hb9ZO7FdFm87DJ1RbLrJQUv770VGj2HuCdIHNoze3p4B/pub?output=csv
+// https://docs.google.com/spreadsheets/d/e/2PACX-1vTiELszpX03qtMwuhOORJYvyhfN06rp9ENCv3g5S02PieqTLphAv0AHMWni9iwhM3XJz_-VzgexZZVj/pub?output=csv
 
 // set the dimensions and margins of the graph
-var margin_heatmap = {top: 30, right: 30, bottom: 100, left: 30},
+var margin_heatmap = {top: 30, right: 30, bottom: 100, left: 120},
   width_heatmap = 650 - margin_heatmap.left - margin_heatmap.right,
   height_heatmap  = 450 - margin_heatmap.top - margin_heatmap.bottom;
 
@@ -17,7 +18,7 @@ var svg_heatmap = d3.select("#my_heatmap")
         "translate(" + margin_heatmap.left + "," + margin_heatmap.top + ")");
 
 // Read the data
-d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vR9sVhFoMblAAKjiTYvx4z2CMadwPYrFnI3Hb9ZO7FdFm87DJ1RbLrJQUv770VGj2HuCdIHNoze3p4B/pub?output=csv", function(data) {
+d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSn35ldxZU6jKlHrkhxBieJjruVhOHoSK1-K3oi2ZVRp0eTCFKbjI79xZnv4hfJ252UpquFPtTaCo-u/pub?output=csv", function(data) {
 
   // Labels of row and columns
   // Cities
@@ -55,15 +56,43 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vR9sVhFoMblAAKjiTYvx4z2C
     .range(["#86efac", "#14532d"])
     .domain([1, 34729])
 
+    // Define a tooltip div
+    var tooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("background-color", "white")
+    .style("border", "1px solid #214328")
+    .style("border-radius", "5px")
+    .style("pointer-events", "none")
+    .style("padding", "5px")
+    .style("opacity", 0)
+    .style("font", "15px Fira Sans")
+    .style("color", "#214328");
+
   //Read the data
       svg_heatmap.selectAll()
         .data(data, function(d) {return d.city +':'+ d.scientific_name;})
         .enter()
         .append("rect")
-        .attr("x", function(d) { return x_heatmap(d.city) })
-        .attr("y", function(d) { return y_heatmap(d.scientific_name) })
-        .attr("width", x_heatmap.bandwidth() )
-        .attr("height", y_heatmap.bandwidth() )
-        .style("fill", function(d) { return myColor(d.Total)} )
+          .attr("x", function(d) { return x_heatmap(d.city) })
+          .attr("y", function(d) { return y_heatmap(d.scientific_name) })
+          .attr("width", x_heatmap.bandwidth() )
+          .attr("height", y_heatmap.bandwidth() )
+          .style("fill", function(d) { return myColor(d.Total)} )
+          .on("mouseover", function(d) {
+            // Show the tooltip and set its content
+            tooltip.transition()
+              .duration(200)
+              .style("opacity", 0.9);
+            tooltip.html("Total: " + d.Total)
+              .style("left", (d3.event.pageX + 10) + "px")
+              .style("top", (d3.event.pageY - 28) + "px");
+          })
+          .on("mouseout", function(d) {
+            // Hide the tooltip on mouseout
+            tooltip.transition()
+              .duration(500)
+              .style("opacity", 0);
+          });
 
 })
