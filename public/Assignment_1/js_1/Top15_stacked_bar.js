@@ -71,10 +71,13 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
     .domain(subgroups)
     .range(['#86efac','#22c55e','#15803d', '#14532d'])
 
+
   //stack the data? --> stack per subgroup
   var stackedData = d3.stack()
     .keys(subgroups)
     (data)
+
+  // console.log(stackedData)
 
     // Define the div for the tooltip (show value in a small div on mouse hover)
     var tooltip = d3.select("body").append("div")
@@ -110,8 +113,8 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
             .style("opacity", 0.8);
           tooltip.html( //show clearly the number of differtent species in a city on mouse hover
           "<span style='color: #14532d;'>Acer Platanoides: " + d.data.Acer_Platanoides + "</span><br>" +
-          "<span style='color: #15803d;'>Lagerstroemia Indica: " + d.data.Lagerstroemia_Indica + "</span><br>" +
-          "<span style='color: #22c55e;'>Platanus Acerifolia: " + d.data.Platanus_Acerifolia + "</span><br>" +
+          "<span style='color: #15803d;'>Platanus Acerifolia: " + d.data.Platanus_Acerifolia + "</span><br>" +
+           "<span style='color: #22c55e;'>Lagerstroemia Indica: " + d.data.Lagerstroemia_Indica + "</span><br>" +
           "<span style='color: #86efac;'>Other: " + d.data.Other + "</span>"
             )
             .style("left", (d3.event.pageX + 10) + "px")

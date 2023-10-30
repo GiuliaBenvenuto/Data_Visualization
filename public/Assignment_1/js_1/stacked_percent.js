@@ -55,10 +55,13 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
       .attr("stroke", "lightgray") // Adjust the color as needed
       .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
 
+
   // color palette = one color per subgroup
+  // Color palette with inverted order such that the first one from the bottom is "other"
   var color = d3.scaleOrdinal()
     .domain(subgroups)
-    .range(['#86efac','#22c55e','#15803d', '#14532d'])
+    .range(['#14532d','#15803d','#22c55e', '#86efac'])
+
 
   // Normalize the data -> sum of each group must be 100!
   console.log(data)
@@ -71,12 +74,31 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
     for (i in subgroups){ temp=subgroups[i] ; d[temp] = d[temp] / tot * 100}
   })
 
-  //stack the data? --> stack per subgroup
-  var stackedData = d3.stack()
-    .keys(subgroups)
-    (data)
 
-    
+  // Define the order of the keys to visualize the percentage in the same way of the stacked barchart (to be consistent)
+  var customOrder = ["Other", "Platanus_Acerifolia", "Lagerstroemia_Indica", "Acer_Platanoides"];
+
+  // Reorder the array subgroups in the same order of customOrder
+  var orderedSubgroups = customOrder.filter(key => subgroups.includes(key));
+
+  // Use the ordered array
+  var stackedData = d3.stack()
+      .keys(orderedSubgroups)
+      (data);
+
+
+  // Define the div for the tooltip (show value in a small div on mouse hover)
+  var tooltip = d3.select("body").append("div")
+    .style("position", "absolute")
+    .style("background", "white")
+    .style("padding", "5px")
+    .style("border", "1px solid #214328")
+    .style("border-radius", "5px")
+    .style("pointer-events", "none")
+    .style("opacity", 0)
+    .style("font", "15px Fira Sans")
+    .style("color", "#214328");
+  
 
   // Show the bars
   svg_percent.append("g")
@@ -93,4 +115,22 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
         .attr("y", function(d) { return y(d[1]); })
         .attr("height", function(d) { return y(d[0]) - y(d[1]); })
         .attr("width",x.bandwidth())
+      .on("mouseover", function(d) {
+        tooltip.transition()
+          .duration(100)
+          .style("opacity", 0.8);
+        tooltip.html( //show clearly the number of differtent species in a city on mouse hover
+          "<span style='color: #14532d;'>Acer Platanoides: " + (d.data.Acer_Platanoides).toFixed(3) + "%" + "</span><br>" +
+          "<span style='color: #15803d;'>Lagerstroemia Indica: " + (d.data.Lagerstroemia_Indica).toFixed(3) + "%" + "</span><br>"+
+          "<span style='color: #22c55e;'>Platanus Acerifolia: " + (d.data.Platanus_Acerifolia).toFixed(3) + "%" + "</span><br>" +
+          "<span style='color: #86efac;'>Other: " + (d.data.Other).toFixed(3) + "%" + "</span>"
+          )
+          .style("left", (d3.event.pageX + 10) + "px")
+          .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+        tooltip.transition()
+          .duration(300)
+          .style("opacity", 0);
+      });
 })
