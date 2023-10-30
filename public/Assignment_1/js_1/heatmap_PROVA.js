@@ -2,13 +2,20 @@
 // HEATMAP
 // https://docs.google.com/spreadsheets/d/e/2PACX-1vR9sVhFoMblAAKjiTYvx4z2CMadwPYrFnI3Hb9ZO7FdFm87DJ1RbLrJQUv770VGj2HuCdIHNoze3p4B/pub?output=csv
 
-// TOP 5: https://docs.google.com/spreadsheets/d/e/2PACX-1vSn35ldxZU6jKlHrkhxBieJjruVhOHoSK1-K3oi2ZVRp0eTCFKbjI79xZnv4hfJ252UpquFPtTaCo-u/pub?output=csv
+// TOP 5: https://docs.google.com/spreadsheets/d/e/2PACX-1vTiELszpX03qtMwuhOORJYvyhfN06rp9ENCv3g5S02PieqTLphAv0AHMWni9iwhM3XJz_-VzgexZZVj/pub?output=csv
 // TOP 10: https://docs.google.com/spreadsheets/d/e/2PACX-1vQL82bVWYC_C8pfBt843yo0ca3pTE7uz5DntMs2sWm3CVTWrrqHuYaa2rYfVCGEaNBUDAGIpUEdBO0L/pub?output=csv
 // TOP 15: https://docs.google.com/spreadsheets/d/e/2PACX-1vQRNFmhZzK9P24CY74TUyLV5xxxjdRkKEfd4xV-4WiCT-c5LL4CWh9LgykFL5fzFnJib5obvqKqOWNp/pub?output=csv
 
 
-function updateHeatmap(selectedOption) {
 
+// set the dimensions and margins of the graph
+
+
+
+
+var currentCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSn35ldxZU6jKlHrkhxBieJjruVhOHoSK1-K3oi2ZVRp0eTCFKbjI79xZnv4hfJ252UpquFPtTaCo-u/pub?output=csv";
+
+function updateHeatmap(selectedOption) {
     // Determine the CSV URL based on the selected option
     var csvURL;
     if (selectedOption === "5") {
@@ -20,8 +27,8 @@ function updateHeatmap(selectedOption) {
     }
 
     // Remove the existing heatmap
-    // d3.select("#my_heatmap").html("");
-    d3.select("#my_heatmap").selectAll("svg").remove();
+    d3.select("#my_heatmap").html("");
+
 
     d3.csv(csvURL, function(data) {
         var margin_heatmap = {top: 30, right: 30, bottom: 100, left: 120},
@@ -89,7 +96,7 @@ function updateHeatmap(selectedOption) {
         .data(data, function(d) {return d.city +':'+ d.scientific_name;})
         .enter()
         .append("rect")
-            .attr("x", function(d) { return x_heatmap(d.city) + 1 })
+            .attr("x", function(d) { return x_heatmap(d.city) })
             .attr("y", function(d) { return y_heatmap(d.scientific_name) })
             .attr("width", x_heatmap.bandwidth() )
             .attr("height", y_heatmap.bandwidth() )
@@ -108,8 +115,12 @@ function updateHeatmap(selectedOption) {
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
-            });     
-    });    
+            });
+
+            
+    });
+
+        
 }
 
 updateHeatmap("5");
@@ -118,5 +129,4 @@ d3.select("#topNSelector").on("change", function() {
     var selectedOption = this.value;
     updateHeatmap(selectedOption);
 });
-
 
