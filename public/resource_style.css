@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+    height: 100vh;
+}
+
+.link-list {
+    display: flex;
+    align-items: center;
+}
+
+.link-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.link-list li {
+    margin-bottom: 10px;
+}
+
+.link-list a {
+    font-family: 'Fira Sans', sans-serif;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.link-list a i {
+    margin-right: 5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Slab', sans-serif;
+    /* Add fallback fonts here in case 'Roboto Slab' isn't available */
+}
+
+/* Fira Sans for paragraphs and text */
+p, span {
+    font-family: 'Fira Sans', sans-serif;
+    /* Add fallback fonts here in case 'Fira Sans' isn't available */
+}
+
+a i.fas.fa-download {
+    color: #525252; /* Change 'blue' to the default color you want */
+}
+
+a:hover i.fas.fa-download {
+    color: #38bdf8; /* Change 'red' to the hover color you want */
+}
