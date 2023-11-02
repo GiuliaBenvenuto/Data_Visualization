@@ -124,6 +124,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
           tooltip.transition()
             .duration(300)
             .style("opacity", 0);
-        });
+        })
+
 
 });
