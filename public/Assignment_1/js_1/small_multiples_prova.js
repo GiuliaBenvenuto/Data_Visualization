@@ -1,9 +1,9 @@
 // https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6cBW1DumszVHmQOu51s4vWOuRdLUoB5TzdX_pgO_Kf_1dlsVoU9waEkO5/pub?output=csv
   
   // Chart dimensions
-  const width = 300; // Adjust the width for side-by-side charts
-  const height = 300; // Adjust the height for side-by-side charts
-  const margin = { top: 10, right: 20, bottom: 80, left: 100 };
+  const width = 370; // Adjust the width for side-by-side charts
+  const height = 450; // Adjust the height for side-by-side charts
+  const margin = { top: 50, right: 10, bottom: 80, left: 90 };
   
   
   
@@ -11,7 +11,8 @@
 
     const categories = ["Acer_Platanoides", "Lagerstroemia_Indica", "Platanus_Acerifolia", "Other"];
     
-    categories.forEach(category => {
+    categories.forEach((category, index) => {
+
         const svg = d3.select("#stacked_small_multiples")
           .append("svg")
           .attr("width", width)
@@ -34,7 +35,27 @@
             .range([0, height - margin.top - margin.bottom])
             .padding(0.1);
 
-        
+
+        svg.selectAll("xGrid")
+        .data(xScale.ticks(12)) // You can change the number of ticks as per your preference
+        .enter()
+        .append("line")
+        .attr("x1", function (d) { return xScale(d); })
+        .attr("x2", function (d) { return xScale(d); })
+        .attr("y1", 0)
+        .attr("y2", height - margin.top - margin.bottom)
+        .attr("stroke", "lightgray") // Adjust the color as needed
+        .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
+
+        const tooltip = d3.select("body").append("div")
+            .style("position", "absolute")
+            .style("visibility", "hidden")
+            .style("background", "white")
+            .style("padding", "8px")
+            .style("border", "1px solid #ccc")
+            .style("border-radius", "5px")
+            .style("font", "12px Fira Sans");
+                
         // Draw bars for each category
         // Draw bars for the current category
         svg.selectAll("rect")
@@ -45,24 +66,48 @@
             .attr("y", d => yScale(d.city))
             .attr("width", d => xScale(d.value))
             .attr("height", yScale.bandwidth())
-            .attr("fill", "steelblue");
+            .attr("fill", "steelblue")
+            .on("mouseover", function (d) {
+                tooltip.html(`<strong>Category:</strong> ${category}<br><strong>City:</strong> ${d.city}<br><strong>Value:</strong> ${d.value}`)
+                    .style("visibility", "visible")
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY - 30) + "px");
+            })
+            .on("mousemove", function () {
+                tooltip.style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY - 30) + "px");
+            })
+            .on("mouseout", function () {
+                tooltip.style("visibility", "hidden");
+            });
 
         // X-axis
         svg.append("g")
             .attr("class", "x-axis")
             .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
-            .call(d3.axisBottom(xScale));
+            .call(d3.axisBottom(xScale))
+            .selectAll("text")
+            .attr("transform", "translate(-5, 10)rotate(-45)")
+            .style("font", "12px Fira Sans")
+            .style("text-anchor", "end");
 
-        // Y-axis
-        svg.append("g")
-            .attr("class", "y-axis")
-            .call(d3.axisLeft(yScale));
+            if (index === 0) {
+                svg.append("g")
+                    .attr("class", "y-axis")
+                    .style("font", "12px Fira Sans")
+                    .call(d3.axisLeft(yScale));
+            } else {
+                svg.append("g")
+                    .attr("class", "y-axis")
+                    .call(d3.axisLeft(yScale).tickFormat(""));
+            }
 
         // Category label
         svg.append("text")
-            .attr("x", 110)
-            .attr("y", height - margin.top - margin.bottom + 50) // Changed to move labels down by 10 pixels
-            .style("text-anchor", "end") // Changed to align labels to the right
+            .attr("x", 140)
+            .attr("y", -20) // Position above the chart
+            .style("text-anchor", "end")
+            .style("font", "15px Fira Sans")
             .text(category);
         
     });
