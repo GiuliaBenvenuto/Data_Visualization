@@ -1,5 +1,5 @@
 // STACKED PERCENT BAR CHART
-
+import { createGrid } from "./utils.js";
 // set the dimensions and margins of the graph
 var margin_percent = {top: 30, right: 30, bottom: 100, left: 50},
     width_percent = 900 - margin_percent.left - margin_percent.right,
@@ -18,7 +18,7 @@ var svg_percent = d3.select("#stacked_percent")
 d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6cBW1DumszVHmQOu51s4vWOuRdLUoB5TzdX_pgO_Kf_1dlsVoU9waEkO5/pub?output=csv", function(data) {
 
   // List of subgroups = header of the csv files = soil condition here
-  var subgroups = data.columns.slice(1)
+  var subgroups = data.columns.slice(1);
 
   // List of groups = species here = value of the first column called group -> I show them on the X axis
   var groups = d3.map(data, function(d){return(d.city)}).keys()
@@ -46,6 +46,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
     .call(d3.axisLeft(y))
     .style("font", "15px Fira Sans");
 
+    /*
   svg_percent.selectAll("yGrid")
     .data(y.ticks(10)) // You can change the number of ticks as per your preference
     .enter()
@@ -56,7 +57,8 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
       .attr("y2", function(d) { return y(d); })
       .attr("stroke", "lightgray") // Adjust the color as needed
       .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
-
+*/
+    createGrid(svg_percent, "yGrid", y, width_percent, 10, "lightgray", "4");
 
   // color palette = one color per subgroup
   // Color palette with inverted order such that the first one from the bottom is "other"
@@ -66,13 +68,14 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
 
 
   // Normalize the data -> sum of each group must be 100!
-  console.log(data)
-  dataNormalized = []
   data.forEach(function(d){
     // Compute the total
-    tot = 0
+    var tot = 0;
+    var temp;
+    var i=0;
     for (i in subgroups){ temp=subgroups[i] ; tot += +d[temp] }
     // Now normalize
+    var i=0;
     for (i in subgroups){ temp=subgroups[i] ; d[temp] = d[temp] / tot * 100}
   })
 

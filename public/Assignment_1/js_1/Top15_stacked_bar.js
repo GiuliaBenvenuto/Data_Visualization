@@ -1,5 +1,5 @@
 // STACKED BAR CHART
-
+import { createGrid } from "./utils.js";
 // set the dimensions and margins of the graph
 var margin_stack = {top: 30, right: 30, bottom: 100, left: 60},
     width_stack = 900 - margin_stack.left - margin_stack.right,
@@ -55,7 +55,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
         .attr("transform", "translate(-5, 10)rotate(-45)")
         .style("font", "14px Fira Sans")
         .style("text-anchor", "end");
-
+    /*
     svg_stack.selectAll("yGrid")
       .data(y_stack.ticks(10)) // You can change the number of ticks as per your preference
       .enter()
@@ -66,7 +66,8 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
         .attr("y2", function(d) { return y_stack(d); })
         .attr("stroke", "lightgray") // Adjust the color as needed
         .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
-    
+    */
+    createGrid(svg_stack, "yGrid", y_stack, width_stack, 10, "lightgray", "4");
 
   // color palette = one color per subgroup
   var color_stack = d3.scaleOrdinal()

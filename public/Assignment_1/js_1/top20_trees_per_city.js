@@ -1,6 +1,5 @@
 // HORIZONAL BAR CHART
-
-function createBarChart() {
+import { createGrid } from "./utils.js";
   // set the dimensions and margins of the graph
   var margin_city = { top: 40, right: 100, bottom: 100, left: 110 },
     width_city = 800 - margin_city.left - margin_city.right,
@@ -17,17 +16,16 @@ function createBarChart() {
 
 
   // load the data
-  d3.csv(
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYwM2PtZzr74DXvzNH2rv4cQ33ip3bG5MB0mB7jTT0OV2db0H-PB8gw_zmyGddtOTxHY9ldCVCDcHE/pub?output=csv",
-    function (data) {
+  d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTYwM2PtZzr74DXvzNH2rv4cQ33ip3bG5MB0mB7jTT0OV2db0H-PB8gw_zmyGddtOTxHY9ldCVCDcHE/pub?output=csv", function (data) {
 
       // X axis
       var x_city = d3.scaleLinear()
         .range([0, width_city])
         .domain([0, data[0].Total]);
 
-
       // Add X axis grid lines
+      //maybe refactable 
+      /*
       svg_city
       .selectAll("xGrid")
       .data(x_city.ticks(12)) // You can change the number of ticks as per your preference
@@ -39,9 +37,8 @@ function createBarChart() {
         .attr("y2", height_city)
         .attr("stroke", "lightgray") // Adjust the color as needed
         .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
-
-        
-
+        */
+       createGrid(svg_city, "xGrid", x_city, height_city, 12, "lightgray", "4");
       // Y axis
       var y_city = d3
         .scaleBand()
@@ -143,9 +140,9 @@ function createBarChart() {
         });
     }
   );
-}
 
 
+/*
 // Create the chart when the chart container is visible in the window
 // To make this work i wrapped everything in function createBarChart() {}
 const chartContainer = document.querySelector("#horizontal_barchart");
@@ -163,3 +160,4 @@ const observer = new IntersectionObserver(
 
 // Start observing the chart container
 observer.observe(chartContainer);
+*/

@@ -1,5 +1,5 @@
 // VERTICAL BAR CHART
-
+import { createGrid } from "./utils.js";
 // set the dimensions and margins of the graph
 var margin_h = {top: 30, right: 60, bottom: 110, left: 60},
     width_h = 800 - margin_h.left - margin_h.right,
@@ -39,7 +39,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
       .range([ height_h, 0]);
     svg_h.append("g")
       .call(d3.axisLeft(y_h));
-
+    /*
     // Add Y axis grid lines
     svg_h.selectAll("yGrid")
     .data(y_h.ticks(10)) // You can change the number of ticks as per your preference
@@ -51,7 +51,8 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
       .attr("y2", function(d) { return y_h(d); })
       .attr("stroke", "lightgray") // Adjust the color as needed
       .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
-
+*/
+    createGrid(svg_h, "yGrid", y_h, width_h, 10, "lightgray", "4");
 
   var colorScale = d3.scaleLinear();
     colorScale.domain([0, data[0].value])
@@ -78,8 +79,6 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
       .attr("y", function(d) { return y_h(0); })
       .attr("width", x_h.bandwidth())
       .attr("height", function(d) { return height_h - y_h(0); })
-      // .attr("fill", "#14532d")
-      // .attr("fill", function(d) { return colorScale(d.value); });
       .attr('fill', function(data, index){
         return colorScale(data.value)
       })

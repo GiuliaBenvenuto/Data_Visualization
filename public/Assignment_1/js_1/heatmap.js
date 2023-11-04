@@ -12,9 +12,6 @@ function updateHeatmap(selectedOption) {
     } else if (selectedOption === "15") {
         csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQRNFmhZzK9P24CY74TUyLV5xxxjdRkKEfd4xV-4WiCT-c5LL4CWh9LgykFL5fzFnJib5obvqKqOWNp/pub?output=csv";
     }
-
-    // Remove the existing heatmap
-    // d3.select("#my_heatmap").html("");
     d3.select("#my_heatmap").selectAll("svg").remove();
 
     d3.csv(csvURL, function(data) {
@@ -33,11 +30,9 @@ function updateHeatmap(selectedOption) {
 
         // Your code for creating the heatmap goes here, similar to your existing code
         var cities = d3.map(data, function(d){return(d.city)}).keys()
-        console.log(cities)
 
         // List of subgroups = header of the csv files = soil condition here
         var tree_types = d3.map(data, function(d){return(d.scientific_name)}).keys()
-        console.log(tree_types)
 
         // Build X scales and axis:
         var x_heatmap = d3.scaleBand()
