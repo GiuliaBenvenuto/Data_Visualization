@@ -1,3 +1,5 @@
+// STACKED BAR CHART
+
 // set the dimensions and margins of the graph
 var margin_stack = {top: 10, right: 30, bottom: 100, left: 60},
     width_stack = 900 - margin_stack.left - margin_stack.right,

@@ -1,3 +1,5 @@
+// HORIZONAL BAR CHART
+
 function createBarChart() {
   // set the dimensions and margins of the graph
   var margin_city = { top: 40, right: 100, bottom: 100, left: 110 },
@@ -63,13 +65,6 @@ function createBarChart() {
           .attr("transform", "translate(10, 20)rotate(-45)")
           .style("font", "12px Fira Sans")
           .style("text-anchor", "end");
-        // the ticks are not aligned with the bar and is the direction is wrong  
-      /*
-      var colorScale = d3.scaleSequential(function(t) {
-        // Reverse the gradient to start with dark green for high values
-        return d3.rgb(0, 200 + (1 - t) * 5, 0);
-      })
-        .domain([0, d3.max(data, function(d) { return d.Total; })]);*/
 
 
       var colorScale = d3.scaleLinear();
@@ -134,21 +129,18 @@ function createBarChart() {
         .text("Top-20 number of trees per city");
 
       // Animation
-      // the bars start to became bigger and bigger form the top to the bottom.
-      // maybe is better if the transition works from the bottom to the top
-      
       svg_city
-      .selectAll("rect")
-      .attr("width", 0) // set the initial width to 0
-      .transition()
-      .duration(600)
-      .attr("x", function(d) { return x_city(0) + 1;})
-      .attr("width", function (d) {
-        return x_city(d.Total); // set the final width with the value of the data
-      })
-      .delay(function (d, i) {
-        return i * 100;
-      });
+        .selectAll("rect")
+        .attr("width", 0) // set the initial width to 0
+        .transition()
+        .duration(600)
+        .attr("x", function(d) { return x_city(0) + 1;})
+        .attr("width", function (d) {
+          return x_city(d.Total); // set the final width with the value of the data
+        })
+        .delay(function (d, i) {
+          return i * 100;
+        });
     }
   );
 }

@@ -1,11 +1,5 @@
 
 // HEATMAP
-// https://docs.google.com/spreadsheets/d/e/2PACX-1vR9sVhFoMblAAKjiTYvx4z2CMadwPYrFnI3Hb9ZO7FdFm87DJ1RbLrJQUv770VGj2HuCdIHNoze3p4B/pub?output=csv
-
-// TOP 5: https://docs.google.com/spreadsheets/d/e/2PACX-1vSn35ldxZU6jKlHrkhxBieJjruVhOHoSK1-K3oi2ZVRp0eTCFKbjI79xZnv4hfJ252UpquFPtTaCo-u/pub?output=csv
-// TOP 10: https://docs.google.com/spreadsheets/d/e/2PACX-1vQL82bVWYC_C8pfBt843yo0ca3pTE7uz5DntMs2sWm3CVTWrrqHuYaa2rYfVCGEaNBUDAGIpUEdBO0L/pub?output=csv
-// TOP 15: https://docs.google.com/spreadsheets/d/e/2PACX-1vQRNFmhZzK9P24CY74TUyLV5xxxjdRkKEfd4xV-4WiCT-c5LL4CWh9LgykFL5fzFnJib5obvqKqOWNp/pub?output=csv
-
 
 function updateHeatmap(selectedOption) {
 

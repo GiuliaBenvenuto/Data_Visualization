@@ -26,12 +26,13 @@
 </head>
 
 <body class="bg-grey-200 flex flex-col min-h-screen">
+
     <!-- Navbar -->
     <nav class="relative flex w-full flex-wrap items-center justify-between bg-neutral-200 py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
       <div class="flex w-full flex-wrap items-center justify-between px-3">
           <div class="flex items-center">
               <a class="mx-2 my-0 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 lg:mb-0 lg:mt-0" href="https://github.com/GiuliaBenvenuto/Data_Visualization_GNZ">
-                  <img src="/img/Logo4_cropped.png" style="height: 50px; width: auto;" alt="" />
+                  <img src="../../img/Logo4_cropped.png" style="height: 50px; width: auto;" alt="" />
               </a>
               <ul class="list-style-none flex pl-0 lg:flex-row ml-6">
                 <li class="mr-6" data-te-nav-item-ref>
@@ -52,155 +53,155 @@
         <a id="go-to-home" href="../index.html" title="Go To Home" class="fixed z-90 bottom-10 left-7 border-0 w-12 h-12 rounded-full drop-shadow-md bg-green-900 text-white text-3xl font-bold">
           <i class="fas fa-home"></i>
         </a>
-
-        <!--
-        <a class="mx-10 my-10 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 lg:mb-0 lg:mt-0" href="../../public/index.html">
-          <i class="fas fa-home fa-lg"></i>
-        </a> -->
       </div>
     </div>
   </nav>
 
     
-    <div class="text-center title mt-10">
-      <div class="text-5xl"></div>
-        <h1 class="text-neutral-700 text-5xl" >Assignment 1</h1>
-        <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data visualizaion for 🌳 5M Trees Dataset</h2>
-      </div>
-      <div class="text-center">
-        <p class="description text-neutral-600 text-center mt-3">In this assignment we will use the <a href="https://www.kaggle.com/datasets/mexwell/5m-trees-dataset " style="text-decoration: underline; color: #404040 " onmouseover="this.style.color='#15803d'" onmouseout="this.style.color='#404040'">5M Trees Dataset</a> from Kaggle.
-          <br> It contains data about 5 million trees from 63 US cities.<br> Our purpose is to analyze the position, the quantity, 
-          the scientific name and the common name of the trees. </p>
-      </div>
-    </div>
-
-    <!-- Vertical Barchart -->
-    <div class="text-center title mt-14">
-      <div class="text-5xl"></div>
-        <h1 class="text-neutral-700 text-3xl" >Vertical Barchart</h1>
-      </div>
+  <div class="text-center title mt-10">
+    <div class="text-5xl"></div>
+      <h1 class="text-neutral-700 text-5xl" >Assignment 1 - Comparing Categories</h1>
+      <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data visualizaion for 🌳 5M Trees Dataset</h2>
     </div>
     <div class="text-center">
-      <p class="description text-neutral-600 text-center mt-3">Our first visualization is a vertical barchart. It shows the twenty states of US with the highest number of trees indeed. The x-axis displays the names of the states while the y-axis represents the number of trees. 
-        Each bar on the chart corresponds to the tree count for a specific US state. <br> For this visualization we opted to focus on states rather than cities to provide a more comprehensive and overarching perspective of the most densely forested regions in the US. </p>
+      <p class="text-neutral-600 text-center mt-3">In this assignment we will use the <a href="https://www.kaggle.com/datasets/mexwell/5m-trees-dataset " style="text-decoration: underline; color: #404040 " onmouseover="this.style.color='#15803d'" onmouseout="this.style.color='#404040'">5M Trees Dataset</a> from Kaggle.
+        <br> It contains data about 5 million trees from 63 US cities.<br> Our purpose is to analyze the position, the quantity, 
+        the scientific name and the common name of the trees. </p>
     </div>
 
-    <!-- js -->
-    <div class="flex justify-center items-center ">
-      <div id="my_dataviz"  style="margin-top: 50px;">
-          <script src="../Assignment_1/js_1/top20_trees_per_state.js"></script>
-      </div>
+    <div class="text-center">
+      <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data preparation</h2>
+      <p class="text-neutral-600 text-center mt-3">
+        ADD HERE DATA PREPARATION
+      </p>
     </div>
+  </div>
+
+
+  <!-- Vertical Barchart -->
+  <div class="text-center title mt-14">
+    <div class="text-5xl"></div>
+      <h1 class="text-neutral-700 text-3xl" >Vertical Barchart</h1>
+    </div>
+  </div>
+  <div class="text-center">
+    <p class="description text-neutral-600 text-center mt-3">Our first visualization is a vertical barchart. It shows the twenty states of US with the highest number of trees indeed. The x-axis displays the names of the states while the y-axis represents the number of trees. 
+      Each bar on the chart corresponds to the tree count for a specific US state. <br> For this visualization we opted to focus on states rather than cities to provide a more comprehensive and overarching perspective of the most densely forested regions in the US. </p>
+  </div>
+
+  <!-- js -->
+  <div class="flex justify-center items-center ">
+    <div id="my_dataviz"  style="margin-top: 50px;">
+        <script src="../Assignment_1/js_1/top20_trees_per_state.js"></script>
+    </div>
+  </div>
   
 
-    <!-- Horizontal Barchart -->
-    <div class="text-center title mt-20">
-      <div class="text-5xl"></div>
-        <h1 class="text-neutral-700 text-3xl" >Horizontal Barchart</h1>
-      </div>
+  <!-- Horizontal Barchart -->
+  <div class="text-center title mt-20">
+    <div class="text-5xl"></div>
+      <h1 class="text-neutral-700 text-3xl" >Horizontal Barchart</h1>
     </div>
-    <div class="text-center">
-      <p class="description text-neutral-600 text-center mt-3">Our second visualization is a horizontal barchart. It shows the twenty cities of US with the highest number of trees. The x-axis displays the names of the cities while the y-axis represents the number of trees. Each bar on the chart corresponds to the tree count for a specific US city.
-        <br> Differently from the first chart, we have chosen to concentrate on cities in this instance to offer a more localized perspective. The reason behind this decision is to provide a finer-grained analysis of tree distribution within urban areas.
-        <br> We can notice that the vertical and the horizontal barcharts are coherent indeed in the first chart, California emerges as the most tree-abundant state, while in the second graph, Los Angeles, a city within the state of California, stands out as the city with the highest number of trees. The same hold for New York.</p>
-    </div>
+  </div>
+  <div class="text-center">
+    <p class="description text-neutral-600 text-center mt-3">Our second visualization is a horizontal barchart. It shows the twenty cities of US with the highest number of trees. The x-axis displays the names of the cities while the y-axis represents the number of trees. Each bar on the chart corresponds to the tree count for a specific US city.
+      <br> Differently from the first chart, we have chosen to concentrate on cities in this instance to offer a more localized perspective. The reason behind this decision is to provide a finer-grained analysis of tree distribution within urban areas.
+      <br> We can notice that the vertical and the horizontal barcharts are coherent indeed in the first chart, California emerges as the most tree-abundant state, while in the second graph, Los Angeles, a city within the state of California, stands out as the city with the highest number of trees. The same hold for New York.</p>
+  </div>
 
-    <!-- horizontal js -->
-    <!-- js -->
-    <div class="flex justify-center items-center ">
-      <div id="horizontal_barchart"  style="margin-top: 50px;">
-        <script src="../Assignment_1/js_1/top20_trees_per_city.js"></script>
-      </div>
+  <!-- js -->
+  <div class="flex justify-center items-center ">
+    <div id="horizontal_barchart"  style="margin-top: 50px;">
+      <script src="../Assignment_1/js_1/top20_trees_per_city.js"></script>
     </div>
-
-
-    <!-- Stacked Barchart -->
-    <div class="text-center title mt-20">
-      <div class="text-5xl"></div>
-        <h1 class="text-neutral-700 text-3xl" >Stacked Barchart</h1>
-      </div>
-    </div>
-    <div class="text-center">
-      <p class="description text-neutral-600 text-center mt-3">Our third visualization is a stacked bar chart. It highlights three distinct tree types: Acer Platanoides, Lagerstroemia Indica, and Platanus Acerifolia across multiple cities. We selected these three tree species because they were the most prevalent and allowed us to compare the tree populations in various cities in fact we've chosen the top 15 cities with the highest counts of these tree types.
-        <br> The x-axis displays the names of the cities while the y-axis represents the total number of trees. Each bar's height corresponds to the total number of trees in a particular city, and the segments in it represent the distribution of the three specified tree types within each city.</p>
-    </div>
+  </div>
 
 
-    <!-- stacked js -->
-    <!-- js -->
-    <div class="flex justify-center items-center ">
-      <div id="stacked_barchart"  style="margin-top: 40px;">
-        <script src="../Assignment_1/js_1/Top15_stacked_bar.js"></script>
-      </div>
+  <!-- Stacked Barchart -->
+  <div class="text-center title mt-20">
+    <div class="text-5xl"></div>
+      <h1 class="text-neutral-700 text-3xl" >Stacked Barchart</h1>
     </div>
+  </div>
+  <div class="text-center">
+    <p class="description text-neutral-600 text-center mt-3">Our third visualization is a stacked bar chart. It highlights three distinct tree types: Acer Platanoides (Norway Maple), Lagerstroemia Indica (Crape Myrtle), and Platanus Acerifolia (London Plane) across multiple cities. We selected these three tree species because they were the most prevalent and allowed us to compare the tree populations in various cities in fact we've chosen the top 15 cities with the highest counts of these tree types.
+      <br> The x-axis displays the names of the cities while the y-axis represents the total number of trees. Each bar's height corresponds to the total number of trees in a particular city, and the segments in it represent the distribution of the three specified tree types within each city.</p>
+  </div>
+
+  <!-- js -->
+  <div class="flex justify-center items-center ">
+    <div id="stacked_barchart"  style="margin-top: 40px;">
+      <script src="../Assignment_1/js_1/Top15_stacked_bar.js"></script>
+    </div>
+  </div>
 
 
-    <!-- Stacked bar chart with small multiple -->
-    <div class="text-center title mt-20">
-      <div class="text-5xl"></div>
-        <h1 class="text-neutral-700 text-3xl" >Small Multiple Barchart </h1>
-      </div>
+  <!-- Stacked bar chart with small multiple -->
+  <div class="text-center title mt-20">
+    <div class="text-5xl"></div>
+      <h1 class="text-neutral-700 text-3xl" >Small Multiple Barchart </h1>
     </div>
-    <div class="text-center">
-      <p class="description text-neutral-600 text-center mt-3">Our fourth visualization is a small multiple barchart. It highlights three distinct tree types: Acer Platanoides, Lagerstroemia Indica, Platanus Acerifolia across the top 15 cities with the highest counts of these tree types (as in the previous chart). 
-        <br> This visualization is composed of four different horizontal barcharts, one for each tree type and one for all the other tree types. The x-axis of each barchart displays the number of trees while the y-axis displays the names of the cities. Each bar in each barchart corresponds to the quantity of a specific tree type in a specific city.
-        <br> Essentially the data displayed in this graph is the same as that displayed in the stacked barchart above, however this type of visualization in some cases can be clearer and more intuitive because more information can be obtained at a glance.</p>
-    </div>
+  </div>
+  <div class="text-center">
+    <p class="description text-neutral-600 text-center mt-3">Our fourth visualization is a small multiple barchart. It highlights three distinct tree types: Acer Platanoides (Norway Maple), Lagerstroemia Indica (Crape Myrtle), and Platanus Acerifolia (London Plane) across the top 15 cities with the highest counts of these tree types (as in the previous chart). 
+      <br> This visualization is composed of four different horizontal barcharts, one for each tree type and one for all the other tree types. The x-axis of each barchart displays the number of trees while the y-axis displays the names of the cities. Each bar in each barchart corresponds to the quantity of a specific tree type in a specific city.
+      <br> The length of the bars in each barchart is computed by normalizing the original values such that the scale of the x-axis of the plots is the same for all of them thus allowing for a direct comparison between the different tree types.
+      <br> Essentially the data displayed in this graph is the same as that displayed in the stacked barchart above, however this type of visualization in some cases can be clearer and more intuitive because more information can be obtained at a glance.</p>
+  </div>
 
-    <!-- Add here js stacked barchart with small multiple-->
-    <!-- js -->
-    <div class="flex justify-center items-center ">
-      <div id="stacked_small_multiples"  style="margin-top: 20px;">
-        <!-- <script src="../Assignment_1/js_1/stacked_small_multiples.js"></script> -->
-         <script src="../Assignment_1/js_1/small_multiples_prova.js"></script>
-      </div>
+  <!-- js -->
+  <div class="flex justify-center items-center ">
+    <div id="stacked_small_multiples"  style="margin-top: 20px;">
+        <script src="../Assignment_1/js_1/stacked_small_multiples.js"></script>
     </div>
+  </div>
 
 
-    <!-- Stacked bar chart 100% -->
-    <div class="text-center title mt-20">
-      <div class="text-5xl"></div>
-        <h1 class="text-neutral-700 text-3xl" >Percent Stacked Barplot </h1>
-      </div>
+  <!-- Stacked bar chart 100% -->
+  <div class="text-center title mt-20">
+    <div class="text-5xl"></div>
+      <h1 class="text-neutral-700 text-3xl" >Percent Stacked Barplot </h1>
     </div>
-    <div class="text-center">
-      <p class="description text-neutral-600 text-center mt-3"> Our fifth visualization is a percent stacked barplot. It highlights three distinct tree types: Acer Platanoides, Lagerstroemia Indica, Platanus Acerifolia across the top 15 cities with the highest counts of these tree types (like the previous two charts). 
-            <br>The x-axis displays the names of the cities while the y-axis represents the total number of trees as a percentage. Each city is represented by a 100% bar, where the entire bar represents the total number of trees while each segments represents the percentage of a specific tree types and the remaining other tree types in the city. 
-            <br>This type of visualization is good for showing the composition of a whole in terms of its individual components. The bar representation as a 100%, and segments within the bars show the proportions of different categories or subgroups, making it easy to compare how these subgroups contribute to the whole.</p>
+  </div>
+  <div class="text-center">
+    <p class="description text-neutral-600 text-center mt-3"> Our fifth visualization is a percent stacked barplot. It highlights three distinct tree types: Acer Platanoides (Norway Maple), Lagerstroemia Indica (Crape Myrtle), and Platanus Acerifolia (London Plane) across the top 15 cities with the highest counts of these tree types (like the previous two charts). 
+          <br>The x-axis displays the names of the cities while the y-axis represents the total number of trees as a percentage. Each city is represented by a 100% bar, where the entire bar represents the total number of trees while each segments represents the percentage of a specific tree types and the remaining other tree types in the city. 
+          <br>This type of visualization is good for showing the composition of a whole in terms of its individual components. The bar representation as a 100%, and segments within the bars show the proportions of different categories or subgroups, making it easy to compare how these subgroups contribute to the whole.</p>
+  </div>
+
+  <!-- js -->
+  <div class="flex justify-center items-center ">
+    <div id="stacked_percent"  style="margin-top: 40px;">
+      <script src="../Assignment_1/js_1/stacked_percent.js"></script>
     </div>
-    <!-- Add here js stacked barchart 100%-->
-    <div class="flex justify-center items-center ">
-      <div id="stacked_percent"  style="margin-top: 40px;">
-        <script src="../Assignment_1/js_1/stacked_percent.js"></script>
-      </div>
-    </div>
+  </div>
 
   
-    <!-- Heatmap -->
-    <div class="text-center title mt-20">
-      <div class="text-5xl"></div>
-        <h1 class="text-neutral-700 text-3xl" > Heatmap </h1>
-      </div>
+  <!-- Heatmap -->
+  <div class="text-center title mt-20">
+    <div class="text-5xl"></div>
+      <h1 class="text-neutral-700 text-3xl" > Heatmap </h1>
     </div>
-    <div class="text-center">
-      <p class="description text-center mt-3">Our sixth visualization is a heatmap. As the previous visualizations, it highlights three distinct tree types: Acer Platanoides, Lagerstroemia Indica, Platanus Acerifolia across multiple cities.
-            <br>The x-axis displays the names of the cities, the y-axis represents the different categories of trees and the squares in the plot represent the number of trees using color gradients (darker color if the quantity of trees is high and a lighter color if the quantity of trees is low).
-            <br>We noticed that one single plot for the 15 cities with the highest counts of these tree types was not good for conveying information since the cities with a small amount of trees were about of the same color, for this reason we decided to give the possibility to choose, with a dropdown menu, whether to display the top 5, 10 and 15 cities with the highest counts of these tree types.</p>
-    </div>
+  </div>
+  <div class="text-center">
+    <p class="description text-center mt-3">Our sixth visualization is a heatmap. As the previous visualizations, it highlights three distinct tree types: Acer Platanoides (Norway Maple), Lagerstroemia Indica (Crape Myrtle), and Platanus Acerifolia (London Plane) across multiple cities.
+          <br>The x-axis displays the names of the cities, the y-axis represents the different categories of trees and the squares in the plot represent the number of trees using color gradients (darker color if the quantity of trees is high and a lighter color if the quantity of trees is low).
+          <br>We noticed that one single plot for the 15 cities with the highest counts of these tree types was not good for conveying information since the cities with a small amount of trees were about of the same color, for this reason we decided to give the possibility to choose, with a dropdown menu, whether to display the top 5, 10 and 15 cities with the highest counts of these tree types.</p>
+  </div>
 
-    <!-- DROPDOWN -->
-    <div class="bg-white p-2 rounded-lg text-center mt-4">
-      <h2 class="text-lg font-semibold mb-2">City number:</h2>
-      <div class="relative inline-block">
-          <select id="topNSelector" class="block appearance-none w-24 bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 pr-6 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-              <option value="5" selected>Top 5</option>
-              <option value="10">Top 10</option>
-              <option value="15">Top 15</option>
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-700">
-              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9 11l-5-5 1.41-1.41L9 8.17l3.59-3.59L14 6l-5 5z"/></svg>
-          </div>
-      </div>
+  <!-- Dropdown city selection heatmap -->
+  <div class="bg-white p-2 rounded-lg text-center mt-4">
+    <h2 class="text-lg font-semibold mb-2">City number:</h2>
+    <div class="relative inline-block">
+        <select id="topNSelector" class="block appearance-none w-24 bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 pr-6 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+            <option value="5" selected>Top 5</option>
+            <option value="10">Top 10</option>
+            <option value="15">Top 15</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9 11l-5-5 1.41-1.41L9 8.17l3.59-3.59L14 6l-5 5z"/></svg>
+        </div>
+    </div>
   </div>
 
   <script>
@@ -213,17 +214,15 @@
     };
   </script>
   
-
-  <!-- js heatmap -->
+  <!-- js -->
   <div class="flex justify-center items-center ">
     <div id="my_heatmap" style="width: 700px; height: 500px;" >
-      <!-- <script src="../Assignment_1/js_1/heatmap.js"></script> -->
       <script src="../Assignment_1/js_1/heatmap.js"></script>
     </div>
   </div>
 
     
-    <!-- Footer -->
+  <!-- Footer -->
   <footer
     class="flex flex-col mt-auto items-center bg-neutral-200 text-center text-white dark:bg-neutral-600">
     <div class="container pt-6">
@@ -245,7 +244,6 @@
     </div>
   </footer> 
 
-  <!-- Fixed position -->
   <!-- Back to top button -->
   <button id="to-top-button" onclick="goToTop()" title="Go To Top"
     class="hidden fixed z-90 bottom-10 right-10 border-0 w-12 h-12 rounded-full drop-shadow-md bg-green-900 text-white text-3xl font-boldF"><i class="fas fa-arrow-up"></i>

@@ -1,62 +1,137 @@
-const data = [
-  { category: 'A', values: [10, 20, 15, 25] },
-  { category: 'B', values: [15, 10, 5, 30] },
-  { category: 'C', values: [25, 5, 20, 15] },
-];
-
+// SMALL MULTIPLES BAR CHART
+  
 // Chart dimensions
-const width = 300; // Adjust the width for side-by-side charts
-const height = 300; // Adjust the height for side-by-side charts
-const margin = { top: 10, right: 20, bottom: 80, left: 40 };
+const width = 345; // Adjust the width for side-by-side charts
+const height = 450; // Adjust the height for side-by-side charts
+const margin = { top: 50, right: 10, bottom: 80, left: 90 };
+  
+  
+  d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6cBW1DumszVHmQOu51s4vWOuRdLUoB5TzdX_pgO_Kf_1dlsVoU9waEkO5/pub?output=csv", function(data) {
 
-// Create an SVG for each category and position them side by side
-const svg = d3.select("#stacked_small_multiples")
-  .selectAll("svg")
-  .data(data)
-  .enter()
-  .append("svg")
-  .attr("width", width)
-  .attr("height", height)
-  .style("display", "inline-block") // Display charts side by side
-  .append("g")
-  .attr("transform", `translate(${margin.left},${margin.top})`);
+    const categories = data.columns.slice(1);
+    // Find the maximum value across all categories
+    
+    const maxCategoryValue = d3.max(data, d => {
+      return d3.max(categories, category => +d[category]);
+    });
 
-// Scales
-const xScale = d3.scaleLinear()
-  .domain([0, d3.max(data, d => d3.max(d.values))])
-  .nice()
-  .range([0, width - margin.left - margin.right]);
+    // Normalize the maximum value to 100
+    const normalizedMax = 100;  
 
-const yScale = d3.scaleBand()
-  .domain(data[0].values.map((_, i) => i + 1))
-  .range([0, height - margin.top - margin.bottom])
-  .padding(0.1);
+    categories.forEach((category, index) => {
 
-// Draw bars for each category
-svg.selectAll("rect")
-  .data(d => d.values)
-  .enter()
-  .append("rect")
-  .attr("x", 0)
-  .attr("y", (_, i) => yScale(i + 1))
-  .attr("width", d => xScale(d))
-  .attr("height", yScale.bandwidth())
-  .attr("fill", "steelblue");
+        
+        
+        const svg = d3.select("#stacked_small_multiples")
+          .append("svg")
+          .attr("width", width)
+          .attr("height", height)
+          .style("display", "inline-block") // Display charts side by side
+          .append("g")
+          .attr("transform", `translate(${margin.left},${margin.top})`);
 
-// X-axis
-svg.append("g")
-  .attr("class", "x-axis")
-  .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
-  .call(d3.axisBottom(xScale));
 
-// Y-axis
-svg.append("g")
-  .attr("class", "y-axis")
-  .call(d3.axisLeft(yScale));
 
-// Category labels
-svg.append("text")
-  .attr("x", 110)
-  .attr("y", height - margin.top - margin.bottom + 50) // Changed to move labels down by 10 pixels
-  .style("text-anchor", "end") // Changed to align labels to the right
-  .text(d => `Category ${d.category}`);
+        // Filter the data for the current category
+        const categoryData = data.map(d => ({ city: d.city, value: +d[category] }));
+
+        // Scales
+        const xScale = d3.scaleLinear()
+          .domain([0, normalizedMax])
+          .range([0, width - margin.left - margin.right]);
+
+        const yScale = d3.scaleBand()
+            .domain(categoryData.map(d => d.city))
+            .range([0, height - margin.top - margin.bottom])
+            .padding(0.1);
+
+
+        svg.selectAll("xGrid")
+          .data(xScale.ticks(12)) // You can change the number of ticks as per your preference
+          .enter()
+          .append("line")
+          .attr("x1", function (d) { return xScale(d); })
+          .attr("x2", function (d) { return xScale(d); })
+          .attr("y1", 0)
+          .attr("y2", height - margin.top - margin.bottom)
+          .attr("stroke", "lightgray") // Adjust the color as needed
+          .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
+
+        // Tooltip
+        var tooltip = d3.select("body").append("div")
+            .style("position", "absolute")
+            .style("background", "white")
+            .style("padding", "5px")
+            .style("border", "1px solid #214328")
+            .style("border-radius", "5px")
+            .style("pointer-events", "none")
+            .style("opacity", 0)
+            .style("font", "15px Fira Sans")
+            .style("color", "#214328");
+
+        const colorScale = d3.scaleOrdinal()
+          .domain(["Acer_Platanoides", "Lagerstroemia_Indica", "Platanus_Acerifolia", "Other"])
+          .range(['#14532d','#15803d','#22c55e', '#86efac']);
+            
+        // Function to normalize values to the range [0, 100]
+        const normalizeValue = value => (value / maxCategoryValue) * normalizedMax;
+
+        // Draw bars for each category
+        // Draw bars for the current category
+        svg.selectAll("rect")
+            .data(categoryData)
+            .enter()
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", d => yScale(d.city))
+            //.attr("width", d => xScale(d.value))
+            .attr("width", d => xScale(normalizeValue(d.value)))
+            .attr("height", yScale.bandwidth())
+            //.attr("fill", "steelblue")
+            .attr("fill", d => colorScale(category))
+            .on("mouseover", function(d) {
+                tooltip.transition()
+                  .duration(100)
+                  .style("opacity", 0.9);
+                  tooltip.html(`<strong>Category:</strong> ${category}<br><strong>City:</strong> ${d.city}<br><strong>Value:</strong> ${d.value}`)
+                  .style("visibility", "visible")
+                  .style("left", (d3.event.pageX + 10) + "px")
+                  .style("top", (d3.event.pageY - 30) + "px");
+              })
+              .on("mouseout", function(d) {
+                tooltip.transition()
+                  .duration(200)
+                  .style("opacity", 0);
+              })
+
+        // X-axis
+        svg.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
+            // .call(d3.axisBottom(xScale))
+            .selectAll("text")
+            // .attr("transform", "translate(-5, 10)rotate(-45)")
+            .style("font", "12px Fira Sans")
+            .style("text-anchor", "end");
+
+            if (index === 0) {
+                svg.append("g")
+                    .attr("class", "y-axis")
+                    .style("font", "12px Fira Sans")
+                    .call(d3.axisLeft(yScale));
+            } else {
+                svg.append("g")
+                    .attr("class", "y-axis")
+                    .call(d3.axisLeft(yScale).tickFormat(""));
+            }
+
+        // Category label
+        svg.append("text")
+            .attr("x", 140)
+            .attr("y", -20) // Position above the chart
+            .style("text-anchor", "end")
+            .style("font", "15px Fira Sans")
+            .text(category);
+        
+    });
+});

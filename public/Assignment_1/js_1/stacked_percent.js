@@ -1,3 +1,5 @@
+// STACKED PERCENT BAR CHART
+
 // set the dimensions and margins of the graph
 var margin_percent = {top: 10, right: 30, bottom: 100, left: 50},
     width_percent = 900 - margin_percent.left - margin_percent.right,

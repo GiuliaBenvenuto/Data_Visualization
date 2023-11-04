@@ -1,3 +1,4 @@
+// VERTICAL BAR CHART
 
 // set the dimensions and margins of the graph
 var margin_h = {top: 30, right: 60, bottom: 110, left: 60},
@@ -51,16 +52,10 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
       .attr("stroke", "lightgray") // Adjust the color as needed
       .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
 
-  /*
-  var colorScale = d3.scaleSequential(function(t) {
-    // Reverse the gradient to start with dark green for high values
-    return d3.rgb(0, 200 + (1 - t) * 5, 0);
-  })
-    .domain([0, d3.max(data, function(d) { return d.value; })]);*/
+
   var colorScale = d3.scaleLinear();
     colorScale.domain([0, data[0].value])
     colorScale.range(['#bbf7d0', '#15803d'])
-
 
   // Define the div for the tooltip (show value in a small div on mouse hover)
   var tooltip = d3.select("body").append("div")
@@ -73,8 +68,6 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
     .style("opacity", 0)
     .style("font", "15px Fira Sans")
     .style("color", "#214328");
-
-    
 
   // Bars
   svg_h.selectAll("mybar")
@@ -105,7 +98,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
       });
 
 
- //add title
+ // Add title
   svg_h.append("text")
     .attr("x", width_h / 2)
     .attr("y", -10) // Adjust the y-coordinate to position the title
@@ -121,10 +114,5 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
     .attr("y", function(d) { return y_h(d.value); })
     .attr("height", function(d) { return height_h - y_h(d.value); })
     .delay(function(d,i){console.log(i) ; return(i*100)})
-
-    // Add variable selection top 5, 10, 20
-
-    //https://docs.google.com/spreadsheets/d/1U-4xtEDnL8R_dUhLyPykkP3Bo-oDHMCPDXOaYS72-R8/edit#gid=579621399
-    //link to other already done csv file
 
 })
