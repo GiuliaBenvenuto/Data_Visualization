@@ -129,8 +129,9 @@ const margin = { top: 50, right: 10, bottom: 80, left: 90 };
         svg.append("text")
             .attr("x", 140)
             .attr("y", -20) // Position above the chart
-            .style("text-anchor", "end")
-            .style("font", "15px Fira Sans")
+            .style("text-anchor", "middle")
+            .style("font-size", "20px")
+            .style("fill", "#14532d")
             .text(category);
         
     });

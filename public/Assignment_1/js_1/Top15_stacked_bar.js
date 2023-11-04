@@ -1,7 +1,7 @@
 // STACKED BAR CHART
 
 // set the dimensions and margins of the graph
-var margin_stack = {top: 10, right: 30, bottom: 100, left: 60},
+var margin_stack = {top: 30, right: 30, bottom: 100, left: 60},
     width_stack = 900 - margin_stack.left - margin_stack.right,
     height_stack = 600 - margin_stack.top - margin_stack.bottom;
 
@@ -127,6 +127,15 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
             .duration(200)
             .style("opacity", 0);
         })
+
+        // Add title
+        svg_stack.append("text")
+          .attr("x", (width_stack / 2))
+          .attr("y", 0 - (margin_stack.top / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "20px")
+          .style("fill", "#14532d")
+          .text("Top-15 city's number of trees per category");
 
 
 });

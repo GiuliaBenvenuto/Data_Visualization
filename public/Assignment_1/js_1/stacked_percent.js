@@ -1,7 +1,7 @@
 // STACKED PERCENT BAR CHART
 
 // set the dimensions and margins of the graph
-var margin_percent = {top: 10, right: 30, bottom: 100, left: 50},
+var margin_percent = {top: 30, right: 30, bottom: 100, left: 50},
     width_percent = 900 - margin_percent.left - margin_percent.right,
     height_percent = 600 - margin_percent.top - margin_percent.bottom;
 
@@ -135,4 +135,12 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
           .duration(200)
           .style("opacity", 0);
       });
+
+      svg_percent.append("text")
+          .attr("x", (width_percent / 2))
+          .attr("y", 0 - (margin_percent.top / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "20px")
+          .style("fill", "#14532d")
+          .text("Top-15 city's number of trees per category as percentage");
 })

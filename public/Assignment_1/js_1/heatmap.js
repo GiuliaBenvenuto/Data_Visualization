@@ -18,7 +18,7 @@ function updateHeatmap(selectedOption) {
     d3.select("#my_heatmap").selectAll("svg").remove();
 
     d3.csv(csvURL, function(data) {
-        var margin_heatmap = {top: 30, right: 30, bottom: 100, left: 120},
+        var margin_heatmap = {top: 55, right: 30, bottom: 100, left: 120},
         width_heatmap = 650 - margin_heatmap.left - margin_heatmap.right,
         height_heatmap  = 450 - margin_heatmap.top - margin_heatmap.bottom;
     
@@ -102,7 +102,19 @@ function updateHeatmap(selectedOption) {
             tooltip.transition()
                 .duration(200)
                 .style("opacity", 0);
-            });     
+            });   
+            
+            // Title
+            svg_heatmap.append("text")
+                .attr("x", (width_heatmap / 2))
+                .attr("y", 0 - (margin_heatmap.top / 2))
+                .attr("text-anchor", "middle")
+                // add margin bottom to the title
+                .attr("transform", "translate(0, +20)")
+
+                .style("font-size", "20px")
+                .style("fill", "#14532d")
+                .text("Top-15 city's number of trees per category");
     });    
 }
 
@@ -112,5 +124,7 @@ d3.select("#topNSelector").on("change", function() {
     var selectedOption = this.value;
     updateHeatmap(selectedOption);
 });
+
+
 
 

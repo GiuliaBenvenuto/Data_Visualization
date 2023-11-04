@@ -27,7 +27,6 @@ p, span {
 /* Margins for descriptions of charts <p> */
 
 .description {
-  text-align: left;
   margin-left: 110px;
   margin-right: 110px;
 }
