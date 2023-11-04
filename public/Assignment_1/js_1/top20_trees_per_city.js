@@ -111,14 +111,14 @@ function createBarChart() {
         .on("mouseover", function(d) {
           tooltip.transition()
             .duration(100)
-            .style("opacity", 0.8);
-          tooltip.html("Value: " + d.Total)
+            .style("opacity", 0.9);
+          tooltip.html("<strong>Value: </strong>" + d.Total)
             .style("left", (d3.event.pageX + 10) + "px")
             .style("top", (d3.event.pageY - 28) + "px");
         })
         .on("mouseout", function(d) {
           tooltip.transition()
-            .duration(300)
+            .duration(200)
             .style("opacity", 0);
         });
 

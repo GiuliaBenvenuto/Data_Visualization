@@ -93,14 +93,14 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
       .on("mouseover", function(d) {
         tooltip.transition()
           .duration(100)
-          .style("opacity", 0.8);
-        tooltip.html("Value: " + d.value)
+          .style("opacity", 0.9);
+        tooltip.html("<strong>Value:</strong> " + d.value)
           .style("left", (d3.event.pageX + 10) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
       })
       .on("mouseout", function(d) {
         tooltip.transition()
-          .duration(300)
+          .duration(200)
           .style("opacity", 0);
       });
 

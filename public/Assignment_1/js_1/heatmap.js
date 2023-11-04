@@ -99,14 +99,14 @@ function updateHeatmap(selectedOption) {
             tooltip.transition()
                 .duration(200)
                 .style("opacity", 0.9);
-            tooltip.html("Total: " + d.Total)
+            tooltip.html("<strong>Total: </strong>" + d.Total)
                 .style("left", (d3.event.pageX + 10) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
             })
             .on("mouseout", function(d) {
             // Hide the tooltip on mouseout
             tooltip.transition()
-                .duration(500)
+                .duration(200)
                 .style("opacity", 0);
             });     
     });    

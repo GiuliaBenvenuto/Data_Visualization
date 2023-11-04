@@ -118,19 +118,19 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
       .on("mouseover", function(d) {
         tooltip.transition()
           .duration(100)
-          .style("opacity", 0.8);
+          .style("opacity", 0.9);
         tooltip.html( //show clearly the number of differtent species in a city on mouse hover
-          "<span style='color: #14532d;'>Acer Platanoides: " + (d.data.Acer_Platanoides).toFixed(3) + "%" + "</span><br>" +
-          "<span style='color: #15803d;'>Lagerstroemia Indica: " + (d.data.Lagerstroemia_Indica).toFixed(3) + "%" + "</span><br>"+
-          "<span style='color: #22c55e;'>Platanus Acerifolia: " + (d.data.Platanus_Acerifolia).toFixed(3) + "%" + "</span><br>" +
-          "<span style='color: #86efac;'>Other: " + (d.data.Other).toFixed(3) + "%" + "</span>"
+          "<span style='color: #14532d;'> <strong>Acer Platanoides: </strong> " + (d.data.Acer_Platanoides).toFixed(3) + "%" + "</span><br>" +
+          "<span style='color: #15803d;'> <strong>Lagerstroemia Indica: </strong> " + (d.data.Lagerstroemia_Indica).toFixed(3) + "%" + "</span><br>"+
+          "<span style='color: #22c55e;'> <strong>Platanus Acerifolia: </strong> " + (d.data.Platanus_Acerifolia).toFixed(3) + "%" + "</span><br>" +
+          "<span style='color: #86efac;'> <strong>Other: </strong> " + (d.data.Other).toFixed(3) + "%" + "</span>"
           )
           .style("left", (d3.event.pageX + 10) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
       })
       .on("mouseout", function(d) {
         tooltip.transition()
-          .duration(300)
+          .duration(200)
           .style("opacity", 0);
       });
 })

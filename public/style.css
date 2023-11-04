@@ -19,3 +19,13 @@ p, span {
   height: 50px;
 }
 
+#stacked_small_multiples{
+  margin-left: 70px;
+  margin-right: 60px;
+}
+
+/* Margins for descriptions of charts <p> */
+.description{
+  margin-left: 110px;
+  margin-right: 110px;
+}
