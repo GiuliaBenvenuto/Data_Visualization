@@ -1,6 +1,6 @@
 
 // HEATMAP
-
+import { addTitle, addTooltip } from "./utils.js";
 function updateHeatmap(selectedOption) {
 
     // Determine the CSV URL based on the selected option
@@ -61,18 +61,7 @@ function updateHeatmap(selectedOption) {
         .domain([1, 34729])
 
         // Define a tooltip div
-        var tooltip = d3.select("body")
-        .append("div")
-        .style("position", "absolute")
-        .style("background-color", "white")
-        .style("border", "1px solid #214328")
-        .style("border-radius", "5px")
-        .style("pointer-events", "none")
-        .style("padding", "5px")
-        .style("opacity", 0)
-        .style("font", "15px Fira Sans")
-        .style("color", "#214328");
-
+       var tooltip = addTooltip(d3.select('body'));
 
         svg_heatmap.selectAll()
         .data(data, function(d) {return d.city +':'+ d.scientific_name;})
@@ -98,18 +87,8 @@ function updateHeatmap(selectedOption) {
                 .duration(200)
                 .style("opacity", 0);
             });   
-            
             // Title
-            svg_heatmap.append("text")
-                .attr("x", (width_heatmap / 2))
-                .attr("y", 0 - (margin_heatmap.top / 2))
-                .attr("text-anchor", "middle")
-                // add margin bottom to the title
-                .attr("transform", "translate(0, +20)")
-
-                .style("font-size", "20px")
-                .style("fill", "#14532d")
-                .text("Top-15 city's number of trees per category");
+               addTitle(svg_heatmap, "Top-" + selectedOption + " city's number of trees per category", "20px", "#14532d", (width_heatmap / 2), 0 - (margin_heatmap.top / 2));
     });    
 }
 

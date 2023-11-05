@@ -1,5 +1,5 @@
 // SMALL MULTIPLES BAR CHART
-  import { createGrid } from "./utils.js";
+import { createGrid, addTooltip } from "./utils.js";
 // Chart dimensions
 const width = 345; // Adjust the width for side-by-side charts
 const height = 450; // Adjust the height for side-by-side charts
@@ -20,8 +20,6 @@ const margin = { top: 50, right: 10, bottom: 80, left: 90 };
 
     categories.forEach((category, index) => {
 
-        
-        
         const svg = d3.select("#stacked_small_multiples")
           .append("svg")
           .attr("width", width)
@@ -29,8 +27,6 @@ const margin = { top: 50, right: 10, bottom: 80, left: 90 };
           .style("display", "inline-block") // Display charts side by side
           .append("g")
           .attr("transform", `translate(${margin.left},${margin.top})`);
-
-
 
         // Filter the data for the current category
         const categoryData = data.map(d => ({ city: d.city, value: +d[category] }));
@@ -45,31 +41,11 @@ const margin = { top: 50, right: 10, bottom: 80, left: 90 };
             .range([0, height - margin.top - margin.bottom])
             .padding(0.1);
 
-        /*
-        svg.selectAll("xGrid")
-          .data(xScale.ticks(12)) // You can change the number of ticks as per your preference
-          .enter()
-          .append("line")
-          .attr("x1", function (d) { return xScale(d); })
-          .attr("x2", function (d) { return xScale(d); })
-          .attr("y1", 0)
-          .attr("y2", height - margin.top - margin.bottom)
-          .attr("stroke", "lightgray") // Adjust the color as needed
-          .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
-        */
+       //add grid 
        createGrid(svg, "xGrid", xScale, height - margin.top - margin.bottom, 12, "lightgray", "4");
 
         // Tooltip
-        var tooltip = d3.select("body").append("div")
-            .style("position", "absolute")
-            .style("background", "white")
-            .style("padding", "5px")
-            .style("border", "1px solid #214328")
-            .style("border-radius", "5px")
-            .style("pointer-events", "none")
-            .style("opacity", 0)
-            .style("font", "15px Fira Sans")
-            .style("color", "#214328");
+        var tooltip = addTooltip(d3.select('body'));
 
         const colorScale = d3.scaleOrdinal()
           .domain(["Acer_Platanoides", "Lagerstroemia_Indica", "Platanus_Acerifolia", "Other"])

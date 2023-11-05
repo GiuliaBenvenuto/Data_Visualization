@@ -1,5 +1,5 @@
 // STACKED PERCENT BAR CHART
-import { createGrid } from "./utils.js";
+import { createGrid, addTitle, addTooltip } from "./utils.js";
 // set the dimensions and margins of the graph
 var margin_percent = {top: 30, right: 30, bottom: 100, left: 50},
     width_percent = 900 - margin_percent.left - margin_percent.right,
@@ -46,19 +46,8 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
     .call(d3.axisLeft(y))
     .style("font", "15px Fira Sans");
 
-    /*
-  svg_percent.selectAll("yGrid")
-    .data(y.ticks(10)) // You can change the number of ticks as per your preference
-    .enter()
-    .append("line")
-      .attr("x1", 0)
-      .attr("x2", width_percent)
-      .attr("y1", function(d) { return y(d); })
-      .attr("y2", function(d) { return y(d); })
-      .attr("stroke", "lightgray") // Adjust the color as needed
-      .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
-*/
-    createGrid(svg_percent, "yGrid", y, width_percent, 10, "lightgray", "4");
+  //Add grid
+  createGrid(svg_percent, "yGrid", y, width_percent, 10, "lightgray", "4");
 
   // color palette = one color per subgroup
   // Color palette with inverted order such that the first one from the bottom is "other"
@@ -91,19 +80,8 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
       .keys(orderedSubgroups)
       (data);
 
-
   // Define the div for the tooltip (show value in a small div on mouse hover)
-  var tooltip = d3.select("body").append("div")
-    .style("position", "absolute")
-    .style("background", "white")
-    .style("padding", "5px")
-    .style("border", "1px solid #214328")
-    .style("border-radius", "5px")
-    .style("pointer-events", "none")
-    .style("opacity", 0)
-    .style("font", "15px Fira Sans")
-    .style("color", "#214328");
-  
+  var tooltip = addTooltip(d3.select('body'));
 
   // Show the bars
   svg_percent.append("g")
@@ -138,12 +116,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
           .duration(200)
           .style("opacity", 0);
       });
+      //Add title
+      addTitle(svg_percent, "Top-15 city's number of trees per category as percentage", "20px", "#14532d", (width_percent / 2), 0 - (margin_percent.top / 2));
 
-      svg_percent.append("text")
-          .attr("x", (width_percent / 2))
-          .attr("y", 0 - (margin_percent.top / 2))
-          .attr("text-anchor", "middle")
-          .style("font-size", "20px")
-          .style("fill", "#14532d")
-          .text("Top-15 city's number of trees per category as percentage");
 })

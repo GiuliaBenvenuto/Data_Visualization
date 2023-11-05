@@ -1,5 +1,5 @@
 // VERTICAL BAR CHART
-import { createGrid } from "./utils.js";
+import { addTitle, createGrid, addTooltip } from "./utils.js";
 // set the dimensions and margins of the graph
 var margin_h = {top: 30, right: 60, bottom: 110, left: 60},
     width_h = 800 - margin_h.left - margin_h.right,
@@ -39,79 +39,52 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
       .range([ height_h, 0]);
     svg_h.append("g")
       .call(d3.axisLeft(y_h));
-    /*
+    
     // Add Y axis grid lines
-    svg_h.selectAll("yGrid")
-    .data(y_h.ticks(10)) // You can change the number of ticks as per your preference
-    .enter()
-    .append("line")
-      .attr("x1", 0)
-      .attr("x2", width_h)
-      .attr("y1", function(d) { return y_h(d); })
-      .attr("y2", function(d) { return y_h(d); })
-      .attr("stroke", "lightgray") // Adjust the color as needed
-      .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
-*/
     createGrid(svg_h, "yGrid", y_h, width_h, 10, "lightgray", "4");
 
-  var colorScale = d3.scaleLinear();
-    colorScale.domain([0, data[0].value])
-    colorScale.range(['#bbf7d0', '#15803d'])
+    var colorScale = d3.scaleLinear();
+      colorScale.domain([0, data[0].value])
+      colorScale.range(['#bbf7d0', '#15803d'])
 
   // Define the div for the tooltip (show value in a small div on mouse hover)
-  var tooltip = d3.select("body").append("div")
-    .style("position", "absolute")
-    .style("background", "white")
-    .style("padding", "5px")
-    .style("border", "1px solid #214328")
-    .style("border-radius", "5px")
-    .style("pointer-events", "none")
-    .style("opacity", 0)
-    .style("font", "15px Fira Sans")
-    .style("color", "#214328");
+     var tooltip = addTooltip(d3.select('body'));
 
   // Bars
-  svg_h.selectAll("mybar")
-    .data(data)
-    .enter()
-    .append("rect")
-      .attr("x", function(d) { return x_h(d.state); })
-      .attr("y", function(d) { return y_h(0); })
-      .attr("width", x_h.bandwidth())
-      .attr("height", function(d) { return height_h - y_h(0); })
-      .attr('fill', function(data, index){
-        return colorScale(data.value)
-      })
-      .on("mouseover", function(d) {
-        tooltip.transition()
-          .duration(100)
-          .style("opacity", 0.9);
-        tooltip.html("<strong>Value:</strong> " + d.value)
-          .style("left", (d3.event.pageX + 10) + "px")
-          .style("top", (d3.event.pageY - 28) + "px");
-      })
-      .on("mouseout", function(d) {
-        tooltip.transition()
-          .duration(200)
-          .style("opacity", 0);
-      });
+    svg_h.selectAll("mybar")
+      .data(data)
+      .enter()
+      .append("rect")
+        .attr("x", function(d) { return x_h(d.state); })
+        .attr("y", function(d) { return y_h(0); })
+        .attr("width", x_h.bandwidth())
+        .attr("height", function(d) { return height_h - y_h(0); })
+        .attr('fill', function(data, index){
+          return colorScale(data.value)
+        })
+        .on("mouseover", function(d) {
+          tooltip.transition()
+            .duration(100)
+            .style("opacity", 0.9);
+          tooltip.html("<strong>Value:</strong> " + d.value)
+            .style("left", (d3.event.pageX + 10) + "px")
+            .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function(d) {
+          tooltip.transition()
+            .duration(200)
+            .style("opacity", 0);
+        });
 
+    // Add title
+    addTitle(svg_h, "Top-20 number of trees per state", "20px", "#14532d", width_h / 2, -10);
 
- // Add title
-  svg_h.append("text")
-    .attr("x", width_h / 2)
-    .attr("y", -10) // Adjust the y-coordinate to position the title
-    .attr("text-anchor", "middle")
-    .style("font-size", "20px")
-    .style("fill", "#14532d")
-    .text("Top-20 number of trees per state");
-
-  // Animation
-  svg_h.selectAll("rect")
-    .transition()
-    .duration(400)
-    .attr("y", function(d) { return y_h(d.value); })
-    .attr("height", function(d) { return height_h - y_h(d.value); })
-    .delay(function(d,i){console.log(i) ; return(i*100)})
+      // Animation
+      svg_h.selectAll("rect")
+        .transition()
+        .duration(400)
+        .attr("y", function(d) { return y_h(d.value); })
+        .attr("height", function(d) { return height_h - y_h(d.value); })
+        .delay(function(d,i){console.log(i) ; return(i*100)})
 
 })

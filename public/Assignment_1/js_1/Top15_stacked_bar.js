@@ -1,5 +1,5 @@
 // STACKED BAR CHART
-import { createGrid } from "./utils.js";
+import { createGrid, addTitle, addTooltip } from "./utils.js";
 // set the dimensions and margins of the graph
 var margin_stack = {top: 30, right: 30, bottom: 100, left: 60},
     width_stack = 900 - margin_stack.left - margin_stack.right,
@@ -55,19 +55,9 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
         .attr("transform", "translate(-5, 10)rotate(-45)")
         .style("font", "14px Fira Sans")
         .style("text-anchor", "end");
-    /*
-    svg_stack.selectAll("yGrid")
-      .data(y_stack.ticks(10)) // You can change the number of ticks as per your preference
-      .enter()
-      .append("line")
-        .attr("x1", 0)
-        .attr("x2", width_stack)
-        .attr("y1", function(d) { return y_stack(d); })
-        .attr("y2", function(d) { return y_stack(d); })
-        .attr("stroke", "lightgray") // Adjust the color as needed
-        .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
-    */
-    createGrid(svg_stack, "yGrid", y_stack, width_stack, 10, "lightgray", "4");
+
+  //Add grid
+  createGrid(svg_stack, "yGrid", y_stack, width_stack, 10, "lightgray", "4");
 
   // color palette = one color per subgroup
   var color_stack = d3.scaleOrdinal()
@@ -80,21 +70,9 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
     .keys(subgroups)
     (data)
 
-  // console.log(stackedData)
+  // Define the div for the tooltip (show value in a small div on mouse hover)
+  var tooltip = addTooltip(d3.select('body'));
 
-    // Define the div for the tooltip (show value in a small div on mouse hover)
-    var tooltip = d3.select("body").append("div")
-      .style("position", "absolute")
-      .style("background", "white")
-      .style("padding", "5px")
-      .style("border", "1px solid #214328")
-      .style("border-radius", "5px")
-      .style("pointer-events", "none")
-      .style("opacity", 0)
-      .style("font", "15px Fira Sans")
-      .style("color", "#214328");
-
-  // ERROR: we need to fix the bars because the dimension of each type don't correspond to the data
   // Show the bars
   svg_stack.append("g")
     .selectAll("g")
@@ -130,13 +108,6 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
         })
 
         // Add title
-        svg_stack.append("text")
-          .attr("x", (width_stack / 2))
-          .attr("y", 0 - (margin_stack.top / 2))
-          .attr("text-anchor", "middle")
-          .style("font-size", "20px")
-          .style("fill", "#14532d")
-          .text("Top-15 city's number of trees per category");
-
+        addTitle(svg_stack, "Top-15 city's number of trees per category", "20px", "#14532d", (width_stack / 2), 0 - (margin_stack.top / 2));
 
 });

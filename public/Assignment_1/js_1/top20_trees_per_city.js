@@ -1,5 +1,5 @@
 // HORIZONAL BAR CHART
-import { createGrid } from "./utils.js";
+import { createGrid, addTitle, addTooltip } from "./utils.js";
   // set the dimensions and margins of the graph
   var margin_city = { top: 40, right: 100, bottom: 100, left: 110 },
     width_city = 800 - margin_city.left - margin_city.right,
@@ -24,21 +24,8 @@ import { createGrid } from "./utils.js";
         .domain([0, data[0].Total]);
 
       // Add X axis grid lines
-      //maybe refactable 
-      /*
-      svg_city
-      .selectAll("xGrid")
-      .data(x_city.ticks(12)) // You can change the number of ticks as per your preference
-      .enter()
-      .append("line")
-        .attr("x1", function(d) { return x_city(d); })
-        .attr("x2", function(d) { return x_city(d); })
-        .attr("y1", 0)
-        .attr("y2", height_city)
-        .attr("stroke", "lightgray") // Adjust the color as needed
-        .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
-        */
-       createGrid(svg_city, "xGrid", x_city, height_city, 12, "lightgray", "4");
+      createGrid(svg_city, "xGrid", x_city, height_city, 12, "lightgray", "4");
+
       // Y axis
       var y_city = d3
         .scaleBand()
@@ -69,17 +56,7 @@ import { createGrid } from "./utils.js";
         colorScale.range(['#bbf7d0', '#15803d'])
 
       // Define the div for the tooltip (show value in a small div on mouse hover)
-      var tooltip = d3.select("body").append("div")
-        .style("position", "absolute")
-        .style("background", "white")
-        .style("padding", "5px")
-        .style("border", "1px solid #214328")
-        .style("border-radius", "5px")
-        .style("pointer-events", "none")
-        .style("opacity", 0)
-        .style("font", "15px Fira Sans")
-        .style("color", "#214328");
-        
+       var tooltip = addTooltip(d3.select('body'));
 
       // Bars
       svg_city
@@ -114,16 +91,8 @@ import { createGrid } from "./utils.js";
             .style("opacity", 0);
         });
 
-
       // Add title
-      svg_city
-        .append("text")
-        .attr("x", width_city / 2)
-        .attr("y", -20) // Adjust the y-coordinate to position the title
-        .attr("text-anchor", "middle")
-        .style("font-size", "20px")
-        .style("fill", "#14532d")
-        .text("Top-20 number of trees per city");
+      addTitle(svg_city, "Top-20 number of trees per city", "20px", "#14532d", width_city / 2, -20);
 
       // Animation
       svg_city
@@ -141,23 +110,3 @@ import { createGrid } from "./utils.js";
     }
   );
 
-
-/*
-// Create the chart when the chart container is visible in the window
-// To make this work i wrapped everything in function createBarChart() {}
-const chartContainer = document.querySelector("#horizontal_barchart");
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        createBarChart(); // Call your chart creation function
-        observer.disconnect(); // Disconnect the observer to avoid creating the chart multiple times
-      }
-    });
-  },
-  { threshold: 0.2 } // Adjust the threshold as needed
-);
-
-// Start observing the chart container
-observer.observe(chartContainer);
-*/
