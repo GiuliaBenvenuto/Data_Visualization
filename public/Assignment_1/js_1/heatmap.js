@@ -15,7 +15,7 @@ function updateHeatmap(selectedOption) {
     d3.select("#my_heatmap").selectAll("svg").remove();
 
     d3.csv(csvURL, function(data) {
-        var margin_heatmap = {top: 55, right: 30, bottom: 100, left: 120},
+        var margin_heatmap = {top: 55, right: 30, bottom: 100, left: 125},
         width_heatmap = 650 - margin_heatmap.left - margin_heatmap.right,
         height_heatmap  = 450 - margin_heatmap.top - margin_heatmap.bottom;
     
@@ -53,7 +53,8 @@ function updateHeatmap(selectedOption) {
         .domain(tree_types)
         .padding(0.01);
         svg_heatmap.append("g")
-        .call(d3.axisLeft(y_heatmap));
+        .call(d3.axisLeft(y_heatmap))
+        .style("font", "12px Fira Sans");
 
         // Build color scale
         var myColor = d3.scaleLinear()

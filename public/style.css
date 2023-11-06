@@ -30,3 +30,12 @@ p, span {
   margin-left: 110px;
   margin-right: 110px;
 }
+
+.code {
+  font-family: Source Code Pro, sans-serif;
+  /* Other font-related CSS properties like font-size, font-weight, etc. */
+}
+
+.number {
+  margin-right: 15px; /* Adjust the value as needed */
+}

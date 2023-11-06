@@ -14,6 +14,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!-- tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -60,7 +63,7 @@
     
   <div class="text-center title mt-10">
     <div class="text-5xl"></div>
-      <h1 class="text-neutral-700 text-5xl" >Assignment 1 - Comparing Categories</h1>
+      <h1 class="text-neutral-700 text-5xl" >Section 1 - Comparing Categories</h1>
       <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data visualizaion for 🌳 5M Trees Dataset</h2>
     </div>
     <div class="text-center">
@@ -71,10 +74,38 @@
 
     <div class="text-center">
       <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data preparation</h2>
-      <p class="text-neutral-600 text-center mt-3">
-        ADD HERE DATA PREPARATION
-      </p>
     </div>
+
+    <p class="description text-neutral-600 text-left mt-3"> For all the datasets we used in the visualizations we extracted the <span class="code">'city'</span>, <span class="code">'scientific_name'</span> and <span class="code">'state'</span> columns from the original dataset and dropped any rows with missing values, resulting in a total number 5130468 of rows.</p>
+    
+    <p class="description text-neutral-600 mt-3">
+      <ol class="description text-neutral-600 mt-3">
+        <li><strong class="number">🟢</strong> We extracted the <span class="code">'state'</span> column from the merged dataset.
+          Next, we counted the occurrences of each unique state in the <span class="code">'state'</span> column and sorted them in descending 
+          order to identify the top 20 states with the most trees.
+          We saved this refined dataset to a CSV file named "Top20_states_MostTrees.csv". <br><br></li>
+
+        <li><strong class="number">🟢</strong> We extracted the <span class="code">'city'</span> column from the merged dataset with the information of all the cities file.
+          Next, we counted the occurrences of each unique city in the <span class="code">'city'</span> column and sorted them in descending 
+          order to identify the top 20 cities with the most trees.
+          We saved this refined dataset to a CSV file named "Top20_city_MostTrees.csv".<br><br></li>
+
+        <li><strong class="number">🟢</strong> First, we extracted the <span class="code">'city'</span> and <span class="code">'scientific_name'</span> columns from the original dataset.
+          Then, we calculated the total counts of each tree type in each city.
+          Next, we filtered the cities where all three selected tree types (Platanus acerifolia, Lagerstroemia indica, and Acer platanoides)
+          exist. We created separate DataFrames for each tree type (Platanus acerifolia, Acer platanoides, and Lagerstroemia indica) 
+          and renamed the count columns accordingly. We filtered these DataFrames to include only the cities where all three tree types are present.
+          Additionally, we created an <span class="code">'Other'</span> DataFrame to account for tree types other than the three selected.
+          To combine the information, we merged the individual tree type DataFrames and the <span class="code">'Other'</span> DataFrame based on the <span class="code">'city'</span> column.
+          We saved the resulting dataset to a CSV file named "Top15_city_3Tree_others.csv".<br><br></li>
+
+        <li><strong class="number">🟢</strong> Just like the previous dataset, we extracted the <span class="code">'city'</span> and <span class="code">'scientific_name'</span> columns from the original dataset.
+          We calculated the total counts of each tree type in each city and we filtered the cities where all three tree 
+          types exist. We also created an <span class="code">'Other'</span> DataFrame to account for tree types other than the three selected.
+          We calculated the total count of all tree types in each city and we sorted them in descending order.
+          We created separate files for the top 5, top 10, and top 15; saved to CSV files named "Top5_3Tree&others.csv", "Top10_3Tree&others.csv" and "Top15_3Tree&others.csv". <br></li>
+    </ol>
+    </p>
   </div>
 
 

@@ -22,20 +22,7 @@ import { createXGrid, addTitle, addTooltip } from "./utils.js";
       var x_city = d3.scaleLinear()
         .range([0, width_city])
         .domain([0, data[0].Total]);
-        // Add X axis grid lines
-        /*
-        svg_city
-        .selectAll("xGrid")
-        .data(x_city.ticks(12)) // You can change the number of ticks as per your preference
-        .enter()
-        .append("line")
-          .attr("x1", function(d) { return x_city(d); })
-          .attr("x2", function(d) { return x_city(d); })
-          .attr("y1", 0)
-          .attr("y2", height_city)
-          .attr("stroke", "lightgray") // Adjust the color as needed
-          .attr("stroke-dasharray", "4");
-          */
+      
 
       createXGrid(svg_city, x_city, height_city, 12, "lightgray", "4");
 
