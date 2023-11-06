@@ -1,5 +1,5 @@
 // HORIZONAL BAR CHART
-import { createGrid, addTitle, addTooltip } from "./utils.js";
+import { createXGrid, addTitle, addTooltip } from "./utils.js";
   // set the dimensions and margins of the graph
   var margin_city = { top: 40, right: 100, bottom: 100, left: 110 },
     width_city = 800 - margin_city.left - margin_city.right,
@@ -22,9 +22,22 @@ import { createGrid, addTitle, addTooltip } from "./utils.js";
       var x_city = d3.scaleLinear()
         .range([0, width_city])
         .domain([0, data[0].Total]);
+        // Add X axis grid lines
+        /*
+        svg_city
+        .selectAll("xGrid")
+        .data(x_city.ticks(12)) // You can change the number of ticks as per your preference
+        .enter()
+        .append("line")
+          .attr("x1", function(d) { return x_city(d); })
+          .attr("x2", function(d) { return x_city(d); })
+          .attr("y1", 0)
+          .attr("y2", height_city)
+          .attr("stroke", "lightgray") // Adjust the color as needed
+          .attr("stroke-dasharray", "4");
+          */
 
-      // Add X axis grid lines
-      createGrid(svg_city, "xGrid", x_city, height_city, 12, "lightgray", "4");
+      createXGrid(svg_city, x_city, height_city, 12, "lightgray", "4");
 
       // Y axis
       var y_city = d3

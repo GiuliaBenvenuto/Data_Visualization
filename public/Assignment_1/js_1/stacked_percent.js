@@ -1,5 +1,5 @@
 // STACKED PERCENT BAR CHART
-import { createGrid, addTitle, addTooltip } from "./utils.js";
+import { createYGrid, addTitle, addTooltip } from "./utils.js";
 // set the dimensions and margins of the graph
 var margin_percent = {top: 30, right: 30, bottom: 100, left: 50},
     width_percent = 900 - margin_percent.left - margin_percent.right,
@@ -47,7 +47,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
     .style("font", "15px Fira Sans");
 
   //Add grid
-  createGrid(svg_percent, "yGrid", y, width_percent, 10, "lightgray", "4");
+  createYGrid(svg_percent, y, width_percent, 10, "lightgray", "4");
 
   // color palette = one color per subgroup
   // Color palette with inverted order such that the first one from the bottom is "other"

@@ -1,5 +1,5 @@
 // VERTICAL BAR CHART
-import { addTitle, createGrid, addTooltip } from "./utils.js";
+import { addTitle, createYGrid, addTooltip } from "./utils.js";
 // set the dimensions and margins of the graph
 var margin_h = {top: 30, right: 60, bottom: 110, left: 60},
     width_h = 800 - margin_h.left - margin_h.right,
@@ -41,7 +41,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRH4eOpVXSGv8yQFKn3wm5a6
       .call(d3.axisLeft(y_h));
     
     // Add Y axis grid lines
-    createGrid(svg_h, "yGrid", y_h, width_h, 10, "lightgray", "4");
+    createYGrid(svg_h, y_h, width_h, 10, "lightgray", "4");
 
     var colorScale = d3.scaleLinear();
       colorScale.domain([0, data[0].value])

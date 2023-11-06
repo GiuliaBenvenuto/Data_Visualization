@@ -1,5 +1,5 @@
 // SMALL MULTIPLES BAR CHART
-import { createGrid, addTooltip } from "./utils.js";
+import { createXGrid, addTooltip } from "./utils.js";
 // Chart dimensions
 const width = 345; // Adjust the width for side-by-side charts
 const height = 450; // Adjust the height for side-by-side charts
@@ -41,8 +41,21 @@ const margin = { top: 50, right: 10, bottom: 80, left: 90 };
             .range([0, height - margin.top - margin.bottom])
             .padding(0.1);
 
-       //add grid 
-       createGrid(svg, "xGrid", xScale, height - margin.top - margin.bottom, 12, "lightgray", "4");
+       //add grid
+       /*
+       svg.selectAll("xGrid")
+       .data(xScale.ticks(12)) // You can change the number of ticks as per your preference
+       .enter()
+       .append("line")
+       .attr("x1", function (d) { return xScale(d); })
+       .attr("x2", function (d) { return xScale(d); })
+       .attr("y1", 0)
+       .attr("y2", height - margin.top - margin.bottom)
+       .attr("stroke", "lightgray") // Adjust the color as needed
+       .attr("stroke-dasharray", "4"); // You can adjust the dash pattern if desired
+       */
+      
+       createXGrid(svg, xScale, height - margin.top - margin.bottom, 12, "lightgray", "4");
 
         // Tooltip
         var tooltip = addTooltip(d3.select('body'));

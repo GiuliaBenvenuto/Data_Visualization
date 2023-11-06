@@ -1,5 +1,5 @@
-export function createGrid(svg, grid_dir, y_stack, width_stack, num_ticks, stroke_color, stroke_dasharray) {
-    svg.selectAll(grid_dir)
+export function createYGrid(svg, y_stack, width_stack, num_ticks, stroke_color, stroke_dasharray) {
+    svg.selectAll("yGrid")
       .data(y_stack.ticks(num_ticks))
       .enter()
       .append("line")
@@ -10,6 +10,21 @@ export function createGrid(svg, grid_dir, y_stack, width_stack, num_ticks, strok
         .attr("stroke", stroke_color)
         .attr("stroke-dasharray", stroke_dasharray);
   };
+
+
+export function createXGrid(svg, xScale, height_stack, num_ticks, stroke_color, stroke_dasharray) {
+  svg.selectAll("xGrid")
+  .data(xScale.ticks(num_ticks)) // You can change the number of ticks as per your preference
+  .enter()
+  .append("line")
+  .attr("x1", function (d) { return xScale(d); })
+  .attr("x2", function (d) { return xScale(d); })
+  .attr("y1", 0)
+  .attr("y2", height_stack)
+  .attr("stroke", stroke_color) // Adjust the color as needed
+  .attr("stroke-dasharray", stroke_dasharray); // You can adjust the dash pattern if desired
+};
+
 
 export function addTitle(selection, text, fontSize, fill, x, y) {
   selection.append("text")

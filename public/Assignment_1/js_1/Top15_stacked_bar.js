@@ -1,5 +1,5 @@
 // STACKED BAR CHART
-import { createGrid, addTitle, addTooltip } from "./utils.js";
+import { createYGrid, addTitle, addTooltip } from "./utils.js";
 // set the dimensions and margins of the graph
 var margin_stack = {top: 30, right: 30, bottom: 100, left: 60},
     width_stack = 900 - margin_stack.left - margin_stack.right,
@@ -57,7 +57,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQWan1dg4-fZLQ-gM9V8AR6c
         .style("text-anchor", "end");
 
   //Add grid
-  createGrid(svg_stack, "yGrid", y_stack, width_stack, 10, "lightgray", "4");
+  createYGrid(svg_stack, y_stack, width_stack, 10, "lightgray", "4");
 
   // color palette = one color per subgroup
   var color_stack = d3.scaleOrdinal()
