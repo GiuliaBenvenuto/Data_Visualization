@@ -15,7 +15,7 @@ function updateHeatmap(selectedOption) {
     d3.select("#my_heatmap").selectAll("svg").remove();
 
     d3.csv(csvURL, function(data) {
-        var margin_heatmap = {top: 55, right: 30, bottom: 100, left: 125},
+        var margin_heatmap = {top: 55, right: 30, bottom: 100, left: 150},
         width_heatmap = 650 - margin_heatmap.left - margin_heatmap.right,
         height_heatmap  = 450 - margin_heatmap.top - margin_heatmap.bottom;
     
@@ -43,8 +43,8 @@ function updateHeatmap(selectedOption) {
         .attr("transform", "translate(0," + height_heatmap + ")")
         .call(d3.axisBottom(x_heatmap))
         .selectAll("text")
-        .attr("transform", "translate(-5, 10)rotate(-45)")
-        .style("font", "12px Fira Sans")
+        .attr("transform", "translate(-5, 0)rotate(-45)")
+        .style("font", "15px Fira Sans")
         .style("text-anchor", "end");
 
         // Build X scales and axis:
@@ -54,7 +54,7 @@ function updateHeatmap(selectedOption) {
         .padding(0.01);
         svg_heatmap.append("g")
         .call(d3.axisLeft(y_heatmap))
-        .style("font", "12px Fira Sans");
+        .style("font", "15px Fira Sans");
 
         // Build color scale
         var myColor = d3.scaleLinear()
