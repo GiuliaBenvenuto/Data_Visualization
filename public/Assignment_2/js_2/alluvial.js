@@ -1,10 +1,12 @@
+// https://docs.google.com/spreadsheets/d/e/2PACX-1vT_x8g1jr8xTg_0s2KhF_YVA0D3M7OaHXV_8C0YFiV8N9jV9ZrIEvGbj8kBCCZGyNu6QS1O_ai0dn5r/pub?output=csv
+
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
     width = 450 - margin.left - margin.right,
     height = 480 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz").append("svg")
+var svg = d3.select("#sankey_diagram").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
