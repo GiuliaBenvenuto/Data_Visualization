@@ -39,3 +39,9 @@ p, span {
 .number {
   margin-right: 15px; /* Adjust the value as needed */
 }
+
+.card-image {
+  height: 160px; /* Adjust the height as needed */
+  width: 100%;
+  object-fit: cover; /* Maintains aspect ratio while covering the container */
+}

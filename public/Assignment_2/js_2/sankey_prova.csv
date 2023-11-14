@@ -1,0 +1,295 @@
+source,target,value
+California,LosAngeles,720140
+LosAngeles,Platanus acerifolia,17477
+LosAngeles,Lagerstroemia indica,34729
+LosAngeles,Acer platanoides,6
+LosAngeles,Gleditsia triacanthos,456
+LosAngeles,Pyrus calleryana,7500
+LosAngeles,Fraxinus pennsylvanica,0
+LosAngeles,Acer rubrum,15
+LosAngeles,Liquidambar styraciflua,30061
+LosAngeles,Tilia cordata,0
+LosAngeles,Quercus virginiana,245
+LosAngeles,Quercus palustris,24
+LosAngeles,Washingtonia robusta,37971
+LosAngeles,Magnolia grandiflora,30988
+LosAngeles,Prunus,132
+LosAngeles,Zelkova serrata,940
+LosAngeles,Celtis occidentalis,34
+LosAngeles,Acer saccharum,5
+LosAngeles,Acer saccharinum,1371
+LosAngeles,Ginkgo biloba,1077
+LosAngeles,Pistacia chinensis,1012
+California,SanJose,347669
+SanJose,Platanus acerifolia,26291
+SanJose,Lagerstroemia indica,21636
+SanJose,Acer platanoides,2868
+SanJose,Gleditsia triacanthos,4037
+SanJose,Pyrus calleryana,9631
+SanJose,Fraxinus pennsylvanica,31
+SanJose,Acer rubrum,1282
+SanJose,Liquidambar styraciflua,14644
+SanJose,Tilia cordata,358
+SanJose,Quercus virginiana,2947
+SanJose,Quercus palustris,154
+SanJose,Washingtonia robusta,5116
+SanJose,Magnolia grandiflora,7080
+SanJose,Prunus,775
+SanJose,Zelkova serrata,7669
+SanJose,Celtis occidentalis,417
+SanJose,Acer saccharum,14
+SanJose,Acer saccharinum,810
+SanJose,Ginkgo biloba,5207
+SanJose,Pistacia chinensis,24316
+California,SanDiego,212304
+SanDiego,Platanus acerifolia,1907
+SanDiego,Lagerstroemia indica,2207
+SanDiego,Acer platanoides,0
+SanDiego,Gleditsia triacanthos,0
+SanDiego,Pyrus calleryana,1986
+SanDiego,Fraxinus pennsylvanica,0
+SanDiego,Acer rubrum,0
+SanDiego,Liquidambar styraciflua,10323
+SanDiego,Tilia cordata,0
+SanDiego,Quercus virginiana,0
+SanDiego,Quercus palustris,0
+SanDiego,Washingtonia robusta,15129
+SanDiego,Magnolia grandiflora,3463
+SanDiego,Prunus,0
+SanDiego,Zelkova serrata,0
+SanDiego,Celtis occidentalis,0
+SanDiego,Acer saccharum,0
+SanDiego,Acer saccharinum,89
+SanDiego,Ginkgo biloba,113
+SanDiego,Pistacia chinensis,115
+California,SanFrancisco,188462
+SanFrancisco,Platanus acerifolia,11925
+SanFrancisco,Lagerstroemia indica,102
+SanFrancisco,Acer platanoides,2
+SanFrancisco,Gleditsia triacanthos,117
+SanFrancisco,Pyrus calleryana,4036
+SanFrancisco,Fraxinus pennsylvanica,0
+SanFrancisco,Acer rubrum,987
+SanFrancisco,Liquidambar styraciflua,1592
+SanFrancisco,Tilia cordata,131
+SanFrancisco,Quercus virginiana,58
+SanFrancisco,Quercus palustris,9
+SanFrancisco,Washingtonia robusta,967
+SanFrancisco,Magnolia grandiflora,7793
+SanFrancisco,Prunus,207
+SanFrancisco,Zelkova serrata,54
+SanFrancisco,Celtis occidentalis,30
+SanFrancisco,Acer saccharum,1
+SanFrancisco,Acer saccharinum,79
+SanFrancisco,Ginkgo biloba,3349
+SanFrancisco,Pistacia chinensis,412
+California,Stockton,98300
+Stockton,Platanus acerifolia,7552
+Stockton,Lagerstroemia indica,7354
+Stockton,Acer platanoides,123
+Stockton,Gleditsia triacanthos,324
+Stockton,Pyrus calleryana,5296
+Stockton,Fraxinus pennsylvanica,21
+Stockton,Acer rubrum,1812
+Stockton,Liquidambar styraciflua,4110
+Stockton,Tilia cordata,895
+Stockton,Quercus virginiana,137
+Stockton,Quercus palustris,661
+Stockton,Washingtonia robusta,780
+Stockton,Magnolia grandiflora,3762
+Stockton,Prunus,117
+Stockton,Zelkova serrata,3379
+Stockton,Celtis occidentalis,387
+Stockton,Acer saccharum,20
+Stockton,Acer saccharinum,164
+Stockton,Ginkgo biloba,786
+Stockton,Pistacia chinensis,11392
+California,Sacramento,87191
+Sacramento,Platanus acerifolia,14111
+Sacramento,Lagerstroemia indica,4146
+Sacramento,Acer platanoides,79
+Sacramento,Gleditsia triacanthos,0
+Sacramento,Pyrus calleryana,4285
+Sacramento,Fraxinus pennsylvanica,0
+Sacramento,Acer rubrum,1924
+Sacramento,Liquidambar styraciflua,1933
+Sacramento,Tilia cordata,0
+Sacramento,Quercus virginiana,0
+Sacramento,Quercus palustris,312
+Sacramento,Washingtonia robusta,1535
+Sacramento,Magnolia grandiflora,1151
+Sacramento,Prunus,530
+Sacramento,Zelkova serrata,3861
+Sacramento,Celtis occidentalis,1171
+Sacramento,Acer saccharum,0
+Sacramento,Acer saccharinum,358
+Sacramento,Ginkgo biloba,1175
+Sacramento,Pistacia chinensis,4580
+Colorado,Denver,284739
+Denver,Platanus acerifolia,1814
+Denver,Lagerstroemia indica,0
+Denver,Acer platanoides,7945
+Denver,Gleditsia triacanthos,24178
+Denver,Pyrus calleryana,7133
+Denver,Fraxinus pennsylvanica,25736
+Denver,Acer rubrum,3084
+Denver,Liquidambar styraciflua,84
+Denver,Tilia cordata,12961
+Denver,Quercus virginiana,0
+Denver,Quercus palustris,296
+Denver,Washingtonia robusta,0
+Denver,Magnolia grandiflora,1
+Denver,Prunus,666
+Denver,Zelkova serrata,474
+Denver,Celtis occidentalis,9060
+Denver,Acer saccharum,1541
+Denver,Acer saccharinum,12735
+Denver,Ginkgo biloba,765
+Denver,Pistacia chinensis,32
+Colorado,AuroraCO,57658
+AuroraCO,Platanus acerifolia,9
+AuroraCO,Lagerstroemia indica,0
+AuroraCO,Acer platanoides,4745
+AuroraCO,Gleditsia triacanthos,10428
+AuroraCO,Pyrus calleryana,1490
+AuroraCO,Fraxinus pennsylvanica,5465
+AuroraCO,Acer rubrum,133
+AuroraCO,Liquidambar styraciflua,0
+AuroraCO,Tilia cordata,280
+AuroraCO,Quercus virginiana,0
+AuroraCO,Quercus palustris,22
+AuroraCO,Washingtonia robusta,0
+AuroraCO,Magnolia grandiflora,0
+AuroraCO,Prunus,44
+AuroraCO,Zelkova serrata,3
+AuroraCO,Celtis occidentalis,2493
+AuroraCO,Acer saccharum,42
+AuroraCO,Acer saccharinum,3433
+AuroraCO,Ginkgo biloba,9
+AuroraCO,Pistacia chinensis,0
+Oregon,Portland,218602
+Portland,Platanus acerifolia,0
+Portland,Lagerstroemia indica,852
+Portland,Acer platanoides,19209
+Portland,Gleditsia triacanthos,1412
+Portland,Pyrus calleryana,0
+Portland,Fraxinus pennsylvanica,0
+Portland,Acer rubrum,15475
+Portland,Liquidambar styraciflua,0
+Portland,Tilia cordata,0
+Portland,Quercus virginiana,0
+Portland,Quercus palustris,0
+Portland,Washingtonia robusta,0
+Portland,Magnolia grandiflora,0
+Portland,Prunus,25635
+Portland,Zelkova serrata,1911
+Portland,Celtis occidentalis,334
+Portland,Acer saccharum,0
+Portland,Acer saccharinum,904
+Portland,Ginkgo biloba,2023
+Portland,Pistacia chinensis,258
+Washington,Seattle,165623
+Seattle,Platanus acerifolia,1769
+Seattle,Lagerstroemia indica,406
+Seattle,Acer platanoides,6304
+Seattle,Gleditsia triacanthos,1404
+Seattle,Pyrus calleryana,4467
+Seattle,Fraxinus pennsylvanica,1835
+Seattle,Acer rubrum,7543
+Seattle,Liquidambar styraciflua,3377
+Seattle,Tilia cordata,2718
+Seattle,Quercus virginiana,11
+Seattle,Quercus palustris,977
+Seattle,Washingtonia robusta,0
+Seattle,Magnolia grandiflora,1225
+Seattle,Prunus,3937
+Seattle,Zelkova serrata,1683
+Seattle,Celtis occidentalis,141
+Seattle,Acer saccharum,1585
+Seattle,Acer saccharinum,265
+Seattle,Ginkgo biloba,1251
+Seattle,Pistacia chinensis,78
+Nevada,LasVegas,39193
+LasVegas,Platanus acerifolia,5
+LasVegas,Lagerstroemia indica,77
+LasVegas,Acer platanoides,0
+LasVegas,Gleditsia triacanthos,204
+LasVegas,Pyrus calleryana,38
+LasVegas,Fraxinus pennsylvanica,0
+LasVegas,Acer rubrum,0
+LasVegas,Liquidambar styraciflua,0
+LasVegas,Tilia cordata,0
+LasVegas,Quercus virginiana,393
+LasVegas,Quercus palustris,0
+LasVegas,Washingtonia robusta,1844
+LasVegas,Magnolia grandiflora,7
+LasVegas,Prunus,0
+LasVegas,Zelkova serrata,11
+LasVegas,Celtis occidentalis,3
+LasVegas,Acer saccharum,0
+LasVegas,Acer saccharinum,0
+LasVegas,Ginkgo biloba,0
+LasVegas,Pistacia chinensis,929
+Hawaii,Honolulu,15440
+Honolulu,Platanus acerifolia,0
+Honolulu,Lagerstroemia indica,161
+Honolulu,Acer platanoides,0
+Honolulu,Gleditsia triacanthos,0
+Honolulu,Pyrus calleryana,0
+Honolulu,Fraxinus pennsylvanica,0
+Honolulu,Acer rubrum,0
+Honolulu,Liquidambar styraciflua,0
+Honolulu,Tilia cordata,0
+Honolulu,Quercus virginiana,0
+Honolulu,Quercus palustris,0
+Honolulu,Washingtonia robusta,0
+Honolulu,Magnolia grandiflora,54
+Honolulu,Prunus,0
+Honolulu,Zelkova serrata,0
+Honolulu,Celtis occidentalis,0
+Honolulu,Acer saccharum,0
+Honolulu,Acer saccharinum,0
+Honolulu,Ginkgo biloba,0
+Honolulu,Pistacia chinensis,0
+New Mexico,Albuquerque,2502
+Albuquerque,Platanus acerifolia,186
+Albuquerque,Lagerstroemia indica,0
+Albuquerque,Acer platanoides,1
+Albuquerque,Gleditsia triacanthos,159
+Albuquerque,Pyrus calleryana,13
+Albuquerque,Fraxinus pennsylvanica,20
+Albuquerque,Acer rubrum,0
+Albuquerque,Liquidambar styraciflua,0
+Albuquerque,Tilia cordata,28
+Albuquerque,Quercus virginiana,0
+Albuquerque,Quercus palustris,0
+Albuquerque,Washingtonia robusta,0
+Albuquerque,Magnolia grandiflora,0
+Albuquerque,Prunus,20
+Albuquerque,Zelkova serrata,2
+Albuquerque,Celtis occidentalis,32
+Albuquerque,Acer saccharum,0
+Albuquerque,Acer saccharinum,1
+Albuquerque,Ginkgo biloba,2
+Albuquerque,Pistacia chinensis,54
+Arizona,Phoenix,214
+Phoenix,Platanus acerifolia,0
+Phoenix,Lagerstroemia indica,0
+Phoenix,Acer platanoides,0
+Phoenix,Gleditsia triacanthos,0
+Phoenix,Pyrus calleryana,0
+Phoenix,Fraxinus pennsylvanica,0
+Phoenix,Acer rubrum,0
+Phoenix,Liquidambar styraciflua,0
+Phoenix,Tilia cordata,0
+Phoenix,Quercus virginiana,1
+Phoenix,Quercus palustris,0
+Phoenix,Washingtonia robusta,2
+Phoenix,Magnolia grandiflora,0
+Phoenix,Prunus,0
+Phoenix,Zelkova serrata,0
+Phoenix,Celtis occidentalis,0
+Phoenix,Acer saccharum,0
+Phoenix,Acer saccharinum,0
+Phoenix,Ginkgo biloba,0
+Phoenix,Pistacia chinensis,0
