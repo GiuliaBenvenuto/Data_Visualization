@@ -6,13 +6,8 @@ function updateSankey(selectedOption) {
     var plotTitle;
 
     if (selectedOption === "east_north_central") {
-
-        // With location:
         csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6W0VnB74aQbLZeubTcnnlhmAvIo7kzzYScYpko4RQUTdxMCLWZPiJ1Sq-7b-u2QwU5wIJsTIlL5kq/pub?output=csv";
-        // csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnAD3h3-FPBpmMrXxqgRNYkhuw1-uL_O388J4-LJGvMtuNi-pluHLsoneEqOFhJ9-Nc0-SVedhdq1F/pub?output=csv";
-        // csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwOi-nD7X2Kdak53aTJdoLldS6SmMvk3ffEmTzDyU-QPmsQTklnWYZa2fTT3LSm01u0CqRvUuh02Am/pub?output=csv";
         plotTitle = "East North Central Trees";
-
     } else if (selectedOption === "west_north_central") {
         csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7e20gUnegzCFoc6dk4s5tng9HXxqwLbrwp69mMsBwf1W0Lt2YgWKrQUQ9tmRrMYHo4vdC_NoBwvpe/pub?output=csv";
         plotTitle = "West North Central Trees";
@@ -23,10 +18,10 @@ function updateSankey(selectedOption) {
         csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQFBFvG-gg70lYWzHqJnNK0Y83So6qVlgQUz3AvkezxqQdat786CP8U3uq8HNKFqXB4U86wOb7aMPef/pub?output=csv";
         plotTitle = "East South Central Trees";
     } else if (selectedOption === "mountain") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRO-EcrvxljUa6KtGnZnWLJT62CXN6bRPOz5yRdRU42nUezdLUi4LalKFTbr2WS7TYCWbDBsl6o3tq2/pub?output=csv";
+        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRbtMWGXmTpk4TOdmxbopWlrqGxIYWExnV5isiX423BuxziTuiIXH83X38cvIq6iSJt2C6yf_FJD6Nu/pub?output=csv";
         plotTitle = "Mountain Trees";
     } else if (selectedOption === "pacific") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4b9ieyjEChfPF4cQnRTkK1H3qfvA46-wZ-XD5VUycDM47n5CaBendKXU6PgMINrGUqjEI3HYi7x_/pub?output=csv";
+        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT2srg6trd2McoVgQVRegO0sW3d4ZIbs2u_Utc3_gNrbc-gJbw20FlJ3Y3Wq_pA9ItUFalct1eqleT0/pub?output=csv";
         plotTitle = "Pacific Trees";
     } 
 
