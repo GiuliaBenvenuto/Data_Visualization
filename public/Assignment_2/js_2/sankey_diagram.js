@@ -6,16 +6,17 @@ function updateSankey(selectedOption) {
     var plotTitle;
 
     if (selectedOption === "east_north_central") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwOi-nD7X2Kdak53aTJdoLldS6SmMvk3ffEmTzDyU-QPmsQTklnWYZa2fTT3LSm01u0CqRvUuh02Am/pub?output=csv";
+        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6W0VnB74aQbLZeubTcnnlhmAvIo7kzzYScYpko4RQUTdxMCLWZPiJ1Sq-7b-u2QwU5wIJsTIlL5kq/pub?output=csv";
+        //csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwOi-nD7X2Kdak53aTJdoLldS6SmMvk3ffEmTzDyU-QPmsQTklnWYZa2fTT3LSm01u0CqRvUuh02Am/pub?output=csv";
         plotTitle = "East North Central Trees";
     } else if (selectedOption === "west_north_central") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRT8N5J7VD4m1u3GB3X7ogjfwSVx2uKBIBMi0TShWGMoEKA8ug048CwqXfxNkrsOzhixIG6zX4gI1s9/pub?output=csv";
+        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7e20gUnegzCFoc6dk4s5tng9HXxqwLbrwp69mMsBwf1W0Lt2YgWKrQUQ9tmRrMYHo4vdC_NoBwvpe/pub?output=csv";
         plotTitle = "West North Central Trees";
     } else if (selectedOption === "south_atlantic") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTeaFJE94yFDspVv1F42xC3lZEYE25T9GjZbmHQMRpopk99z_4WrjJ9lvi5vP5lvdnS6W1svAYzUllV/pub?output=csv";
+        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTarot56_qrvd51UAgmRIAhVV8Zttv1dat3OrHa75h9fUxGhD_g4Xf5vWwV0lNQwYn8v20K9UxPSAJi/pub?output=csv";
         plotTitle = "South Atlantic Trees";
     } else if (selectedOption === "east_south_central") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQouwebiLw81zne-61w4sp5yqCYA5cxxAbREfwJGobVzhLvOzfzqjzJElS2WS4svercPYdyJEW5l2Ed/pub?output=csv";
+        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQFBFvG-gg70lYWzHqJnNK0Y83So6qVlgQUz3AvkezxqQdat786CP8U3uq8HNKFqXB4U86wOb7aMPef/pub?output=csv";
         plotTitle = "East South Central Trees";
     } else if (selectedOption === "mountain") {
         csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRO-EcrvxljUa6KtGnZnWLJT62CXN6bRPOz5yRdRU42nUezdLUi4LalKFTbr2WS7TYCWbDBsl6o3tq2/pub?output=csv";

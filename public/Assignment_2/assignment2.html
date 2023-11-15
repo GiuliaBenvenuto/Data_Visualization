@@ -30,6 +30,8 @@
     <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>
 
 
+
+
 </head>
 
 <body class="bg-grey-200 flex flex-col min-h-screen">
@@ -72,23 +74,30 @@
     </div>
     <div class="text-center">
       <p class="text-neutral-600 text-center mt-3">In this assignment we will use the <a href="https://www.kaggle.com/datasets/mexwell/5m-trees-dataset " style="text-decoration: underline; color: #404040 " onmouseover="this.style.color='#15803d'" onmouseout="this.style.color='#404040'">5M Trees Dataset</a> from Kaggle.
-        <br> It contains data about 5 million trees from 63 US cities.<br> Our purpose is to analyze the position, the quantity, 
-        the scientific name and the common name of the trees. </p>
+        <br> It contains data about 5 million trees from 63 US cities.<br> Our purpose is to analyze the distribution of trees and display the state, city, location_type and family tree.</br> This last feature has been extracted using an API from  <a href="https://api.gbif.org" style="text-decoration: underline; color: #404040 " onmouseover="this.style.color='#15803d'" onmouseout="this.style.color='#404040'">GBIF</a></p>
     </div>
 
     <div class="text-center">
       <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data preparation</h2>
+    <p class="description text-neutral-600 text-left mt-3>
+    
+    </p>
     </div>
   </div>
+
 
   <!-- Sankey Diagram -->
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
-      <h1 class="text-neutral-700 text-3xl" >Sankey Diagram</h1>
+      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Sankey Diagram</h1>
+      <p class="description text-neutral-600 text-left mt-3">
+        We use a Sankey Diagram to visualize the distribution of trees in the US. Showing different diagram for each geographical region in which the US are commonly divided (<span class="code"> East north central, West north central, South Atlantic, East South central, Mountain, Pacific</span>). <br>
+        Due the readibility of the different diagrams we have decided to choose not the biggest geographical region like for instance Mid-west or South but the smaller ones. <br> 
+      </p>
     </div>
   </div>
 
-  <p class="description text-neutral-600 text-left mt-3">Our first visualization is a sankey diagram.  </p>
+  <!--<p class="description text-neutral-600 text-left mt-3">Our first visualization is a sankey diagram.  </p>-->
 
   <!-- Dropdown city selection -->
   <div class="bg-white p-2 rounded-lg text-center mt-4">
