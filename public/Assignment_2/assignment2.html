@@ -95,10 +95,12 @@
     <h2 class="text-lg font-semibold mb-2 text-neutral-700">Zone:</h2>
     <div class="relative inline-block">
         <select id="topNSelector" class="block appearance-none w-30 bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 pr-6 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-            <option value="Northeast" selected>Northeast</option>
-            <option value="Midwest">Midwest</option>
-            <option value="South">South</option>
-            <option value="West">West</option>
+            <option value="east_north_central" selected>East North Central</option>
+            <option value="west_north_central">West North Central</option>
+            <option value="south_atlantic">South Atlantic</option>
+            <option value="east_south_central">East South Central</option>
+            <option value="mountain">Mountain</option>
+            <option value="pacific">Pacific</option>
             
         </select>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-700">
@@ -110,10 +112,10 @@
   <script>
     window.onload = function() {
       // Get the topNSelector element.
-      var zoneSelector = document.getElementById('zoneSelector');
+      var zoneSelector = document.getElementById('topNSelector');
   
       // Set the value of the topNSelector element to "5".
-      zoneSelector.value = "Northeast";
+      zoneSelector.value = "east_north_central";
     };
   </script>
   
@@ -121,7 +123,7 @@
 
   <!-- js -->
   <div class="flex justify-center items-center ">
-    <div id="sankey_diagram"  style="margin-top: 50px;">
+    <div id="sankey_diagram"  style="margin-top: 50px; width: 1200px; height: 700px;">
 
         <!-- ESEMPIO FUNZIONANTE -->
         <!--<script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script> -->

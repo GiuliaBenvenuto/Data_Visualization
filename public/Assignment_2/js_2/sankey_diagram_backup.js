@@ -1,39 +1,8 @@
 
-function updateSankey(selectedOption) {
-
-    // Determine the CSV URL based on the selected option
-    var csvURL;
-    var plotTitle;
-
-    if (selectedOption === "east_north_central") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwOi-nD7X2Kdak53aTJdoLldS6SmMvk3ffEmTzDyU-QPmsQTklnWYZa2fTT3LSm01u0CqRvUuh02Am/pub?output=csv";
-        plotTitle = "East North Central Trees";
-    } else if (selectedOption === "west_north_central") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRT8N5J7VD4m1u3GB3X7ogjfwSVx2uKBIBMi0TShWGMoEKA8ug048CwqXfxNkrsOzhixIG6zX4gI1s9/pub?output=csv";
-        plotTitle = "West North Central Trees";
-    } else if (selectedOption === "south_atlantic") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTeaFJE94yFDspVv1F42xC3lZEYE25T9GjZbmHQMRpopk99z_4WrjJ9lvi5vP5lvdnS6W1svAYzUllV/pub?output=csv";
-        plotTitle = "South Atlantic Trees";
-    } else if (selectedOption === "east_south_central") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQouwebiLw81zne-61w4sp5yqCYA5cxxAbREfwJGobVzhLvOzfzqjzJElS2WS4svercPYdyJEW5l2Ed/pub?output=csv";
-        plotTitle = "East South Central Trees";
-    } else if (selectedOption === "mountain") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRO-EcrvxljUa6KtGnZnWLJT62CXN6bRPOz5yRdRU42nUezdLUi4LalKFTbr2WS7TYCWbDBsl6o3tq2/pub?output=csv";
-        plotTitle = "Mountain Trees";
-    } else if (selectedOption === "pacific") {
-        csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4b9ieyjEChfPF4cQnRTkK1H3qfvA46-wZ-XD5VUycDM47n5CaBendKXU6PgMINrGUqjEI3HYi7x_/pub?output=csv";
-        plotTitle = "Pacific Trees";
-    } 
-
-    d3.select("#sankey_diagram").selectAll("svg").remove();
-
-    d3.csv(csvURL).then(function(data) {
-    //d3.csv(csvURL, function(data) {
-
 // set the dimensions and margins of the graph
 var margin = {top: 40, right: 40, bottom: 70, left: 60},
-    width = 1200 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;  
+    width = 1300 - margin.left - margin.right,
+    height = 1100 - margin.top - margin.bottom;  
 
 // format variables
 var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -58,7 +27,11 @@ var sankey = d3.sankey()
 var path = sankey.links();
 
 // load the data
-//d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQwOi-nD7X2Kdak53aTJdoLldS6SmMvk3ffEmTzDyU-QPmsQTklnWYZa2fTT3LSm01u0CqRvUuh02Am/pub?output=csv").then(function(data) {
+//d3.csv("js_2/sankey_alternative.csv").then(function(data) {
+// d3.csv("js_2/sankey_prova.csv").then(function(data) {
+// d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQmJwG5OJ0A4npu4JpS3BqW0rnBhQrxbQxa09W3hu1Ydq0BcLEWESbIO1tqQQ4_QVEq25Wtk1ovIlh9/pub?output=csv").then(function(data) {
+// d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-4E9isJa59g_oZHgaWsKPV2XViCkt1XF8ATuIHQct_ScPTKScc67SrPxONboXkEXWiR1GfCTwUuj0/pub?output=csv").then(function(data) {
+d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQwOi-nD7X2Kdak53aTJdoLldS6SmMvk3ffEmTzDyU-QPmsQTklnWYZa2fTT3LSm01u0CqRvUuh02Am/pub?output=csv").then(function(data) {
 
   //set up graph in same style as original example but empty
   sankeydata = {"nodes" : [], "links" : []};
@@ -124,8 +97,7 @@ var path = sankey.links();
       .style("fill", function(d) { 
 	  return d.color = color(d.name.replace(/ .*/, "")); })
       .style("stroke", function(d) { 
-	  return d3.rgb(d.color).darker(2); })
-      ;
+	  return d3.rgb(d.color).darker(2); });
 
   // add the title for the nodes
   node.append("title")
@@ -153,9 +125,7 @@ var path = sankey.links();
   .style("font-size", "20px")
   .style("fill", "#404040")
   .style("font-family", "'Fira Sans', sans-serif")
-  .text(plotTitle);
-
-
+  .text("West America Trees");
 
 
  // Add hover effects to nodes
@@ -178,12 +148,4 @@ link.on("mouseover", function() {
         .attr("stroke-width", function(d) { return d.width; });
 });
 
-});
-}
-
-updateSankey("east_north_central");
-
-d3.select("#topNSelector").on("change", function() {
-    var selectedOption = this.value;
-    updateSankey(selectedOption);
 });

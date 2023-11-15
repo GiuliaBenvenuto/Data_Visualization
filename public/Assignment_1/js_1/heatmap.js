@@ -15,6 +15,7 @@ function updateHeatmap(selectedOption) {
     d3.select("#my_heatmap").selectAll("svg").remove();
 
     d3.csv(csvURL, function(data) {
+        
         var margin_heatmap = {top: 55, right: 30, bottom: 100, left: 150},
         width_heatmap = 650 - margin_heatmap.left - margin_heatmap.right,
         height_heatmap  = 450 - margin_heatmap.top - margin_heatmap.bottom;
