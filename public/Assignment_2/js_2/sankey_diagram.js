@@ -31,7 +31,7 @@ function updateSankey(selectedOption) {
     //d3.csv(csvURL, function(data) {
 
 // set the dimensions and margins of the graph
-var margin = {top: 0, right: 40, bottom: 70, left: 60},
+var margin = {top: 40, right: 40, bottom: 70, left: 60},
     width = 1200 - margin.left - margin.right,
     height = 700 - margin.top - margin.bottom;  
 
