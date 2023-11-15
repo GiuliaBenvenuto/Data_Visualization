@@ -6,9 +6,13 @@ function updateSankey(selectedOption) {
     var plotTitle;
 
     if (selectedOption === "east_north_central") {
+
+        // With location:
         csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6W0VnB74aQbLZeubTcnnlhmAvIo7kzzYScYpko4RQUTdxMCLWZPiJ1Sq-7b-u2QwU5wIJsTIlL5kq/pub?output=csv";
-        //csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwOi-nD7X2Kdak53aTJdoLldS6SmMvk3ffEmTzDyU-QPmsQTklnWYZa2fTT3LSm01u0CqRvUuh02Am/pub?output=csv";
+        // csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnAD3h3-FPBpmMrXxqgRNYkhuw1-uL_O388J4-LJGvMtuNi-pluHLsoneEqOFhJ9-Nc0-SVedhdq1F/pub?output=csv";
+        // csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwOi-nD7X2Kdak53aTJdoLldS6SmMvk3ffEmTzDyU-QPmsQTklnWYZa2fTT3LSm01u0CqRvUuh02Am/pub?output=csv";
         plotTitle = "East North Central Trees";
+
     } else if (selectedOption === "west_north_central") {
         csvURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7e20gUnegzCFoc6dk4s5tng9HXxqwLbrwp69mMsBwf1W0Lt2YgWKrQUQ9tmRrMYHo4vdC_NoBwvpe/pub?output=csv";
         plotTitle = "West North Central Trees";
@@ -32,7 +36,7 @@ function updateSankey(selectedOption) {
     //d3.csv(csvURL, function(data) {
 
 // set the dimensions and margins of the graph
-var margin = {top: 40, right: 40, bottom: 70, left: 60},
+var margin = {top: 0, right: 40, bottom: 70, left: 60},
     width = 1200 - margin.left - margin.right,
     height = 700 - margin.top - margin.bottom;  
 
@@ -155,6 +159,7 @@ var path = sankey.links();
   .style("fill", "#404040")
   .style("font-family", "'Fira Sans', sans-serif")
   .text(plotTitle);
+  
 
 
 
