@@ -31,7 +31,7 @@ function updateSankey(selectedOption) {
     //d3.csv(csvURL, function(data) {
 
 // set the dimensions and margins of the graph
-var margin = {top: 40, right: 40, bottom: 70, left: 60},
+var margin = {top: 50, right: 40, bottom: 0, left: 60},
     width = 1200 - margin.left - margin.right,
     height = 700 - margin.top - margin.bottom;  
 
@@ -144,16 +144,34 @@ var path = sankey.links();
       .attr("x", function(d) { return d.x1 + 6; })
       .attr("text-anchor", "start");
 
-      
+  columnWidth = sankey.nodeWidth()
   // Add a title to the plot
   svg.append("text")
   .attr("x", width / 2)
-  .attr("y", 0 - (margin.top / 2))
+  .attr("y", -35)
   .attr("text-anchor", "middle")
   .style("font-size", "20px")
   .style("fill", "#404040")
   .style("font-family", "'Fira Sans', sans-serif")
   .text(plotTitle);
+
+
+    // Add column titles
+  var columnTitles = svg.selectAll(".column-title")
+  .data(["State", "City", "location_type", "scientific_name", "family_tree"]) // Replace with your actual column titles
+  .enter().append("text")
+  .attr("class", "column-title")
+  .attr("x", function(d, i) {
+      // Calculate the cumulative width of previous columns and spacing
+      var cumulativeWidth = i * (columnWidth + 220 );
+      return cumulativeWidth + columnWidth / 2; // Center the title over the middle of the column
+  })
+  .attr("y", -10) // Adjust the y-coordinate based on your layout
+  .style("text-anchor", "middle")
+  .style("font-size", "15px")
+  .style("fill", "#404040")
+  .style("font-family", "'Fira Sans', sans-serif")
+  .text(function(d) { return d; });
   
 
 
