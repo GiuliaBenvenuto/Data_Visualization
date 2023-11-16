@@ -28,10 +28,9 @@ function updateSankey(selectedOption) {
     d3.select("#sankey_diagram").selectAll("svg").remove();
 
     d3.csv(csvURL).then(function(data) {
-    //d3.csv(csvURL, function(data) {
 
 // set the dimensions and margins of the graph
-var margin = {top: 50, right: 40, bottom: 0, left: 60},
+var margin = {top: 60, right: 40, bottom: 0, left: 60},
     width = 1200 - margin.left - margin.right,
     height = 700 - margin.top - margin.bottom;  
 
@@ -56,9 +55,6 @@ var sankey = d3.sankey()
     //.nodeSort(null); // creates sankey nodes as ordered in the data 
 
 var path = sankey.links();
-
-// load the data
-//d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQwOi-nD7X2Kdak53aTJdoLldS6SmMvk3ffEmTzDyU-QPmsQTklnWYZa2fTT3LSm01u0CqRvUuh02Am/pub?output=csv").then(function(data) {
 
   //set up graph in same style as original example but empty
   sankeydata = {"nodes" : [], "links" : []};
@@ -150,20 +146,19 @@ var path = sankey.links();
   .attr("x", width / 2)
   .attr("y", -35)
   .attr("text-anchor", "middle")
-  .style("font-size", "20px")
+  .style("font-size", "25px")
   .style("fill", "#404040")
   .style("font-family", "'Fira Sans', sans-serif")
   .text(plotTitle);
 
-
     // Add column titles
   var columnTitles = svg.selectAll(".column-title")
-  .data(["State", "City", "location_type", "scientific_name", "family_tree"]) // Replace with your actual column titles
+  .data(["State", "City", "Location type", "Scientific name", "Family tree"]) // Replace with your actual column titles
   .enter().append("text")
   .attr("class", "column-title")
   .attr("x", function(d, i) {
       // Calculate the cumulative width of previous columns and spacing
-      var cumulativeWidth = i * (columnWidth + 220 );
+      var cumulativeWidth = i * (columnWidth + 230 );
       return cumulativeWidth + columnWidth / 2; // Center the title over the middle of the column
   })
   .attr("y", -10) // Adjust the y-coordinate based on your layout
@@ -173,10 +168,6 @@ var path = sankey.links();
   .style("font-family", "'Fira Sans', sans-serif")
   .text(function(d) { return d; });
   
-
-
-
-
  // Add hover effects to nodes
  node.on("mouseover", function() {
      d3.select(this)

@@ -33,6 +33,7 @@ export function addTitle(selection, text, fontSize, fill, x, y) {
     .attr("text-anchor", "middle")
     .style("font-size", fontSize)
     .style("fill", fill)
+    .style("font-family", "'Fira Sans', sans-serif")
     .text(text);
 }
 
