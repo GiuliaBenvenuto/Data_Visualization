@@ -30,7 +30,7 @@ function updateSankey(selectedOption) {
     d3.csv(csvURL).then(function(data) {
 
 // set the dimensions and margins of the graph
-var margin = {top: 60, right: 40, bottom: 0, left: 60},
+var margin = {top: 60, right: 40, bottom: 60, left: 60},
     width = 1200 - margin.left - margin.right,
     height = 700 - margin.top - margin.bottom;  
 
