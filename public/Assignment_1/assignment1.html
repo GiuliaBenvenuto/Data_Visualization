@@ -51,9 +51,49 @@
               </ul>
            </div>
 
+        
+          <!-- Dropdown menu -->
+          <div class="relative ml-auto mr-12">
+            <button id="dropdownButton" class="flex items-center text-neutral-700 hover:text-neutral-500 focus:text-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2">
+              <span class="mr-1">Assignments</span>
+              <!-- Down arrow SVG -->
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <ul id="dropdownMenu" class="text-center absolute hidden mt-2 bg-white border border-neutral-300 dark:bg-neutral-800 dark:border-neutral-600 rounded-md shadow-lg w-40">
+              <!-- Dropdown items -->
+              <li class="px-4 py-2"><a href="../Assignment_1/assignment1.html">Assignment 1</a></li>
+              <li class="px-4 py-2"><a href="../Assignment_2/assignment2.html">Assignment 2</a></li>
+              <li class="px-4 py-2"><a href="../Assignment_3/assignment3.html">Assignment 3</a></li>
+              <!-- Add more items as needed -->
+            </ul>
+          </div>
 
        </div>
   </nav>
+
+  <!-- Dropdown script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var button = document.getElementById('dropdownButton');
+      var menu = document.getElementById('dropdownMenu');
+  
+      button.addEventListener('click', function () {
+        menu.classList.toggle('hidden');
+      });
+  
+      // Close the dropdown when clicking outside of it
+      document.addEventListener('click', function (event) {
+        if (!button.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+
+
+
 
   <div>
     <a id="go-to-home" href="../index.html" title="Go To Home" class="fixed z-90 bottom-10 left-7 border-0 w-12 h-12 rounded-full drop-shadow-md bg-green-900 text-white text-3xl font-bold">

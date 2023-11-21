@@ -45,3 +45,9 @@ p, span {
   width: 100%;
   object-fit: cover; /* Maintains aspect ratio while covering the container */
 }
+
+/* Position of the dropdown menu in the navbar */
+#dropdownMenu {
+  left: 50%; /* Center the dropdown menu */
+  transform: translateX(-50%); /* Adjust for half of the menu width */
+}
