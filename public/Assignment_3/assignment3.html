@@ -233,6 +233,7 @@
 
     }
   </script> -->
+  <!--
   <script>
   let checkedValues = [];
 
@@ -274,7 +275,51 @@
 
   // Initialize checkboxes on page load
   initializeCheckboxes();
+</script> -->
+<script>
+  let checkedValues = [];
+
+  // Function to save checkbox values
+  function saveCheckboxValue(id) {
+    const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
+    checkedValues = [];
+
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        checkedValues.push(checkbox.id);
+      }
+    });
+
+    // Save the checked values in local storage
+    localStorage.setItem('checkedValues', JSON.stringify(checkedValues));
+  }
+
+  // Function to initialize checkboxes on page load
+  function initializeCheckboxes() {
+    const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
+    const defaultCheckedValue = 'c_1900';
+
+    // Get stored checked values from local storage
+    const storedCheckedValues = JSON.parse(localStorage.getItem('checkedValues')) || [];
+
+    checkboxes.forEach(checkbox => {
+      if (checkbox.id === defaultCheckedValue) {
+        // If the checkbox is the default one (c_1900), make sure it stays checked
+        checkbox.checked = true;
+      } else {
+        // Uncheck other checkboxes
+        checkbox.checked = false;
+      }
+    });
+
+    // Save the initial state with only the default checkbox checked
+    saveCheckboxValue(defaultCheckedValue);
+  }
+
+  // Initialize checkboxes on page load
+  initializeCheckboxes();
 </script>
+
 
 
 
