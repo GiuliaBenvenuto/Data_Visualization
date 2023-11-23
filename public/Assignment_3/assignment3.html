@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignment 1</title>
     <link rel="icon" type="image/png" sizes="16x16" href="../../img/leaf.png">
+     <!-- Replace with the actual path to your prova2.js file -->
 
     <!-- Style -->
     <link rel="stylesheet" href="../style.css">
@@ -122,6 +123,8 @@
     </div>
   </div>
 
+  
+
 
   <!-- Line Chart -->
   <div class="text-center title mt-14">
@@ -132,13 +135,161 @@
       </p>
   </div>
 
-  <!-- Line chart js -->
-  <div class="flex justify-center items-center ">
-    <div id="my_dataviz"  style="margin-top: 50px;">
-        <script type="module" src="../Assignment_3/js_3/line_chart.js"></script>
+
+
+  <!-- Dropdown region selection -->
+  <div class="bg-white p-2 rounded-lg text-center mt-4">
+    <h2 class="text-lg font-semibold mb-2 text-neutral-700">Region:</h2>
+    <div class="relative inline-block">
+        <select id="regionSelector" class="block appearance-none w-30 bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 pr-6 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+          <option value="west" selected>West</option>
+          <option value="south">South</option>
+          <option value="west_north_central">West North Central</option>
+          <option value="central">Central</option>
+          <option value="east_north_central">East North Central</option>
+          <option value="northwest">Northwest</option>
+          <option value="northeast">Northeast</option>
+          <option value="southwest">Southwest</option>
+          <option value="southeast">Southeast</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9 11l-5-5 1.41-1.41L9 8.17l3.59-3.59L14 6l-5 5z"/></svg>
+        </div>
     </div>
   </div>
 
+  <script>
+    window.onload = function() {
+      // Get the topNSelector element.
+      var regionSelector = document.getElementById('regionSelector');
+  
+      // Set the value of the topNSelector element to "5".
+      regionSelector.value = "west";
+    };
+  </script>
+
+  <!--Checkbox year selection -->
+  <div class="checkbox-container" style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+    <input type="checkbox" id="c_1900" onclick="saveCheckboxValue('c_1900')" checked>
+    <label for="c_1900">1900</label>
+
+    <input type="checkbox" id="c_1910" onclick="saveCheckboxValue('c_1910')">
+    <label for="c_1910">1910</label>
+
+    <input type="checkbox" id="c_1920" onclick="saveCheckboxValue('c_1920')">
+    <label for="c_1920">1920</label>
+
+    <input type="checkbox" id="c_1930" onclick="saveCheckboxValue('c_1930')">
+    <label for="c_1930">1930</label>
+
+    <input type="checkbox" id="c_1940" onclick="saveCheckboxValue('c_1940')">
+    <label for="c_1940">1940</label>
+
+    <input type="checkbox" id="c_1950" onclick="saveCheckboxValue('c_1950')">
+    <label for="c_1950">1950</label>
+
+    <input type="checkbox" id="c_1960" onclick="saveCheckboxValue('c_1960')">
+    <label for="c_1960">1960</label>
+
+    <input type="checkbox" id="c_1970" onclick="saveCheckboxValue('c_1970')">
+    <label for="c_1970">1970</label>
+
+    <input type="checkbox" id="c_1980" onclick="saveCheckboxValue('c_1980')">
+    <label for="c_1980">1980</label>
+
+    <input type="checkbox" id="c_1990" onclick="saveCheckboxValue('c_1990')">
+    <label for="c_1990">1990</label>
+
+    <input type="checkbox" id="c_2000" onclick="saveCheckboxValue('c_2000')">
+    <label for="c_2000">2000</label>
+
+    <input type="checkbox" id="c_2010" onclick="saveCheckboxValue('c_2010')">
+    <label for="c_2010">2010</label>
+
+    <input type="checkbox" id="c_2020" onclick="saveCheckboxValue('c_2020')">
+    <label for="c_2020">2020</label>
+  </div>
+
+  <!-- Save the checked boxes 
+  <script>
+    let checkedValues = [];
+
+    function saveCheckboxValue() {
+      // Get all checkboxes
+      const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
+  
+      // Array to store the checked values
+      checkedValues = [];
+  
+      // Loop through checkboxes and save the checked ones
+      checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+          checkedValues.push(checkbox.id);
+        }
+      });
+  
+      // Display the checked values in the console (you can store or send them to a server)
+      console.log('Checked Boxes:', checkedValues);
+
+    }
+  </script> -->
+  <script>
+  let checkedValues = [];
+
+  // Function to save checkbox values
+  function saveCheckboxValue(id) {
+    const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
+    checkedValues = [];
+
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        checkedValues.push(checkbox.id);
+      }
+    });
+
+    // Save the checked values in local storage
+    localStorage.setItem('checkedValues', JSON.stringify(checkedValues));
+  }
+
+  // Function to initialize checkboxes on page load
+  function initializeCheckboxes() {
+    const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
+    const defaultCheckedValue = 'c_1900';
+
+    // Get stored checked values from local storage
+    const storedCheckedValues = JSON.parse(localStorage.getItem('checkedValues')) || [];
+
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = storedCheckedValues.includes(checkbox.id);
+
+      // If the checkbox is the default one (c_1900), make sure it stays checked
+      if (checkbox.id === defaultCheckedValue) {
+        checkbox.checked = true;
+      }
+    });
+
+    // Save the initial state in case no checkboxes are checked
+    saveCheckboxValue(defaultCheckedValue);
+  }
+
+  // Initialize checkboxes on page load
+  initializeCheckboxes();
+</script>
+
+
+
+  <!-- Add 2 buttons 
+  <button onclick="update(data1)"> West region </button>
+  <button onclick="update(data2)"> South region </button>
+  -->
+
+  <!-- Line chart js -->
+  <div class="flex justify-center items-center ">
+    <div id="my_dataviz" style="width: 700px; height: 500px;" >
+      <script type="module" src="../Assignment_3/js_3/prova3.js"></script>
+    </div>
+  </div>
+  
 
   <!-- Radar Chart -->
   <div class="text-center title mt-14">

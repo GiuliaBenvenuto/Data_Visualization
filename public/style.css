@@ -51,3 +51,8 @@ p, span {
   left: 50%; /* Center the dropdown menu */
   transform: translateX(-50%); /* Adjust for half of the menu width */
 }
+
+
+.checkbox-container input {
+  margin-left: 15px;
+}
