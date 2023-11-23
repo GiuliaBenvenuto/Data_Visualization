@@ -93,101 +93,173 @@ function updateLineChart(selectedOption) {
 
     // append the svg object to the body of the page
     var svg = d3.select("#my_dataviz")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
 
 
-fileUrls.forEach(function(fileUrl, index) {
-    d3.csv(fileUrl, function(data) {
+    fileUrls.forEach(function(fileUrl, index) {
+        console.log("Index:", index);
+        d3.csv(fileUrl, function(data) {
 
-    // Filter columns based on checkedValues after removing "c_" prefix
-    var filteredColumns = checkedValues.map(function(column) {
-        return column.replace("c_", "");
-    }).filter(function(column) {
-        return data.columns.includes(column); // Assuming data has a 'columns' property
-    });
-    console.log("FILTERED:", filteredColumns);
-
-
-
-  // group the data: I want to draw one line per group
-  var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-    .key(function(d) { return d.name;})
-    .entries(data);
-
-  // Add X axis --> it is a date format
-  var x = d3.scaleBand()
-    .domain(data.map(function(d) { return d.Months; }))
-    .range([0, width])
-    .padding(0.1);
-
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x)); 
-
-  svg.selectAll("text")
-    .style("text-anchor", "end")
-    .attr("dx", "-.8em")
-    .attr("dy", ".15em")
-    .attr("transform", "rotate(-65)");
-
-  // Y axis
-  // Extract all column names except the first one ("Months")
-  var columns = Object.keys(data[0]).slice(0);
-  console.log(columns);
-
-  // Extract all values from the selected columns
-  var allValues = data.reduce(function(acc, d) {
-    columns.forEach(function(column) {
-      acc.push(+d[column]);
-    });
-    return acc;
-  }, []);
-  console.log(allValues);
-
-  // Find the maximum value across all columns
-  var maxValue = d3.max(allValues);
-  console.log(maxValue);
-
-  // Define the y-scale using the calculated maximum value
-  var y = d3.scaleLinear()
-      .domain([0, maxValue])
-      .range([height, 0]);
-
-  // Append the y-axis to the SVG
-  svg.append("g")
-      .call(d3.axisLeft(y));
-
-  // color palette
-  var res = sumstat.map(function(d){ return d.key }) // list of group names
-  var color = d3.scaleOrdinal()
-    .domain(res)
-    .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999'])
-
-  // Draw the line
-  // Draw the line
-    svg.selectAll(".line")
-        .data(filteredColumns) // Use the filtered columns as the data
-        .enter()
-        .append("path")
-        .attr("fill", "none")
-        .attr("stroke", function(column) { return color(column); })
-        .attr("stroke-width", 1.5)
-        .attr("d", function(column) {
-            return d3.line()
-                .x(function(d) { return x(d.Months); }) // Assuming 'Months' is the x-axis variable
-                .y(function(d) { return y(+d[column]); }) // Use the current column for the y-axis
-                (data.filter(function(d) {
-                    return filteredColumns.includes(column); // Filter the data to include only the selected columns
-                }));
+        // Filter columns based on checkedValues after removing "c_" prefix
+        var filteredColumns = checkedValues.map(function(column) {
+            return column.replace("c_", "");
+        }).filter(function(column) {
+            return data.columns.includes(column); // Assuming data has a 'columns' property
         });
-})
+        console.log("FILTERED:", filteredColumns);
 
-})
+
+        // group the data: I want to draw one line per group
+        var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+            .key(function(d) { return d.name;})
+            .entries(data);
+
+        // Add X axis --> it is a date format
+        var x = d3.scaleBand()
+            .domain(data.map(function(d) { return d.Months; }))
+            .range([0, width])
+            .padding(0.1);
+
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x)); 
+
+        svg.selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
+
+        // Y axis
+        // Extract all column names except the first one ("Months")
+        var columns = Object.keys(data[0]).slice(0);
+        console.log(columns);
+
+        // Extract all values from the selected columns
+        var allValues = data.reduce(function(acc, d) {
+            columns.forEach(function(column) {
+            acc.push(+d[column]);
+            });
+            return acc;
+        }, []);
+        console.log(allValues);
+
+        // Find the maximum value across all columns
+        var maxValue = d3.max(allValues);
+        console.log(maxValue);
+
+        // Define the y-scale using the calculated maximum value
+        var y = d3.scaleLinear()
+            .domain([0, maxValue])
+            .range([height, 0]);
+
+        // Append the y-axis to the SVG
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+        /* color palette
+        var res = sumstat.map(function(d){ return d.key }) // list of group names
+        var color = d3.scaleOrdinal()
+            .domain(res)
+            .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999'])
+        */
+        var color = d3.scaleOrdinal()
+            .domain(fileUrls)
+            .range(['#e41a1c', '#4daf4a', '#377eb8']); // Red, Green, Blue
+
+            
+            
+        var tooltip = d3.select('body')
+            .append("div")
+            .style("position", "absolute")
+            .style("background", "#f0f0f0") // Use a light grey color for the background
+            .style("padding", "10px")
+            .style("border", "1px solid #ccc") // Use a darker grey for the border
+            .style("border-radius", "8px")
+            .style("pointer-events", "none")
+            .style("opacity", 0)
+            .style("font", "15px Fira Sans")
+            .style("color", "#333"); // Use a dark grey color for the text
+
+
+        // Draw the line
+        svg.selectAll(".line")
+            .data(filteredColumns) // Use the filtered columns as the data
+            .enter()
+            .append("path")
+            .attr("fill", "none")
+            //.attr("stroke", function(column) { return color(column); })
+            .attr("stroke", function (column, i) {
+                // Use the color scale to assign color based on file URL index
+                return color(fileUrls[index]);
+            })
+            .attr("stroke-width", 1.8)
+            .attr("d", function(column) {
+                return d3.line()
+                    .x(function(d) { return x(d.Months); }) // Assuming 'Months' is the x-axis variable
+                    .y(function(d) { return y(+d[column]); }) // Use the current column for the y-axis
+                    (data.filter(function(d) {
+                        return filteredColumns.includes(column); // Filter the data to include only the selected columns
+                    }));
+            })
+
+        .each(function (d, i) {
+        // Append dots at the end of each line segment
+        svg.selectAll(".dot")
+            .data(data.filter(function (row) {
+                return filteredColumns.includes(d);
+            }))
+            .enter().append("circle")
+            .attr("cx", function (row) { return x(row.Months); })
+            .attr("cy", function (row) { return y(+row[d]); })
+            .attr("r", 4)
+            .attr("fill", color(fileUrls[index]))
+            .attr("stroke", "#fff") // Add a white stroke for better visibility
+
+            .on("mouseover", function (row) {
+                tooltip.transition()
+                    .duration(100)
+                    .style("opacity", 0.9);
+                tooltip.html(
+                    "<div style='text-align: center;'>" +
+                    "<span style='color: #333;'> <strong>" + getLabel(index) + "</strong></span><br>" +
+                    "</div>" +
+                    "<span style='color: #333;'> <strong>Value: </strong> " + row[d] + "</span><br>" +
+                    "<span style='color: #333;'> <strong>Month: </strong> " + row.Months + "</span><br>" 
+                    
+                )
+                .style("left", (d3.event.pageX + 10) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function (d) {
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", 0);
+            });
+
+        });
+
+        // Function to get the label based on the index
+        function getLabel(index) {
+            if (index === 0) {
+                return "Max";
+            } else if (index === 1) {
+                return "Min";
+            } else if (index === 2) {
+                return "Avg";
+            } else {
+                return "";
+            }
+        }
+                
+        }) // d3.csv
+
+    }) // for
 }
 
 updateLineChart("west");
