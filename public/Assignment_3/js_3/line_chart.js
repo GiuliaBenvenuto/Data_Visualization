@@ -100,10 +100,36 @@ function updateLineChart(selectedOption) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
+    var maxValue = 0.0;
+    var minValue = 0.0;
+    var maxColumn;
+    var minColumn;
+    var first = true;
 
     fileUrls.forEach(function(fileUrl, index) {
         // console.log("Index:", index);
+
         d3.csv(fileUrl, function(data) {
+
+    
+        if(first) {
+            maxColumn = data.map(function(d) {
+                return d.Max;
+            });
+            maxValue = maxColumn[0];
+            console.log("MAX VALUE:", maxValue);
+
+            minColumn = data.map(function(d) {
+                return d.Min;
+            });
+            minValue = minColumn[0];
+            console.log("MIN VALUE:", minValue);
+            first = false;
+        }
+        console.log("Index:", index);
+        console.log("MAX VALUE fuori:", maxValue);
+        console.log("MIN VALUE fuori:", minValue);
+
 
         // Filter columns based on checkedValues after removing "c_" prefix
         var filteredColumns = checkedValues.map(function(column) {
@@ -133,7 +159,7 @@ function updateLineChart(selectedOption) {
             .call(d3.axisBottom(x));
         
 
-        // Y axis
+        /* Y axis
         // Extract all column names except the first one ("Months")
         var columns = Object.keys(data[0]).slice(0);
         // console.log(columns);
@@ -149,11 +175,11 @@ function updateLineChart(selectedOption) {
 
         // Find the maximum value across all columns
         var maxValue = d3.max(allValues);
-        // console.log(maxValue);
+        // console.log(maxValue); */
 
         // Define the y-scale using the calculated maximum value
         var y = d3.scaleLinear()
-            .domain([0, maxValue])
+            .domain([minValue, maxValue])
             .range([height, 0]);
 
         // Append the y-axis to the SVG

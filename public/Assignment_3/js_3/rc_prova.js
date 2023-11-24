@@ -5,8 +5,9 @@ import { RadarChart } from "../js_3/radarChart.js";
 ////////////////////////////////////////////////////////////// 
 
 var margin = {top: 100, right: 100, bottom: 100, left: 100},
-    width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+    width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
     height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+    console.log("WIDTH", window.innerWidth);
         
 ////////////////////////////////////////////////////////////// 
 ////////////////////////// Data ////////////////////////////// 
@@ -19,7 +20,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vT7i09PlQfdRCQO_lf7mxxei
     });
 
     // Now, monthsColumn contains an array of values from the "Months" column
-    console.log(monthsColumn);
+    // console.log(monthsColumn);
 
     // Extract values from the "1900" column (second column)
     var column1900 = data.map(function(d) {
@@ -27,7 +28,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vT7i09PlQfdRCQO_lf7mxxei
     });
 
     // Now, column1900 contains an array of values from the "1900" column
-    console.log(column1900);
+    // console.log(column1900);
 
     // Create an array to store the new format of data
     var newData = [];
@@ -43,12 +44,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vT7i09PlQfdRCQO_lf7mxxei
     }
 
     var newDataWrapped = [newData];
-
     console.log("NEW_DATA_WRAPPED", newDataWrapped);
-
-
-    // Now, newData contains the data in the new format
-    console.log("NEW_DATA", newData);
 
     /*
     var data = [
@@ -84,7 +80,9 @@ var radarChartOptions = {
 
 
 //Call function to draw the Radar chart
-RadarChart(".radarChart", newDataWrapped, radarChartOptions);
+RadarChart("#my_radarchart_1", newDataWrapped, radarChartOptions);
+RadarChart("#my_radarchart_2", newDataWrapped, radarChartOptions);
+RadarChart("#my_radarchart_3", newDataWrapped, radarChartOptions);
 
 });
 
