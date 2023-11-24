@@ -9,7 +9,7 @@
 
     <!-- Style -->
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../Assignment_2/sankey_style.css">
+    <link rel="stylesheet" href="../Assignment_3/radar_style.css">
 
     <!-- Font -->
     <!-- Fira Sans & Roboto Slab -->
@@ -24,6 +24,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!--D3.js-->
     <script src="https://d3js.org/d3.v4.js"></script>
+    
     <!--Font awesome-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
@@ -104,7 +105,6 @@
   </div>
 
 
-
     
   <div class="text-center title mt-10">
     <div class="text-5xl"></div>
@@ -125,7 +125,6 @@
 
   
 
-
   <!-- Line Chart -->
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
@@ -134,7 +133,6 @@
         Describe here the line chart.
       </p>
   </div>
-
 
 
   <!-- Dropdown region selection -->
@@ -257,12 +255,10 @@
 
 
 
-
-
   <!-- Line chart js -->
   <div class="flex justify-center items-center ">
     <div id="my_dataviz" style="width: 700px; height: 500px;" >
-      <script type="module" src="../Assignment_3/js_3/prova3.js"></script>
+      <script type="module" src="../Assignment_3/js_3/line_chart.js"></script>
     </div>
   </div>
   
@@ -274,6 +270,23 @@
       <p class="description text-neutral-600 text-left mt-3">
         Describe here the radar chart.
       </p>
+  </div>
+
+  <!-- Radar Chart js 
+  <div class="flex justify-center items-center ">
+    <div id="sankey_diagram"  style="margin-top: 50px; width: 1200px; height: 700px;">
+
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+        <script src="../Assignment_2/js_2/sankey_diagram.js"></script>
+
+    </div>
+  </div> -->
+  <div class="flex justify-center items-center ">
+    <div id="my_radarchart" style="width: 700px; height: 500px;" >
+      <script type="module" src="../Assignment_3/js_3/radarChart.js"></script>
+      <script type="module" src="../Assignment_3/js_3/radar_chart.js"></script>
+    </div>
   </div>
 
 
@@ -288,7 +301,6 @@
 
 
 
-    
   <!-- Footer -->
   <footer class="flex flex-col mt-auto items-center bg-neutral-200 text-center text-white dark:bg-neutral-600">
     <div class="container pt-6">
