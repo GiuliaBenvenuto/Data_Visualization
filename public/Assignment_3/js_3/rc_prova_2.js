@@ -16,7 +16,6 @@ function updateRadarChart(selectedOption) {
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7i09PlQfdRCQO_lf7mxxei0klpyVkcvb9yssf8WLIHNBwI7FOYKroe4HGzN8aIE7PkkvENGRZMIHv/pub?output=csv",  // MAX
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vQxn9gnqzgt3UbgbLBjiV6HoUiTVoqT7_OiUXZm8bqJmRHyPYGNWI-fTJm7m3vWXFPgS6zvagU2lSNO/pub?output=csv",  // MIN
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vTh77p4ddzVOUFcH-kLs_OABWrnYbqVQ8227iLz-TJ-HT-nh300fxCj4pEoul4eFhpMsbrlLru8dVH3/pub?output=csv"   // AVERAGE
-            
         ];
 
     } else if (selectedOption === "south") {
@@ -86,8 +85,6 @@ function updateRadarChart(selectedOption) {
     }
 
 
-
-
     var margin = {top: 100, right: 100, bottom: 100, left: 100},
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
@@ -97,79 +94,105 @@ function updateRadarChart(selectedOption) {
     ////////////////////////// Data ////////////////////////////// 
     ////////////////////////////////////////////////////////////// 
 
-    d3.csv(fileUrls, function(data) {
-    // d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vT7i09PlQfdRCQO_lf7mxxei0klpyVkcvb9yssf8WLIHNBwI7FOYKroe4HGzN8aIE7PkkvENGRZMIHv/pub?output=csv", function(data) {
-        // Extract values from the "Months" column
-        var monthsColumn = data.map(function(d) {
-            return d.Months;
-        });
+    fileUrls.forEach(function(fileUrls, index) {
+        d3.csv(fileUrls, function(data) {
+            console.log("INDEX", index);
+            // d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vT7i09PlQfdRCQO_lf7mxxei0klpyVkcvb9yssf8WLIHNBwI7FOYKroe4HGzN8aIE7PkkvENGRZMIHv/pub?output=csv", function(data) {
+            // Extract values from the "Months" column
+            var monthsColumn = data.map(function(d) {
+                return d.Months;
+            });
 
-        // Now, monthsColumn contains an array of values from the "Months" column
-        // console.log(monthsColumn);
-
-        // Extract values from the "1900" column (second column)
-        var column1900 = data.map(function(d) {
-            return d["1900"];
-        });
-
-        // Now, column1900 contains an array of values from the "1900" column
-        // console.log(column1900);
-
-        // Create an array to store the new format of data
-        var newData = [];
-
-        // Iterate through the months and create the new format
-        for (var i = 0; i < monthsColumn.length; i++) {
-            var newDataPoint = {
-                axis: monthsColumn[i],  // Use the month as the "axis" label
-                value: column1900[i]    // Use the corresponding value as the "value" label
-            };
-
-            newData.push(newDataPoint);
-        }
-
-        var newDataWrapped = [newData];
-        console.log("NEW_DATA_WRAPPED", newDataWrapped);
-
-        /*
-        var data = [
-                [//iPhone
-                {axis:"Battery Life",value:0.22},
-                {axis:"Brand",value:0.28},
-                {axis:"Contract Cost",value:0.29},
-                {axis:"Design And Quality",value:0.17},
-                {axis:"Have Internet Connectivity",value:0.22},
-                {axis:"Large Screen",value:0.02},
-                {axis:"Price Of Device",value:0.21},
-                {axis:"To Be A Smartphone",value:0.50}			
-                ]
-            ];
-        */
-
-    ////////////////////////////////////////////////////////////// 
-    //////////////////// Draw the Chart ////////////////////////// 
-    ////////////////////////////////////////////////////////////// 
-
-    var color = d3.scaleOrdinal()
-        .range(["#EDC951", "#CC333F", "#00A0B0"]);
-        
-    var radarChartOptions = {
-        w: width,
-        h: height,
-        margin: margin,
-        maxValue: 0.5,
-        levels: 5,
-        roundStrokes: true,
-        color: color
-    };
+            // Now, monthsColumn contains an array of values from the "Months" column
+            // console.log(monthsColumn);
 
 
-    //Call function to draw the Radar chart
-    RadarChart("#my_radarchart_1", newDataWrapped, radarChartOptions);
-    RadarChart("#my_radarchart_2", newDataWrapped, radarChartOptions);
-    RadarChart("#my_radarchart_3", newDataWrapped, radarChartOptions);
+            // Filter columns based on checkedValues after removing "c_" prefix
+            var filteredColumns = checkedValues.map(function(column) {
+                return column.replace("c_", "");
+            }).filter(function(column) {
+                return data.columns.includes(column); // Assuming data has a 'columns' property
+            });
+             console.log("FILTERED:", filteredColumns);
 
-    });
+
+            /* Extract values from the "1900" column (second column)
+            var column1900 = data.map(function(d) {
+                return d["1900"];
+            });*/
+
+            var colonne = [];
+            for (var j = 0; j < filteredColumns.length; j++) {
+                colonne[j] = data.map(function(d) {
+                    return d[filteredColumns[j]];
+                });
+
+            }
+            console.log("COLONNE", colonne);
+
+            // Now, column1900 contains an array of values from the "1900" column
+            // console.log(column1900);
+
+            // Create an array to store the new format of data
+            var newData = [];
+
+            
+            // Iterate through the months and create the new format
+            for (var anno; anno < colonne.length; anno++) {
+                for (var i = 0; i < monthsColumn.length; i++) {
+                    var newDataPoint = {
+                        axis: monthsColumn[i],  // Use the month as the "axis" label
+                        //value: column1900[i]    // Use the corresponding value as the "value" label
+                        value: colonne[anno][i]
+                    }
+                    console.log("NEW_DATA_POINT", newDataPoint);
+
+                    newData.push(newDataPoint);
+                }
+            }
+            var newDataWrapped = [newData];
+            console.log("NEW_DATA_WRAPPED", newDataWrapped);
+
+            /*
+            var data = [
+                    [//iPhone
+                    {axis:"Battery Life",value:0.22},
+                    {axis:"Brand",value:0.28},
+                    {axis:"Contract Cost",value:0.29},
+                    {axis:"Design And Quality",value:0.17},
+                    {axis:"Have Internet Connectivity",value:0.22},
+                    {axis:"Large Screen",value:0.02},
+                    {axis:"Price Of Device",value:0.21},
+                    {axis:"To Be A Smartphone",value:0.50}			
+                    ]
+                ];
+            */
+
+        ////////////////////////////////////////////////////////////// 
+        //////////////////// Draw the Chart ////////////////////////// 
+        ////////////////////////////////////////////////////////////// 
+
+        var color = d3.scaleOrdinal()
+            .range(["#EDC951", "#CC333F", "#00A0B0"]);
+            
+        var radarChartOptions = {
+            w: width,
+            h: height,
+            margin: margin,
+            maxValue: 0.5,
+            levels: 5,
+            roundStrokes: true,
+            color: color
+        };
+
+
+        //Call function to draw the Radar chart
+        RadarChart("#my_radarchart_1", newDataWrapped, radarChartOptions); // MIN
+        RadarChart("#my_radarchart_2", newDataWrapped, radarChartOptions); // MAX
+        RadarChart("#my_radarchart_3", newDataWrapped, radarChartOptions); // AVG
+
+        }); // d3.js
+    }); // fileUrls.forEach
 
 }
 
@@ -180,3 +203,25 @@ d3.select("#regionSelector").on("change", function() {
     updateRadarChart(selectedOption);
     console.log("SELECTED OPTION", selectedOption);
 });
+
+
+function setupChangeListener(selector) {
+    d3.select(selector).on("change", function() {
+        var selectedOption = d3.select("#regionSelector").node().value;
+        //console.log("Selectedoption", selectedOption);
+        updateRadarChart(selectedOption);
+    });
+}
+setupChangeListener("#c_1900");
+setupChangeListener("#c_1910");
+setupChangeListener("#c_1920");
+setupChangeListener("#c_1930");
+setupChangeListener("#c_1940");
+setupChangeListener("#c_1950");
+setupChangeListener("#c_1960");
+setupChangeListener("#c_1970");
+setupChangeListener("#c_1980");
+setupChangeListener("#c_1990");
+setupChangeListener("#c_2000");
+setupChangeListener("#c_2010");
+setupChangeListener("#c_2020");
