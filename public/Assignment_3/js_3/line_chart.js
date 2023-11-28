@@ -117,18 +117,18 @@ function updateLineChart(selectedOption) {
                 return d.Max;
             });
             maxValue = maxColumn[0];
-            console.log("MAX VALUE:", maxValue);
+            // console.log("MAX VALUE:", maxValue);
 
             minColumn = data.map(function(d) {
                 return d.Min;
             });
             minValue = minColumn[0];
-            console.log("MIN VALUE:", minValue);
+            // console.log("MIN VALUE:", minValue);
             first = false;
         }
-        console.log("Index:", index);
-        console.log("MAX VALUE fuori:", maxValue);
-        console.log("MIN VALUE fuori:", minValue);
+        // console.log("Index:", index);
+        // console.log("MAX VALUE fuori:", maxValue);
+        // console.log("MIN VALUE fuori:", minValue);
 
 
         // Filter columns based on checkedValues after removing "c_" prefix
@@ -315,3 +315,6 @@ setupChangeListener("#c_1990");
 setupChangeListener("#c_2000");
 setupChangeListener("#c_2010");
 setupChangeListener("#c_2020");
+
+
+export { updateLineChart };
