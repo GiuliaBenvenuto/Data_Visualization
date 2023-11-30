@@ -2,7 +2,6 @@
 
 function updateLineChart(selectedOption) {
 
-
     // Determine the CSV URL based on the selected option
     var csvURL;
 

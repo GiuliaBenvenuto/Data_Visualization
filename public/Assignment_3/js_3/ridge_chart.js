@@ -13,11 +13,28 @@ var svg = d3.select("#my_ridge_chart")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //read data
-d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.csv", function(data) {
+// d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.csv", function(data) {
+d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vT7i09PlQfdRCQO_lf7mxxei0klpyVkcvb9yssf8WLIHNBwI7FOYKroe4HGzN8aIE7PkkvENGRZMIHv/pub?output=csv", function(data) {
+
 
   // Get the different categories and count them
-  var categories = data.columns
-  var n = categories.length
+  //var categories = data.columns
+  //var n = categories.length
+  
+  // Assuming data is a 2D array or object with columns
+  var categories = data.columns;
+
+  // Find the index of "Months" in the array
+  var monthsIndex = categories.indexOf("Months");
+
+  // Remove "Months", "Min", and "Max" from the array
+  var filteredCategories = categories.slice(0, monthsIndex).concat(categories.slice(monthsIndex + 1, -2));
+
+  var n = filteredCategories.length
+
+  // Now, filteredCategories contains all columns except "Months", "Min", and "Max"
+  console.log("Filtered", filteredCategories);
+
 
   // Add X axis
   var x = d3.scaleLinear()
@@ -34,7 +51,8 @@ d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.c
 
   // Create the Y axis for names
   var yName = d3.scaleBand()
-    .domain(categories)
+    //.domain(categories)
+    .domain(filteredCategories)
     .range([0, height])
     .paddingInner(1)
   svg.append("g")
@@ -44,7 +62,8 @@ d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.c
   var kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(40)) // increase this 40 for more accurate density.
   var allDensity = []
   for (var i = 0; i < n; i++) {
-      var key = categories[i]
+      //var key = categories[i]
+      var key = filteredCategories[i]
       var density = kde( data.map(function(d){  return d[key]; }) )
       allDensity.push({key: key, density: density})
   }
@@ -65,8 +84,9 @@ d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.c
           .y(function(d) { return y(d[1]); })
       )
 
-})
+}) // d3.csv
 
+// -------- FUNCTIONS --------
 // This is what I need to compute kernel density estimation
 function kernelDensityEstimator(kernel, X) {
   return function(V) {
@@ -75,6 +95,8 @@ function kernelDensityEstimator(kernel, X) {
     });
   };
 }
+
+
 function kernelEpanechnikov(k) {
   return function(v) {
     return Math.abs(v /= k) <= 1 ? 0.75 * (1 - v * v) / k : 0;

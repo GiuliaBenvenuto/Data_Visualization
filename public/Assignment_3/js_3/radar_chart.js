@@ -266,3 +266,5 @@ setupChangeListener("#c_1990");
 setupChangeListener("#c_2000");
 setupChangeListener("#c_2010");
 setupChangeListener("#c_2020");
+
+export { updateRadarChart };
