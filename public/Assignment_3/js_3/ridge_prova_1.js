@@ -80,8 +80,8 @@ function updateRidgeChart(selectedOption) {
     d3.select("#my_ridge_chart").selectAll("svg").remove();
 
     // set the dimensions and margins of the graph
-    var margin = {top: 60, right: 30, bottom: 200, left:110},
-        width = 460 - margin.left - margin.right,
+    var margin = {top: 60, right: 200, bottom: 200, left:110},
+        width = 1000 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
@@ -100,6 +100,7 @@ function updateRidgeChart(selectedOption) {
     var maxColumn;
     var minColumn;
     var first = true;
+    //var allDataDict = {};
 
     //read data
     // d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.csv", function(data) {
@@ -149,50 +150,92 @@ function updateRidgeChart(selectedOption) {
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x));
 
-        // Create a Y scale for densities
-        var y = d3.scaleLinear()
-            .domain([0, 0.4])
-            .range([ height, 0]);
-
-        // Create the Y axis for names
-        var yName = d3.scaleBand()
-            //.domain(categories)
-            .domain(filteredCategories)
-            .range([0, height])
-            .paddingInner(1)
-        svg.append("g")
-            .call(d3.axisLeft(yName));
+        var spacing = height / n;
 
         // Compute kernel density estimation for each column:
-        var kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(40)) // increase this 40 for more accurate density.
+        var kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(100)) // increase this 40 for more accurate density.
         var allDensity = []
+        var ymax=0;
         for (var i = 0; i < n; i++) {
-            //var key = categories[i]
+            //var key = categories[i]ù
+            //var keys = index;
             var key = filteredCategories[i]
             var density = kde( data.map(function(d){  return d[key]; }) )
+            let max = d3.max(density, function(d) { return d[1]; });
+            if (max > ymax) {
+                ymax = max;
+            }
             allDensity.push({key: key, density: density})
+            //allDataDict[keys] = allDensity;
             // console.log("Key", key);
             // console.log("Density", density);
         }
 
+        // Create a Y scale for densities
+        var y = d3.scaleLinear()
+        .domain([0, ymax])
+        .range([ spacing, 0]);
+
+        // Create the Y axis for names
+        var yName = d3.scaleBand()
+        //.domain(categories)
+        .domain(filteredCategories)
+        .range([0, height])
+        .paddingInner(1)
+
+        svg.append("g")
+            .call(d3.axisLeft(yName));
+
         // Add areas
-        svg.selectAll("areas")
+      /*  svg.selectAll("areas")
             .data(allDensity)
             .enter()
             .append("path")
             .attr("transform", function(d){return("translate(0," + (yName(d.key)-height) +")" )})
             .datum(function(d){return(d.density)})
-            .attr("fill", "#69b3a2")
+            .attr("fill", function(d, i) {
+                if (index === 0) {
+                    return "#69b3a2"; // First round color
+                } else if (index === 1) {
+                    return "#ff0000"; // Second round color
+                } else {
+                    return "#000000"; // Default color
+                }
+            })
             .attr("stroke", "#000")
             .attr("stroke-width", 1)
+            .attr("opacity", 0.5)
             .attr("d",  d3.line()
                 .curve(d3.curveBasis)
                 .x(function(d) { return x(d[0]); })
                 .y(function(d) { return y(d[1]); })
-            )
-
+            )*/
+            svg.selectAll("areas")
+            .data(allDensity)
+            .enter()
+            .append("path")
+              .attr("transform", d => "translate(0," + (yName(d.key) - spacing) +")" )
+              .attr("fill", function(d, i) {
+                if (index === 0) {
+                    return "#69b3a2"; // First round color
+                } else if (index === 1) {
+                    return "#ff0000"; // Second round color
+                } else {
+                    return "#000000"; // Default color
+                }
+            })
+              .attr("stroke", "#000")
+              .attr("stroke-width", 1)
+              .attr("opacity", 0.5)
+              .attr("d",  d => {
+                let p = d3.line()
+                    .curve(d3.curveBasis)
+                    .x(d => x(d[0]))
+                    .y(d => y(d[1]))(d.density);
+                return p;
+              });
         }) // d3.csv
-    }); // fileUrls.forEach
+        }); // fileUrls.forEach
 
 } // updateRidgeChart
 
