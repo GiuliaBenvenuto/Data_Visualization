@@ -80,9 +80,9 @@ function updateRidgeChart(selectedOption) {
     d3.select("#my_ridge_chart").selectAll("svg").remove();
 
     // set the dimensions and margins of the graph
-    var margin = {top: 60, right: 200, bottom: 200, left:110},
+    var margin = {top: 80, right: 110, bottom: 200, left:110},
         width = 1000 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom;
+        height = 800 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = d3.select("#my_ridge_chart")
@@ -100,7 +100,6 @@ function updateRidgeChart(selectedOption) {
     var maxColumn;
     var minColumn;
     var first = true;
-    //var allDataDict = {};
 
     //read data
     // d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.csv", function(data) {
@@ -156,7 +155,7 @@ function updateRidgeChart(selectedOption) {
         var kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(100)) // increase this 40 for more accurate density.
         var allDensity = []
         var ymax=0;
-        for (var i = 0; i < n; i++) {
+        for (var i = 0; i <= n; i++) {
             //var key = categories[i]ù
             //var keys = index;
             var key = filteredCategories[i]
@@ -178,10 +177,12 @@ function updateRidgeChart(selectedOption) {
 
         // Create the Y axis for names
         var yName = d3.scaleBand()
-        //.domain(categories)
-        .domain(filteredCategories)
-        .range([0, height])
-        .paddingInner(1)
+            .domain(filteredCategories)
+            .range([1, height])
+            .paddingInner(1);
+    
+            
+        console.log("YName", yName);
 
         svg.append("g")
             .call(d3.axisLeft(yName));
@@ -214,26 +215,46 @@ function updateRidgeChart(selectedOption) {
             .data(allDensity)
             .enter()
             .append("path")
-              .attr("transform", d => "translate(0," + (yName(d.key) - spacing) +")" )
+              //.attr("transform", d => "translate(0," + (yName(d.key) - spacing) +")" )
+              .attr("transform", d => {
+                const translateY = yName(d.key);
+                
+                // Check if translateY is a valid number
+                if (isNaN(translateY)) {
+                    // Skip transformation for undefined or non-numeric values
+                    return "";
+                }
+                //console.log("Key:", d.key, "TranslateY:", translateY);
+                // Apply the transformation for valid numeric values
+                return "translate(0," + (translateY - spacing) + ")";
+            })
               .attr("fill", function(d, i) {
                 if (index === 0) {
-                    return "#69b3a2"; // First round color
+                    return "#e41a1c"; // First round color
                 } else if (index === 1) {
-                    return "#ff0000"; // Second round color
+                    return "#377eb8"; // Second round color 377eb8
                 } else {
                     return "#000000"; // Default color
                 }
             })
               .attr("stroke", "#000")
-              .attr("stroke-width", 1)
-              .attr("opacity", 0.5)
+              .attr("stroke-width", 2)
+              .attr("opacity", 0.3)
               .attr("d",  d => {
-                let p = d3.line()
+                let p = d3.area()
                     .curve(d3.curveBasis)
                     .x(d => x(d[0]))
-                    .y(d => y(d[1]))(d.density);
+                    .y0(y(0))
+                    .y1(d => y(d[1]))(d.density);
                 return p;
               });
+        
+                /*.attr("d",  d3.line()
+                    .curve(d3.curveBasis)
+                    .x(function(d) { return x(d[0]); })
+                    .y(function(d) { return y(d[1]); })
+                )*/
+
         }) // d3.csv
         }); // fileUrls.forEach
 
