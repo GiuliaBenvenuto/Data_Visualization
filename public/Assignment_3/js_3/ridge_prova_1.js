@@ -1,6 +1,7 @@
 import { RadarChart } from "./radarChart.js";
 import { updateRadarChart} from "./radar_chart.js";
 import { updateLineChart } from "./line_chart.js";
+import { addTitle } from "../../Assignment_1/js_1/utils.js";
 
 
 function updateRidgeChart(selectedOption) {
@@ -187,6 +188,9 @@ function updateRidgeChart(selectedOption) {
         svg.append("g")
             .call(d3.axisLeft(yName));
 
+
+        addTitle(svg, "Region: " + (selectedOption), "20px", "#404040", width / 2, -50);
+
         // Add areas
       /*  svg.selectAll("areas")
             .data(allDensity)
@@ -224,7 +228,7 @@ function updateRidgeChart(selectedOption) {
                     // Skip transformation for undefined or non-numeric values
                     return "";
                 }
-                //console.log("Key:", d.key, "TranslateY:", translateY);
+                console.log("Key:", d.key, "TranslateY:", translateY);
                 // Apply the transformation for valid numeric values
                 return "translate(0," + (translateY - spacing) + ")";
             })
@@ -237,7 +241,7 @@ function updateRidgeChart(selectedOption) {
                     return "#000000"; // Default color
                 }
             })
-              .attr("stroke", "#000")
+              .attr("stroke", "#000000")
               .attr("stroke-width", 2)
               .attr("opacity", 0.3)
               .attr("d",  d => {
