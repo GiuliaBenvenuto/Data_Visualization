@@ -70,3 +70,9 @@ p, span {
   align-items: center;
   gap: 40px;
 }
+
+
+.chart-title{
+  font-family: 'Fira Sans', sans-serif;
+  margin-top: 10px;
+}
