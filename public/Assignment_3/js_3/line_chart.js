@@ -4,7 +4,7 @@ function updateLineChart(selectedOption) {
 
     // Determine the CSV URL based on the selected option
     var csvURL;
-
+    var plotTitle;
     
     // console.log('PROVA Checked Boxes:', checkedValues);
 
@@ -15,6 +15,7 @@ function updateLineChart(selectedOption) {
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vQxn9gnqzgt3UbgbLBjiV6HoUiTVoqT7_OiUXZm8bqJmRHyPYGNWI-fTJm7m3vWXFPgS6zvagU2lSNO/pub?output=csv",  // MIN
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vTh77p4ddzVOUFcH-kLs_OABWrnYbqVQ8227iLz-TJ-HT-nh300fxCj4pEoul4eFhpMsbrlLru8dVH3/pub?output=csv"   // AVERAGE
         ];
+        plotTitle = "Temperature of West Region";
 
     } else if (selectedOption === "south") {
         // Fatto
@@ -23,6 +24,7 @@ function updateLineChart(selectedOption) {
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vTh1lt6UOPpM1anRHzkahSSIFxJpy3bSAafFSuGeW-LyhzX82H7119YDjlSbBtxqCLlGxnyI4o2w4jJ/pub?output=csv",  // MIN
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsB1b8PUSRRoO4guxJXo-lAYWL17YWAkGZWMP2invr0ou93xxuTwNyTtyWOtqjtySvmz8A-4WSl7ZB/pub?output=csv"   // AVERAGE
         ];
+        plotTitle = "Temperature of South Region";
 
     } else if (selectedOption === "west_north_central") {
         // Fatto
@@ -31,6 +33,7 @@ function updateLineChart(selectedOption) {
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vQqhssGQA5zdupJv-CH2qIkGA7lddgxyM8ZaaiEHUZYBUMWqamJlHGXIK09Mk20vR6kpt8SGI2RIfQ7/pub?output=csv",  // MIN
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vSrSfXy17MSA9xIGVXPm3iRpS5cQazMD330PS1OiNB_gJwXtKGsleYmJtqgoDlJKCFQFU0skeQ2MMkA/pub?output=csv"   // AVERAGE
         ];
+        plotTitle = "Temperature of West North Centeal Region";
 
     } else if (selectedOption === "central") {
         // Fatto
@@ -39,6 +42,7 @@ function updateLineChart(selectedOption) {
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vT5G_yY5VaIl0pqhspkO6w60fITojpIro8K0f0GvVc5-BuT6Zc5Vcqr68ukbxZMRDoi509hafwe_Rxz/pub?output=csv",  // MIN
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vR7dErpzPJi7QYP_rV-EDj2VvGMKpJMY_qQonUx5fbBelN0LlfWMlZY5TgMevdAiu0cFgDHfrB57Hl0/pub?output=csv"   // AVERAGE
         ];
+        plotTitle = "Temperature of Central Region";
 
     } else if (selectedOption === "east_north_central") {
         // Fatto
@@ -47,6 +51,7 @@ function updateLineChart(selectedOption) {
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vR6FufvKS2ZrtKkOlbFcPjKyv8Fk1BSaVSagoyc50RVj06B69yfoo0s__nJ54qZeCqLjtWA5Y6PWdss/pub?output=csv",  // MIN
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vTioWe7PZVx1g95e0dS-sT9f1TdfhIi6QJYszq86e0hJRfX1OO53DxY6xmjeub5HffJ8iTnbaQJOrv6/pub?output=csv"   // AVERAGE
         ];
+        plotTitle = "Temperature of East North Central Region";
 
     } else if (selectedOption === "northwest") {
         // Fatto
@@ -55,6 +60,7 @@ function updateLineChart(selectedOption) {
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXbVuWs-GOERVB42wpcsn5LptbNbGFyshFJ0T623jfDFCyDvx53IEuekssDqioKJTDhbSGceI_iWU8/pub?output=csv",  // Link sbagliato MIN
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vR4F5h8MeVc3L9p5suFguPDwrQIr2fRyvEE5FWajRyzMT0tEqycwLWXgf_D_8UviOlyqzKRgazR7xyG/pub?output=csv"   // AVERAGE
         ];
+        plotTitle = "Temperature of Northwest Region";
 
     } else if (selectedOption === "northeast") {
         // Fatto
@@ -63,6 +69,7 @@ function updateLineChart(selectedOption) {
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnmlIye4MkEros8bfmWUs89oivB1GlpDprG_UG2g2gMtLgHtVFE-y2jLGRv2-mg96nECkslBAWCfUt/pub?output=csv",  // MIN
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkI2mVHQ4Y5GE50WgkMfEUQb_nU9FXORHSqgNVmKpGohjHf5OvnAoTkrGL9uLeFAiOHTCV0ytaddmy/pub?output=csv"   // AVERAGE
         ];
+        plotTitle = "Temperature of Northeast Region";
 
     } else if (selectedOption === "southwest") {
 
@@ -71,6 +78,7 @@ function updateLineChart(selectedOption) {
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vQclI4EUDKpRCI--zmkpR6WAFDFu9qYqzd2IsARXLDayZLjFHA5GUi3nLyg9x2-ugbXGQrxjzEMLuhZ/pub?output=csv",  // MIN
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vTWHBNsk_xXCQ-39hqsbT0pZZp57KilU8bczOSRXDEFtTXNJkBElrvZlTBE6E7m2ZGthA2QcbnhmmEW/pub?output=csv"   // AVERAGE
         ];
+        plotTitle = "Temperature of Southwest Region";
 
     } else if (selectedOption === "southeast") {
 
@@ -79,6 +87,7 @@ function updateLineChart(selectedOption) {
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vQK5R17QdSa22BHCdWZoK5hv8ZazEsZrPa6C-DRX30cKj0yYkg0ToRUZC7RN9cIxrABluVO8KXgUA9F/pub?output=csv",  // MIN
             "https://docs.google.com/spreadsheets/d/e/2PACX-1vRupRVGRHK2A20dXoXFUUr8y3EYtKR7Z9q3eBpJEVO9CuDVMl8k8hnOQp1qCzPhdjuayjYU0DGdAqhX/pub?output=csv"   // AVERAGE
         ];
+        plotTitle = "Temperature of Southeast Region";
 
     }
 
@@ -86,9 +95,9 @@ function updateLineChart(selectedOption) {
     d3.select("#my_dataviz").selectAll("svg").remove();
 
     // set the dimensions and margins of the graph
-    var margin = {top: 50, right: 30, bottom: 30, left: 60},
-    width = 800 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    var margin = {top: 80, right: 50, bottom: 30, left: 50},
+    width = 1000 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = d3.select("#my_dataviz")
@@ -125,9 +134,6 @@ function updateLineChart(selectedOption) {
             // console.log("MIN VALUE:", minValue);
             first = false;
         }
-        // console.log("Index:", index);
-        // console.log("MAX VALUE fuori:", maxValue);
-        // console.log("MIN VALUE fuori:", minValue);
 
 
         // Filter columns based on checkedValues after removing "c_" prefix
@@ -144,7 +150,16 @@ function updateLineChart(selectedOption) {
             .key(function(d) { return d.name;})
             .entries(data);
 
-        
+        // Add a title to the chart
+        svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", -35)
+        .attr("text-anchor", "middle")
+        .style("font-size", "20px")
+        .style("fill", "#404040")
+        .style("font-family", "'Fira Sans', sans-serif")
+        .text(plotTitle + "in years: " + filteredColumns.join(", "));
+
 
         // X - axis
         var x = d3.scalePoint()
@@ -156,25 +171,7 @@ function updateLineChart(selectedOption) {
             .append("g")
             .attr("transform", "translate(0," + height + ")")      // This controls the vertical position of the Axis
             .call(d3.axisBottom(x));
-        
-
-        /* Y axis
-        // Extract all column names except the first one ("Months")
-        var columns = Object.keys(data[0]).slice(0);
-        // console.log(columns);
-
-        // Extract all values from the selected columns
-        var allValues = data.reduce(function(acc, d) {
-            columns.forEach(function(column) {
-            acc.push(+d[column]);
-            });
-            return acc;
-        }, []);
-        // console.log(allValues);
-
-        // Find the maximum value across all columns
-        var maxValue = d3.max(allValues);
-        // console.log(maxValue); */
+    
 
         // Define the y-scale using the calculated maximum value
         var y = d3.scaleLinear()
@@ -185,18 +182,11 @@ function updateLineChart(selectedOption) {
         svg.append("g")
             .call(d3.axisLeft(y));
 
-        /* color palette
-        var res = sumstat.map(function(d){ return d.key }) // list of group names
-        var color = d3.scaleOrdinal()
-            .domain(res)
-            .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999'])
-        */
 
         var color = d3.scaleOrdinal()
             .domain(fileUrls)
             .range(['#e41a1c', '#4daf4a', '#377eb8']); // Red, Green, Blue
 
-            
             
         var tooltip = d3.select('body')
             .append("div")
