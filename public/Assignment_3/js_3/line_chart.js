@@ -5,18 +5,18 @@ function updateLineChart(selectedOption) {
     
     // Colors for each year
     const yearColorDictionary = {
-        "1900": "#a6cee3", 
+        "1900": "#30B7EB", 
         "1910": "#1f78b4", 
         "1920": "#90e148",
         "1930": "#33a02c", 
         "1940": "#fb9a99", 
-        "1950": "#fb9a99",
-        "1960": "#e31a1c", 
-        "1970": "#fdbf6f", 
-        "1980": "#ff7f00",
-        "1990": "#cab2d6",
+        "1950": "#e31a1c",
+        "1960": "#bc7bff", 
+        "1970": "#ff7f00", 
+        "1980": "#40E0D0",
+        "1990": "#FB1DAC",
         "2000": "#6a3d9a",
-        "2010": "#ffff99",
+        "2010": "#6A7782",
         "2020": "#b15928"
         // Add more years and hex color codes as needed
       };
@@ -115,7 +115,7 @@ function updateLineChart(selectedOption) {
     d3.select("#my_dataviz").selectAll("svg").remove();
 
     // set the dimensions and margins of the graph
-    var margin = {top: 80, right: 50, bottom: 30, left: 50},
+    var margin = {top: 80, right: 80, bottom: 30, left: 80},
     width = 1000 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -127,6 +127,44 @@ function updateLineChart(selectedOption) {
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
+
+    // Legend
+    // Create a legend container
+    var legend = svg.append("g")
+        .attr("class", "legend")
+        .attr("transform", "translate(" + (width + 20) + ", 20)"); // Adjust the translation as needed
+
+        // Function to update the legend based on the selected years
+    function updateLegend(selectedYears) {
+        // Remove existing legend items
+        legend.selectAll("*").remove();
+
+        // Add a colored square and text for each selected year
+        var legendItems = legend.selectAll(".legend-item")
+            .data(selectedYears)
+            .enter().append("g")
+            .attr("class", "legend-item")
+            .attr("transform", function(d, i) {
+                return "translate(0, " + (i * 20) + ")";
+            });
+
+        legendItems.append("rect")
+            .attr("width", 15)
+            .attr("height", 15)
+            .style("fill", function(d) {
+                return yearColorDictionary[d];
+            });
+
+        legendItems.append("text")
+            .attr("x", 20)
+            .attr("y", 10)
+            .attr("dy", ".35em")
+            .style("text-anchor", "start")
+            .text(function(d) {
+                return d;
+            });
+    }
+
 
     var maxValue = 0.0;
     var minValue = 0.0;
@@ -145,12 +183,14 @@ function updateLineChart(selectedOption) {
                 return d.Max;
             });
             maxValue = maxColumn[0];
+            maxValue = parseFloat(maxValue);
             // console.log("MAX VALUE:", maxValue);
 
             minColumn = data.map(function(d) {
                 return d.Min;
             });
             minValue = minColumn[0];
+            minValue = parseFloat(minValue);
             // console.log("MIN VALUE:", minValue);
             first = false;
         }
@@ -164,6 +204,14 @@ function updateLineChart(selectedOption) {
         });
         // console.log("FILTERED:", filteredColumns);
 
+        // Update legend with the current set of selected years
+        updateLegend(filteredColumns);
+
+        // NEW
+        // Assign colors to lines based on the yearColorDictionary
+        var lineColors = filteredColumns.map(function(year) {
+            return yearColorDictionary[year];
+        });
 
         // group the data: I want to draw one line per group
         var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
@@ -195,18 +243,35 @@ function updateLineChart(selectedOption) {
 
         // Define the y-scale using the calculated maximum value
         var y = d3.scaleLinear()
-            .domain([minValue, maxValue])
+            .domain([minValue, maxValue +5])
             .range([height, 0]);
 
         // Append the y-axis to the SVG
         svg.append("g")
             .call(d3.axisLeft(y));
 
+            // Add horizontal grid lines
+        // Add horizontal grid lines
+svg.append("g")
+.attr("class", "grid")
+.call(d3.axisLeft(y)
+    .tickSize(-width)
+    .tickFormat("")
+    .tickSizeOuter(0) // Exclude the outer tick at the top
+);
 
+// Style the grid lines
+svg.selectAll(".grid line")
+.style("stroke", "#ccc")  // Grey color
+.style("stroke-dasharray", "3 3")  // Dashed line
+.style("opacity", 0.5);  // Opacity 
+            
+
+        /*
         var color = d3.scaleOrdinal()
             .domain(fileUrls)
             .range(['#e41a1c', '#4daf4a', '#377eb8']); // Red, Green, Blue
-
+        */
             
         var tooltip = d3.select('body')
             .append("div")
@@ -221,7 +286,7 @@ function updateLineChart(selectedOption) {
             .style("color", "#333"); // Use a dark grey color for the text
 
 
-        // Draw the line
+        /* Draw the line
         svg.selectAll(".line")
             .data(filteredColumns) // Use the filtered columns as the data
             .enter()
@@ -233,7 +298,8 @@ function updateLineChart(selectedOption) {
 
                 // CHANGE HERE
                 // return yearColorDictionary[filteredColumns[index]];
-                return color(fileUrls[index]);
+                // return color(fileUrls[index]);
+                return lineColors[i];
             })
             .attr("stroke-width", 1.8)
             .attr("d", function(column) {
@@ -243,6 +309,31 @@ function updateLineChart(selectedOption) {
                     (data.filter(function(d) {
                         return filteredColumns.includes(column); // Filter the data to include only the selected columns
                     }));
+            })*/
+
+        svg.selectAll(".line")
+            .data(filteredColumns)
+            .enter()
+            .append("path")
+            .attr("fill", "none")
+            .attr("stroke", function (column, i) {
+                // Use the color scale to assign color based on file URL index
+                return lineColors[i];
+            })
+            .attr("stroke-dasharray", function (column, i) {
+                return index === 2 ? "5,5" : "none";
+            })
+            .attr("stroke-width", 1.8)
+            .attr("d", function (column) {
+                return d3.line()
+                    .x(function (d) { return x(d.Months); })
+                    .y(function (d) { return y(+d[column]); })
+                    (data.filter(function (d) {
+                        return filteredColumns.includes(column);
+                    }));
+            })
+            .style("stroke-linecap", function () {
+                return index === 2 ? "round" : "butt";
             })
 
         .each(function (d, i) {
@@ -255,7 +346,8 @@ function updateLineChart(selectedOption) {
             .attr("cx", function (row) { return x(row.Months); })
             .attr("cy", function (row) { return y(+row[d]); })
             .attr("r", 4)
-            .attr("fill", color(fileUrls[index]))
+            //.attr("fill", color(fileUrls[index]))
+            .attr("fill", lineColors[i])
             .attr("stroke", "#fff") // Add a white stroke for better visibility
 
             .on("mouseover", function (row) {
@@ -267,10 +359,7 @@ function updateLineChart(selectedOption) {
                     "<span style='color: #333;'> <strong>" + getLabel(index) + "</strong></span><br>" +
                     "</div>" +
                     "<span style='color: #333;'> <strong>Value: </strong> " + row[d] + "</span><br>" +
-                    
                     "<span style='color: #333;'> <strong>Month: </strong> " + row.Months + "</span><br>" 
-                
-
                 )
                 .style("left", (d3.event.pageX + 10) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
