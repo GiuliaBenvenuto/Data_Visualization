@@ -1,6 +1,26 @@
 // https://docs.google.com/spreadsheets/d/e/2PACX-1vT7i09PlQfdRCQO_lf7mxxei0klpyVkcvb9yssf8WLIHNBwI7FOYKroe4HGzN8aIE7PkkvENGRZMIHv/pub?output=csv
 
+
 function updateLineChart(selectedOption) {
+    
+    // Colors for each year
+    const yearColorDictionary = {
+        "1900": "#a6cee3", 
+        "1910": "#1f78b4", 
+        "1920": "#90e148",
+        "1930": "#33a02c", 
+        "1940": "#fb9a99", 
+        "1950": "#fb9a99",
+        "1960": "#e31a1c", 
+        "1970": "#fdbf6f", 
+        "1980": "#ff7f00",
+        "1990": "#cab2d6",
+        "2000": "#6a3d9a",
+        "2010": "#ffff99",
+        "2020": "#b15928"
+        // Add more years and hex color codes as needed
+      };
+
 
     // Determine the CSV URL based on the selected option
     var csvURL;
@@ -210,6 +230,9 @@ function updateLineChart(selectedOption) {
             //.attr("stroke", function(column) { return color(column); })
             .attr("stroke", function (column, i) {
                 // Use the color scale to assign color based on file URL index
+
+                // CHANGE HERE
+                // return yearColorDictionary[filteredColumns[index]];
                 return color(fileUrls[index]);
             })
             .attr("stroke-width", 1.8)
@@ -244,8 +267,10 @@ function updateLineChart(selectedOption) {
                     "<span style='color: #333;'> <strong>" + getLabel(index) + "</strong></span><br>" +
                     "</div>" +
                     "<span style='color: #333;'> <strong>Value: </strong> " + row[d] + "</span><br>" +
-                    "<span style='color: #333;'> <strong>Month: </strong> " + row.Months + "</span><br>" 
                     
+                    "<span style='color: #333;'> <strong>Month: </strong> " + row.Months + "</span><br>" 
+                
+
                 )
                 .style("left", (d3.event.pageX + 10) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");

@@ -179,20 +179,6 @@ function updateRadarChart(selectedOption) {
                 tmp = [];
             }
 
-            /*
-            var data = [
-                    [//iPhone
-                    {axis:"Battery Life",value:0.22},
-                    {axis:"Brand",value:0.28},
-                    {axis:"Contract Cost",value:0.29},
-                    {axis:"Design And Quality",value:0.17},
-                    {axis:"Have Internet Connectivity",value:0.22},
-                    {axis:"Large Screen",value:0.02},
-                    {axis:"Price Of Device",value:0.21},
-                    {axis:"To Be A Smartphone",value:0.50}			
-                    ]
-                ];
-            */
 
         ////////////////////////////////////////////////////////////// 
         //////////////////// Draw the Chart ////////////////////////// 
@@ -208,6 +194,7 @@ function updateRadarChart(selectedOption) {
             margin: margin,
             // maxValue: 0.5,
             maxValue: max_value,
+            minValue: min_value,
             levels: 5,
             roundStrokes: true,
             // color: color
