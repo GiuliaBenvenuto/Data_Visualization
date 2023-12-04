@@ -22,8 +22,6 @@ function updateLineChart(selectedOption) {
       };
 
 
-    // Determine the CSV URL based on the selected option
-    var csvURL;
     var plotTitle;
     
     // console.log('PROVA Checked Boxes:', checkedValues);

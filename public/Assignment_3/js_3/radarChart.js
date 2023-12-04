@@ -6,6 +6,8 @@
 /////////////////////////////////////////////////////////
 	
 function RadarChart(id, data, options) {
+
+
 	var cfg = {
 	 w: 600,				//Width of the circle
 	 h: 600,				//Height of the circle
@@ -21,7 +23,8 @@ function RadarChart(id, data, options) {
 	 strokeWidth: 2, 		//The width of the stroke around each blob
 	 roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
 	 //color: d3.scale.category10()	//Color function
-     color: d3.scaleOrdinal(d3.schemeCategory10)
+     //color: d3.scaleOrdinal(d3.schemeCategory10)
+	 //color: d3.scaleOrdinal().range(lineColors)
 	};
 	
 	//Put all of the options into a variable called cfg
@@ -57,7 +60,6 @@ function RadarChart(id, data, options) {
 	d3.select(id).select("svg").remove();
 	
 	//Initiate the radar chart SVG
-    // var svg = d3.select("#my_radarchart_1")
 	var svg = d3.select(id)
             .append("svg")
 			.attr("width",  cfg.w + cfg.margin.left + cfg.margin.right)
@@ -145,17 +147,11 @@ function RadarChart(id, data, options) {
 	/////////////////////////////////////////////////////////
 	
 	//The radial line function
-	// var radarLine = d3.svg.line.radial()
     var radarLine = d3.lineRadial()
-		//.interpolate("linear-closed")
         .curve(d3.curveLinearClosed)
 		.radius(function(d) { return rScale(d.value); })
 		.angle(function(d,i) {	return i*angleSlice; });
 
-	/*
-	if(cfg.roundStrokes) {
-		radarLine.interpolate("cardinal-closed");
-	}*/
 
     if (cfg.roundStrokes) {
         radarLine.curve(d3.curveCardinalClosed);
@@ -191,6 +187,7 @@ function RadarChart(id, data, options) {
 				.style("fill-opacity", cfg.opacityArea);
 		});
 		
+	
 	//Create the outlines	
 	blobWrapper.append("path")
 		.attr("class", "radarStroke")
@@ -208,7 +205,7 @@ function RadarChart(id, data, options) {
 		.attr("r", cfg.dotRadius)
 		.attr("cx", function(d,i){ return rScale(d.value) * Math.cos(angleSlice*i - Math.PI/2); })
 		.attr("cy", function(d,i){ return rScale(d.value) * Math.sin(angleSlice*i - Math.PI/2); })
-		.style("fill", function(d,i,j) { return cfg.color(j); })
+		.style("fill", function(d,i,j) { console.log("Color: ", cfg.color(j)); return cfg.color(d); })		
 		.style("fill-opacity", 0.8);
 
 	/////////////////////////////////////////////////////////

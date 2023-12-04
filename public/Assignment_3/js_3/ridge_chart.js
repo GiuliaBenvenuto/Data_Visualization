@@ -5,11 +5,6 @@ import { updateLineChart } from "./line_chart.js";
 
 function updateRidgeChart(selectedOption) {
 
-    // Determine the CSV URL based on the selected option
-    var csvURL;
-
-    
-    // console.log('PROVA Checked Boxes:', checkedValues);
 
     if (selectedOption === "west") {
         // Fatto
@@ -94,15 +89,13 @@ function updateRidgeChart(selectedOption) {
             "translate(" + margin.left + "," + margin.top + ")");
 
 
-
     var max_value = 0.0;
     var min_value = 0.0;
     var maxColumn;
     var minColumn;
     var first = true;
 
-    //read data
-    // d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.csv", function(data) {
+
     fileUrls.forEach(function(fileUrl, index) {
         d3.csv(fileUrl, function(data) {
 
@@ -113,22 +106,13 @@ function updateRidgeChart(selectedOption) {
             max_value = maxColumn[0];
             max_value = parseFloat(max_value);
 
-            //console.log("MAX VALUE:", max_value);
-            //console.log("MAX type:", typeof max_value);
-
             minColumn = data.map(function(d) {
                 return d.Min;
             });
             min_value = minColumn[0];
             min_value = parseFloat(min_value);
-            //console.log("MIN VALUE:", min_value);
-            //console.log("MIN type:", typeof min_value);
             first = false;
         }
-
-        // Get the different categories and count them
-        //var categories = data.columns
-        //var n = categories.length
         
         // Assuming data is a 2D array or object with columns
         var categories = data.columns;

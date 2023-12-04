@@ -74,5 +74,6 @@ p, span {
 
 .chart-title{
   font-family: 'Fira Sans', sans-serif;
+  font-size: 20px;
   margin-top: 10px;
 }
