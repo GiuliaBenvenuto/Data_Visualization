@@ -6,8 +6,23 @@ import { updateLineChart } from "./line_chart.js";
     ////////////////////////////////////////////////////////////// 
 function updateRadarChart(selectedOption) {
 
-    // Determine the CSV URL based on the selected option
-    var csvURL;
+    // Colors for each year
+    const yearColorDictionary = {
+        "1900": "#30B7EB", 
+        "1910": "#1f78b4", 
+        "1920": "#90e148",
+        "1930": "#33a02c", 
+        "1940": "#fb9a99", 
+        "1950": "#e31a1c",
+        "1960": "#bc7bff", 
+        "1970": "#ff7f00", 
+        "1980": "#40E0D0",
+        "1990": "#FB1DAC",
+        "2000": "#6a3d9a",
+        "2010": "#6A7782",
+        "2020": "#b15928"
+        // Add more years and hex color codes as needed
+      };
     
     console.log('PROVA Checked Boxes:', checkedValues);
 
@@ -86,7 +101,7 @@ function updateRadarChart(selectedOption) {
     }
 
 
-    var margin = {top: 100, right: 100, bottom: 100, left: 100},
+    var margin = {top: 80, right: 100, bottom: 100, left: 100},
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
         //console.log("WIDTH", window.innerWidth);
@@ -125,9 +140,6 @@ function updateRadarChart(selectedOption) {
                 return d.Months;
             });
 
-            // Now, monthsColumn contains an array of values from the "Months" column
-            // console.log(monthsColumn);
-
 
             // Filter columns based on checkedValues after removing "c_" prefix
             var filteredColumns = checkedValues.map(function(column) {
@@ -138,10 +150,12 @@ function updateRadarChart(selectedOption) {
             // console.log("Column names:", filteredColumns);
 
 
-            /* Extract values from the "1900" column (second column)
-            var column1900 = data.map(function(d) {
-                return d["1900"];
-            });*/
+            // NEW
+            // Assign colors to lines based on the yearColorDictionary
+            var lineColors = filteredColumns.map(function(year) {
+                return yearColorDictionary[year];
+            });
+
 
             var colonne = [];
             for (var j = 0; j < filteredColumns.length; j++) {
@@ -150,11 +164,6 @@ function updateRadarChart(selectedOption) {
                 });
 
             }
-            //console.log("COLONNE", colonne);
-            //console.log("length", colonne.length);
-
-            // Now, column1900 contains an array of values from the "1900" column
-            // console.log(column1900);
 
             // Create an array to store the new format of data
             var newData = [];
@@ -179,28 +188,15 @@ function updateRadarChart(selectedOption) {
                 tmp = [];
             }
 
-            /*
-            var data = [
-                    [//iPhone
-                    {axis:"Battery Life",value:0.22},
-                    {axis:"Brand",value:0.28},
-                    {axis:"Contract Cost",value:0.29},
-                    {axis:"Design And Quality",value:0.17},
-                    {axis:"Have Internet Connectivity",value:0.22},
-                    {axis:"Large Screen",value:0.02},
-                    {axis:"Price Of Device",value:0.21},
-                    {axis:"To Be A Smartphone",value:0.50}			
-                    ]
-                ];
-            */
 
         ////////////////////////////////////////////////////////////// 
         //////////////////// Draw the Chart ////////////////////////// 
         ////////////////////////////////////////////////////////////// 
 
-        
+        /*
         var color = d3.scaleOrdinal()
             .range(["#EDC951", "#CC333F", "#00A0B0"]);
+            */
             
         var radarChartOptions = {
             w: width,
@@ -208,11 +204,17 @@ function updateRadarChart(selectedOption) {
             margin: margin,
             // maxValue: 0.5,
             maxValue: max_value,
+            minValue: min_value,
             levels: 5,
             roundStrokes: true,
-            // color: color
+            color : function(i) {
+                return lineColors[i];
+            }
+            //color: color
+            // color: function() {}
         };
 
+        
         var id = "";
         if(index === 0) {
             id = "#my_radarchart_3";
@@ -223,9 +225,7 @@ function updateRadarChart(selectedOption) {
         }
 
         //Call function to draw the Radar chart
-        RadarChart(id, newData, radarChartOptions); // MIN
-        //RadarChart("#my_radarchart_2", newData, radarChartOptions); // MAX
-        //RadarChart("#my_radarchart_3", newData, radarChartOptions); // AVG
+        RadarChart(id, newData, radarChartOptions); 
 
         }); // d3.js
     }); // fileUrls.forEach

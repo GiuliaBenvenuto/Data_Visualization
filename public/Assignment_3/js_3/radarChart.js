@@ -6,12 +6,15 @@
 /////////////////////////////////////////////////////////
 	
 function RadarChart(id, data, options) {
+
+
 	var cfg = {
 	 w: 600,				//Width of the circle
 	 h: 600,				//Height of the circle
 	 margin: {top: 20, right: 20, bottom: 20, left: 20}, //The margins of the SVG
 	 levels: 3,				//How many levels or inner circles should there be drawn
 	 maxValue: 0, 			//What is the value that the biggest circle will represent
+	 minValue: 0, 			
 	 labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
 	 wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
 	 opacityArea: 0.35, 	//The opacity of the area of the blob
@@ -20,7 +23,8 @@ function RadarChart(id, data, options) {
 	 strokeWidth: 2, 		//The width of the stroke around each blob
 	 roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
 	 //color: d3.scale.category10()	//Color function
-     color: d3.scaleOrdinal(d3.schemeCategory10)
+     //color: d3.scaleOrdinal(d3.schemeCategory10)
+	 //color: d3.scaleOrdinal().range(lineColors)
 	};
 	
 	//Put all of the options into a variable called cfg
@@ -32,19 +36,20 @@ function RadarChart(id, data, options) {
 	
 	//If the supplied maxValue is smaller than the actual one, replace by the max in the data
 	var maxValue = Math.max(cfg.maxValue, d3.max(data, function(i){return d3.max(i.map(function(o){return o.value;}))}));
+	var minValue = Math.min(cfg.minValue, d3.min(data, function(i){return d3.min(i.map(function(o){return o.value;}))}));
     
     
 	var allAxis = (data[0].map(function(i, j){return i.axis})),	//Names of each axis
 		total = allAxis.length,					//The number of different axes
 		radius = Math.min(cfg.w/2, cfg.h/2), 	//Radius of the outermost circle
-		Format = d3.format('%'),			 	//Percentage formatting
+		Format = d3.format('.1f'),			 	//Percentage formatting
 		angleSlice = Math.PI * 2 / total;		//The width in radians of each "slice"
 	
 	//Scale for the radius
 	// var rScale = d3.scale.linear()
     var rScale = d3.scaleLinear()
 		.range([0, radius])
-		.domain([0, maxValue]);
+		.domain([minValue, maxValue]);
 
 		
 	/////////////////////////////////////////////////////////
@@ -55,7 +60,6 @@ function RadarChart(id, data, options) {
 	d3.select(id).select("svg").remove();
 	
 	//Initiate the radar chart SVG
-    // var svg = d3.select("#my_radarchart_1")
 	var svg = d3.select(id)
             .append("svg")
 			.attr("width",  cfg.w + cfg.margin.left + cfg.margin.right)
@@ -95,7 +99,7 @@ function RadarChart(id, data, options) {
 		.style("fill-opacity", cfg.opacityCircles)
 		.style("filter" , "url(#glow)");
 
-	//Text indicating at what % each level is
+	/*Text indicating at what % each level is
 	axisGrid.selectAll(".axisLabel")
 	   .data(d3.range(1,(cfg.levels+1)).reverse())
 	   .enter().append("text")
@@ -105,7 +109,7 @@ function RadarChart(id, data, options) {
 	   .attr("dy", "0.4em")
 	   .style("font-size", "10px")
 	   .attr("fill", "#737373")
-	   .text(function(d,i) { return Format(maxValue * d/cfg.levels); });
+	   .text(function(d,i) { return Format(maxValue * d/cfg.levels); });*/
 
 	/////////////////////////////////////////////////////////
 	//////////////////// Draw the axes //////////////////////
@@ -143,17 +147,11 @@ function RadarChart(id, data, options) {
 	/////////////////////////////////////////////////////////
 	
 	//The radial line function
-	// var radarLine = d3.svg.line.radial()
     var radarLine = d3.lineRadial()
-		//.interpolate("linear-closed")
         .curve(d3.curveLinearClosed)
 		.radius(function(d) { return rScale(d.value); })
 		.angle(function(d,i) {	return i*angleSlice; });
 
-	/*
-	if(cfg.roundStrokes) {
-		radarLine.interpolate("cardinal-closed");
-	}*/
 
     if (cfg.roundStrokes) {
         radarLine.curve(d3.curveCardinalClosed);
@@ -189,6 +187,7 @@ function RadarChart(id, data, options) {
 				.style("fill-opacity", cfg.opacityArea);
 		});
 		
+	
 	//Create the outlines	
 	blobWrapper.append("path")
 		.attr("class", "radarStroke")
@@ -206,7 +205,7 @@ function RadarChart(id, data, options) {
 		.attr("r", cfg.dotRadius)
 		.attr("cx", function(d,i){ return rScale(d.value) * Math.cos(angleSlice*i - Math.PI/2); })
 		.attr("cy", function(d,i){ return rScale(d.value) * Math.sin(angleSlice*i - Math.PI/2); })
-		.style("fill", function(d,i,j) { return cfg.color(j); })
+		.style("fill", function(d,i,j) { console.log("Color: ", cfg.color(j)); return cfg.color(d); })		
 		.style("fill-opacity", 0.8);
 
 	/////////////////////////////////////////////////////////
@@ -236,7 +235,7 @@ function RadarChart(id, data, options) {
 			tooltip
 				.attr('x', newX)
 				.attr('y', newY)
-				.text(Format(d.value))
+				.text(Format(d.value) + "°C")
 				.transition().duration(200)
 				.style('opacity', 1);
 		})
