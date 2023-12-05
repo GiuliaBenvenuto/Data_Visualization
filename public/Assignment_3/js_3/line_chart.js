@@ -3,7 +3,7 @@
 
 function updateLineChart(selectedOption) {
     
-    // Colors for each year
+    /* Colors for each year
     const yearColorDictionary = {
         "1900": "#30B7EB", 
         "1910": "#1f78b4", 
@@ -19,7 +19,24 @@ function updateLineChart(selectedOption) {
         "2010": "#6A7782",
         "2020": "#b15928"
         // Add more years and hex color codes as needed
+      };*/
+      const yearColorDictionary = {
+        "1900": "#402365",  
+        "1910": "#6A4C93",
+        "1920": "#4267AC", 
+        "1930": "#1982C4", 
+        "1940": "#52A675", 
+        "1950": "#8AC926",
+        "1960": "#C5CA30", 
+        "1970": "#FFCA3A", 
+        "1980": "#FFAE43",
+        "1990": "#FF924C",
+        "2000": "#FF595E", 
+        "2010": "#FD0A13",
+        "2020": "#9d0208"  
       };
+      
+      
 
 
     var plotTitle;
@@ -151,7 +168,9 @@ function updateLineChart(selectedOption) {
             .attr("height", 15)
             .style("fill", function(d) {
                 return yearColorDictionary[d];
-            });
+            })
+            .style("stroke", "black") // Add black border
+            .style("stroke-width", 1);
 
         legendItems.append("text")
             .attr("x", 20)
@@ -216,16 +235,33 @@ function updateLineChart(selectedOption) {
             .key(function(d) { return d.name;})
             .entries(data);
 
-        // Add a title to the chart
+
         svg.append("text")
         .attr("x", width / 2)
         .attr("y", -35)
         .attr("text-anchor", "middle")
         .style("font-size", "20px")
-        .style("fill", "#404040")
         .style("font-family", "'Fira Sans', sans-serif")
-        .text(plotTitle + "in years: " + filteredColumns.join(", "));
+        .text(plotTitle + "in years: ")
+        .selectAll("tspan")
+        .data(filteredColumns)
+        .enter()
+        .append("tspan")
+        .text(function (d, i) {
+            return i > 0 ? ", " : ""; // Add comma for all elements except the first
+        })
+        .style("fill", "black") // Set color of the comma to black
+        .append("tspan") // Create a new tspan for the year
+        .text(function (d) {
+            return d;
+        })
+        .style("fill", function (d, i) {
+            return lineColors[i]; // Set color of the year based on lineColors
+        });
 
+
+        
+        
 
         // X - axis
         var x = d3.scalePoint()
@@ -354,7 +390,7 @@ svg.selectAll(".grid line")
                     .style("opacity", 0.9);
                 tooltip.html(
                     "<div style='text-align: center;'>" +
-                    "<span style='color: #333;'> <strong>" + getLabel(index) + "</strong></span><br>" +
+                    "<span style='font-size: 18px; color: " + lineColors[i] + ";'> <strong>" + getLabel(index) + "</strong></span><br>" +
                     "</div>" +
                     "<span style='color: #333;'> <strong>Value: </strong> " + row[d] + "</span><br>" +
                     "<span style='color: #333;'> <strong>Month: </strong> " + row.Months + "</span><br>" 
@@ -369,6 +405,7 @@ svg.selectAll(".grid line")
             });
 
         });
+
 
         // Function to get the label based on the index
         function getLabel(index) {
@@ -416,6 +453,8 @@ setupChangeListener("#c_1990");
 setupChangeListener("#c_2000");
 setupChangeListener("#c_2010");
 setupChangeListener("#c_2020");
+
+
 
 
 export { updateLineChart };

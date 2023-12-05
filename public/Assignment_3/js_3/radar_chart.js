@@ -6,7 +6,7 @@ import { updateLineChart } from "./line_chart.js";
     ////////////////////////////////////////////////////////////// 
 function updateRadarChart(selectedOption) {
 
-    // Colors for each year
+    /* Colors for each year
     const yearColorDictionary = {
         "1900": "#30B7EB", 
         "1910": "#1f78b4", 
@@ -22,6 +22,22 @@ function updateRadarChart(selectedOption) {
         "2010": "#6A7782",
         "2020": "#b15928"
         // Add more years and hex color codes as needed
+      }; */
+
+      const yearColorDictionary = {
+        "1900": "#402365",  
+        "1910": "#6A4C93",
+        "1920": "#4267AC", 
+        "1930": "#1982C4", 
+        "1940": "#52A675", 
+        "1950": "#8AC926",
+        "1960": "#C5CA30", 
+        "1970": "#FFCA3A", 
+        "1980": "#FFAE43",
+        "1990": "#FF924C",
+        "2000": "#FF595E", 
+        "2010": "#FD0A13",
+        "2020": "#9d0208"  
       };
     
     console.log('PROVA Checked Boxes:', checkedValues);

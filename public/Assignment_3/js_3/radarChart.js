@@ -187,7 +187,7 @@ function RadarChart(id, data, options) {
 				.style("fill-opacity", cfg.opacityArea);
 		});
 		
-	
+
 	//Create the outlines	
 	blobWrapper.append("path")
 		.attr("class", "radarStroke")
@@ -205,7 +205,9 @@ function RadarChart(id, data, options) {
 		.attr("r", cfg.dotRadius)
 		.attr("cx", function(d,i){ return rScale(d.value) * Math.cos(angleSlice*i - Math.PI/2); })
 		.attr("cy", function(d,i){ return rScale(d.value) * Math.sin(angleSlice*i - Math.PI/2); })
-		.style("fill", function(d,i,j) { console.log("Color: ", cfg.color(j)); return cfg.color(d); })		
+		//.style("fill", function(d,i,j) { console.log("Color: ", cfg.color(i)); return cfg.color(i); })		
+		//.style("fill", function(d,i) {return my_color})
+		.style("fill", function(d,i,j) { return cfg.color(j); })
 		.style("fill-opacity", 0.8);
 
 	/////////////////////////////////////////////////////////
