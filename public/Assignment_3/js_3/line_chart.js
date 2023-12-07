@@ -396,7 +396,7 @@ svg.selectAll(".grid line")
                     "<div style='text-align: center;'>" +
                     "<span style='font-size: 18px; color: " + lineColors[i] + ";'> <strong>" + getLabel(index) + "</strong></span><br>" +
                     "</div>" +
-                    "<span style='color: #333;'> <strong>Value: </strong> " + row[d] + "</span><br>" +
+                    "<span style='color: #333;'> <strong>Value: </strong> " + row[d] + " °C</span><br>" +
                     "<span style='color: #333;'> <strong>Month: </strong> " + row.Months + "</span><br>" 
                 )
                 .style("left", (d3.event.pageX + 10) + "px")

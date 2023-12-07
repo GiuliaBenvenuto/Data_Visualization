@@ -237,7 +237,7 @@ function RadarChart(id, data, options) {
 		.attr("class", "radarCircleWrapper");
 		
 
-		var tooltip = d3.select('body')
+	var tooltip = d3.select('body')
 		.append("div")
 		.style("position", "absolute")
 		.style("background", "#f0f0f0") // Use a light grey color for the background
@@ -260,27 +260,25 @@ function RadarChart(id, data, options) {
 		.style("fill", "none")
 		.style("pointer-events", "all")
 
-		.on("mouseover", function(d,i) {
-			var newX =  parseFloat(d3.select(this).attr('cx')) - 10;
-			var newY =  parseFloat(d3.select(this).attr('cy')) - 10;
-				
-			tooltip
-				.attr('x', newX)
-				.attr('y', newY)
-				.text(Format(d.value) + "°C")
-				.transition().duration(200)
-				.style('opacity', 1);
+		.on("mouseover", function (d, i) {
+			tooltip.transition()
+				.duration(100)
+				.style("opacity", 0.9);
+			tooltip.html(
+				"<div style='text-align: center;'>" +
+				"<span style='font-size: 18px; color: " + yearColorDictionary[d.year] + ";'> <strong>" + d.value + " °C</strong></span><br>" +
+				"<span style='font-size: 18px; color: " + yearColorDictionary[d.year] + ";'> <strong> Year: " + d.year + " </strong></span><br>" +
+				"</div>"
+			)
+			.style("left", (d3.event.pageX + 10) + "px")
+			.style("top", (d3.event.pageY - 28) + "px");
 		})
-		.on("mouseout", function(){
-			tooltip.transition().duration(200)
+		.on("mouseout", function (d) {
+			tooltip.transition()
+				.duration(200)
 				.style("opacity", 0);
 		});
 
-		
-	//Set up the small tooltip for when you hover over a circle
-	var tooltip = g.append("text")
-		.attr("class", "tooltip")
-		.style("opacity", 0);
 	
 	/////////////////////////////////////////////////////////
 	/////////////////// Helper Function /////////////////////
