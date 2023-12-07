@@ -118,7 +118,7 @@ function updateRadarChart(selectedOption) {
 
 
     var margin = {top: 80, right: 100, bottom: 100, left: 100},
-        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+        width = Math.min(500, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
         //console.log("WIDTH", window.innerWidth);
             
@@ -193,7 +193,8 @@ function updateRadarChart(selectedOption) {
                     dataPoint = {
                         axis: monthsColumn[i],  // Use the month as the "axis" label
                         //value: column1900[i]    // Use the corresponding value as the "value" label
-                        value: colonne[anno][i]
+                        value: colonne[anno][i], 
+                        year: filteredColumns[anno]
                     }
                 
                     tmp.push(dataPoint);
@@ -226,6 +227,7 @@ function updateRadarChart(selectedOption) {
             color : function(i) {
                 return lineColors[i];
             }
+
             //color: color
             // color: function() {}
         };

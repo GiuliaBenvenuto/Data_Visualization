@@ -8,6 +8,22 @@
 function RadarChart(id, data, options) {
 
 
+	const yearColorDictionary = {
+        "1900": "#402365",  
+        "1910": "#6A4C93",
+        "1920": "#4267AC", 
+        "1930": "#1982C4", 
+        "1940": "#52A675", 
+        "1950": "#8AC926",
+        "1960": "#C5CA30", 
+        "1970": "#FFCA3A", 
+        "1980": "#FFAE43",
+        "1990": "#FF924C",
+        "2000": "#FF595E", 
+        "2010": "#FD0A13",
+        "2020": "#9d0208"  
+      };
+
 	var cfg = {
 	 w: 600,				//Width of the circle
 	 h: 600,				//Height of the circle
@@ -205,9 +221,9 @@ function RadarChart(id, data, options) {
 		.attr("r", cfg.dotRadius)
 		.attr("cx", function(d,i){ return rScale(d.value) * Math.cos(angleSlice*i - Math.PI/2); })
 		.attr("cy", function(d,i){ return rScale(d.value) * Math.sin(angleSlice*i - Math.PI/2); })
-		//.style("fill", function(d,i,j) { console.log("Color: ", cfg.color(i)); return cfg.color(i); })		
-		//.style("fill", function(d,i) {return my_color})
-		.style("fill", function(d,i,j) { return cfg.color(j); })
+		.each(function(d,i) {
+			d3.select(this).style("fill", yearColorDictionary[d.year]);
+		})
 		.style("fill-opacity", 0.8);
 
 	/////////////////////////////////////////////////////////
@@ -245,6 +261,30 @@ function RadarChart(id, data, options) {
 			tooltip.transition().duration(200)
 				.style("opacity", 0);
 		});
+
+
+
+		/*
+		.on("mouseover", function (row) {
+                tooltip.transition()
+                    .duration(100)
+                    .style("opacity", 0.9);
+                tooltip.html(
+                    "<div style='text-align: center;'>" +
+                    "<span style='font-size: 18px; color: " + lineColors[i] + ";'> <strong>" + getLabel(index) + "</strong></span><br>" +
+                    "</div>" +
+                    "<span style='color: #333;'> <strong>Value: </strong> " + row[d] + "</span><br>" +
+                    "<span style='color: #333;'> <strong>Month: </strong> " + row.Months + "</span><br>" 
+                )
+                .style("left", (d3.event.pageX + 10) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function (d) {
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", 0);
+            });
+		*/
 		
 	//Set up the small tooltip for when you hover over a circle
 	var tooltip = g.append("text")
