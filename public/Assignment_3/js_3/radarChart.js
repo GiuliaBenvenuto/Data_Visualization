@@ -80,7 +80,7 @@ function RadarChart(id, data, options) {
             .append("svg")
 			.attr("width",  cfg.w + cfg.margin.left + cfg.margin.right)
 			.attr("height", cfg.h + cfg.margin.top + cfg.margin.bottom)
-			.attr("class", "radar"+id);
+			.attr("class", "radar" + id);
 	//Append a g element		
 	var g = svg.append("g")
 			.attr("transform", "translate(" + (cfg.w/2 + cfg.margin.left) + "," + (cfg.h/2 + cfg.margin.top) + ")");
@@ -236,6 +236,19 @@ function RadarChart(id, data, options) {
 		.enter().append("g")
 		.attr("class", "radarCircleWrapper");
 		
+
+		var tooltip = d3.select('body')
+		.append("div")
+		.style("position", "absolute")
+		.style("background", "#f0f0f0") // Use a light grey color for the background
+		.style("padding", "10px")
+		.style("border", "1px solid #ccc") // Use a darker grey for the border
+		.style("border-radius", "8px")
+		.style("pointer-events", "none")
+		.style("opacity", 0)
+		.style("font", "15px Fira Sans")
+		.style("color", "#333");
+		
 	//Append a set of invisible circles on top for the mouseover pop-up
 	blobCircleWrapper.selectAll(".radarInvisibleCircle")
 		.data(function(d,i) { return d; })
@@ -246,10 +259,11 @@ function RadarChart(id, data, options) {
 		.attr("cy", function(d,i){ return rScale(d.value) * Math.sin(angleSlice*i - Math.PI/2); })
 		.style("fill", "none")
 		.style("pointer-events", "all")
+
 		.on("mouseover", function(d,i) {
 			var newX =  parseFloat(d3.select(this).attr('cx')) - 10;
 			var newY =  parseFloat(d3.select(this).attr('cy')) - 10;
-					
+				
 			tooltip
 				.attr('x', newX)
 				.attr('y', newY)
@@ -262,29 +276,6 @@ function RadarChart(id, data, options) {
 				.style("opacity", 0);
 		});
 
-
-
-		/*
-		.on("mouseover", function (row) {
-                tooltip.transition()
-                    .duration(100)
-                    .style("opacity", 0.9);
-                tooltip.html(
-                    "<div style='text-align: center;'>" +
-                    "<span style='font-size: 18px; color: " + lineColors[i] + ";'> <strong>" + getLabel(index) + "</strong></span><br>" +
-                    "</div>" +
-                    "<span style='color: #333;'> <strong>Value: </strong> " + row[d] + "</span><br>" +
-                    "<span style='color: #333;'> <strong>Month: </strong> " + row.Months + "</span><br>" 
-                )
-                .style("left", (d3.event.pageX + 10) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
-            })
-            .on("mouseout", function (d) {
-                tooltip.transition()
-                    .duration(200)
-                    .style("opacity", 0);
-            });
-		*/
 		
 	//Set up the small tooltip for when you hover over a circle
 	var tooltip = g.append("text")

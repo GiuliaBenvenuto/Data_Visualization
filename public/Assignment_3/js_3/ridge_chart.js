@@ -75,9 +75,9 @@ function updateRidgeChart(selectedOption) {
     d3.select("#my_ridge_chart").selectAll("svg").remove();
 
     // set the dimensions and margins of the graph
-    var margin = {top: 80, right: 110, bottom: 200, left:110},
-        width = 1200 - margin.left - margin.right,
-        height = 800 - margin.top - margin.bottom;
+    var margin = {top: 80, right: 100, bottom: 200, left:100},
+        width = 1100 - margin.left - margin.right,
+        height = 900 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = d3.select("#my_ridge_chart")
@@ -128,6 +128,14 @@ function updateRidgeChart(selectedOption) {
         // Now, filteredCategories contains all columns except "Months", "Min", and "Max"
         console.log("Filtered", filteredCategories);
 
+        // Filter columns based on checkedValues after removing "c_" prefix
+        var selectedCheck = checkedValues.map(function(column) {
+            return column.replace("c_", "");
+        }).filter(function(column) {
+            return data.columns.includes(column); // Assuming data has a 'columns' property
+        });
+        console.log("Selected", selectedCheck);
+
 
         // Add X axis
         var x = d3.scaleLinear()
@@ -135,7 +143,10 @@ function updateRidgeChart(selectedOption) {
             .range([ 0, width ]);
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+            .call(d3.axisBottom(x))
+            .selectAll("text")  // Select all the text elements for customization
+            .style("font-size", "15px")
+            .style("font-family", "Fira Sans")
 
         var spacing = height / n;
 
@@ -173,37 +184,29 @@ function updateRidgeChart(selectedOption) {
         console.log("YName", yName);
 
         svg.append("g")
-            .call(d3.axisLeft(yName));
-
-        // Add areas
-      /*  svg.selectAll("areas")
-            .data(allDensity)
-            .enter()
-            .append("path")
-            .attr("transform", function(d){return("translate(0," + (yName(d.key)-height) +")" )})
-            .datum(function(d){return(d.density)})
-            .attr("fill", function(d, i) {
-                if (index === 0) {
-                    return "#69b3a2"; // First round color
-                } else if (index === 1) {
-                    return "#ff0000"; // Second round color
-                } else {
-                    return "#000000"; // Default color
-                }
-            })
-            .attr("stroke", "#000")
-            .attr("stroke-width", 1)
-            .attr("opacity", 0.5)
-            .attr("d",  d3.line()
-                .curve(d3.curveBasis)
-                .x(function(d) { return x(d[0]); })
-                .y(function(d) { return y(d[1]); })
-            )*/
+            .call(d3.axisLeft(yName))
+            .selectAll("text")  // Select all the text elements for customization
+            .style("font-size", "15px")
+            .style("font-family", "Fira Sans")
             
 
             allDensity = allDensity.filter(entry => entry.key !== undefined);
         
-            svg.selectAll("areas")
+            svg.selectAll("line.y-axis-line")
+            .data(allDensity.map(d => d.key))
+            .enter()
+            .append("line")
+            .attr("class", "y-axis-line")
+            .attr("x1", 0)
+            .attr("x2", width) // Adjust 'width' based on your chart dimensions
+            .attr("y1", d => yName(d))
+            .attr("y2", d => yName(d))
+            .attr("stroke", "#000")
+            .attr("stroke-width", 1)
+            
+
+
+              svg.selectAll("areas")
             .data(allDensity)
             .enter()
             .append("path")
@@ -214,35 +217,115 @@ function updateRidgeChart(selectedOption) {
                 // Apply the transformation for valid numeric values
                 return "translate(0," + (translateY - spacing) + ")";
             })
-              .attr("fill", function(d, i) {
-                if (index === 0) {
-                    return "#e41a1c"; // First round color
-                } else if (index === 1) {
-                    return "#377eb8"; // Second round color 377eb8
-                } else {
-                    return "#000000"; // Default color
+            .attr("fill", function(d, i) {
+                console.log("d", d.key);
+                if (selectedCheck.includes(d.key)) {
+                    if (index === 0) {
+                        return "#e41a1c"; // First round color
+                    } else if (index === 1) {
+                        return "#377eb8"; // Second round color 377eb8
+                    } else {
+                        return "#D3D3D3"; // Default color
+                    }
                 }
             })
-              .attr("stroke", "#000")
-              .attr("stroke-width", 2)
-              .attr("opacity", 0.3)
-              .attr("d",  d => {
-                let p = d3.area()
-                    .curve(d3.curveBasis)
-                    .x(d => x(d[0]))
-                    .y0(y(0))
-                    .y1(d => y(d[1]))(d.density);
-                return p;
-              });
-        
-                /*.attr("d",  d3.line()
-                    .curve(d3.curveBasis)
-                    .x(function(d) { return x(d[0]); })
-                    .y(function(d) { return y(d[1]); })
-                )*/
+
+            .attr("stroke", function(d, i) {
+                if (selectedCheck.includes(d.key)) {
+                    if (index === 0) {
+                        return "#920000"; // First round color
+                    } else if (index === 1) {
+                        return "#00417c"; // Second round color 377eb8
+                    } else {
+                        return "#D3D3D3"; // Default color
+                    }
+                }
+            })
+
+            .attr("stroke-width", 1)
+            .attr("opacity", function(d, i) {
+            if (selectedCheck.includes(d.key)) {
+                if (index === 0) {
+                    return 0.8; // First round opacity
+                } else if (index === 1) {
+                    return 0.8; // Second round opacity
+                } else {
+                    c = "#D3D3D3";
+                    return 0.7; // Default opacity
+                }
+            } else {
+                return 0.2; // Opacity when not in selectedCheck
+            }
+            })
+            .attr("d",  d => {
+            let p = d3.area()
+                .curve(d3.curveBasis)
+                .x(d => x(d[0]))
+                .y0(y(0))
+                .y1(d => y(d[1]))(d.density);
+            return p;
+            });
+
+
+            // LEGEND
+            // Assuming you have a color dictionary
+var colorDictionary = {
+    'Max': 'red',
+    'Min': 'blue'
+};
+
+
+// Create a legend container
+var legend = svg.append("g")
+    .attr("class", "legend")
+    //.attr("transform", "translate(" + (width / 2) + ", -10)")
+    .attr("transform",
+            "translate(" + 390 + "," + -80 + ")")
+    
+    ; // Adjust the translation for vertical position
+
+// Function to update the legend based on the selected years
+function updateLegend(selectedYears) {
+    // Remove existing legend items
+    legend.selectAll("*").remove();
+
+    // Add a colored square and text for each selected year
+    var legendItems = legend.selectAll(".legend-item")
+        .data(selectedYears)
+        .enter().append("g")
+        .attr("class", "legend-item")
+        .attr("transform", function(d, i) {
+            return "translate(" + (i * 80) + ", 0)"; // Adjust the spacing between squares
+        });
+
+    legendItems.append("rect")
+        .attr("width", 15)
+        .attr("height", 15)
+        .style("fill", function(d) {
+            return colorDictionary[d];
+        })
+        .style("stroke", "black") // Add black border
+        .style("stroke-width", 1);
+
+    legendItems.append("text")
+        .attr("x", 20)
+        .attr("y", 10)
+        .attr("dy", ".35em")
+        .style("text-anchor", "start")
+        .text(function(d) {
+            return d;
+        });
+}
+
+// Call the function with the desired legend items
+updateLegend(['Max', 'Min']);
+
+
+
+
 
         }) // d3.csv
-        }); // fileUrls.forEach
+    }); // fileUrls.forEach
 
 } // updateRidgeChart
 
