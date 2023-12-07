@@ -111,14 +111,19 @@
       <h1 class="text-neutral-700 text-5xl" >Section 3 - Timelines and Distributions</h1>
       <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data visualization for monthly temperature time series</h2>
     </div>
-    <div class="text-center">
-      <p class="text-neutral-600 text-center mt-3">The purpose of this assignment is to analyzie the minimum, maximum and average temperatures of different regions of USA over the last 120 years.</p>
-    </div>
+    <div class="text-center mx-auto max-w-2xl">
+      <p class="text-neutral-600 text-center mt-3" style=" font-size: 18px;">
+          The purpose of this assignment is to analyze the minimum, maximum, and average temperatures of different regions of the USA over the last 120 years.
+          <br> The data has been extracted <a href="https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/statewide/time-series" style="text-decoration: underline; color: #525252 " onmouseover="this.style.color='#5e97c6'" onmouseout="this.style.color='#404040'">here</a>.
+      </p>
+  </div>
+  
 
     <div class="text-center">
       <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data preparation</h2>
-    <p class="description text-neutral-600 text-left mt-3">
-      
+    <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
+      For the third Assignment: we use the data from the National Centers for Enviromental Information. Just like the second Assignment we decided to visualize the states by grouping them (West, South, Central Region...). To visualize better the change of the temperature over the years, we selected the years by decades, beginning with 1900 until 2020. 
+      We converted the temperatures from Farehnheit to Celcius. In the end for each region we computed the absolute minimum and maximum temperature for each region to scale better the charts.
     </p>
     </div>
   </div>
@@ -129,8 +134,9 @@
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
       <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Line Chart</h1>
-      <p class="description text-neutral-600 text-left mt-3">
-        Describe here the line chart.
+      <p class="text-center text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
+        Our first visualization is a line chart, it shows the minimum, average and maximum temperatures of the selected region over the selected years. <br>
+        This type of chart is excellent for representing sequential data, such as time series indeed in our case we can notice that in general the temperatures are increasing over the years because of the global warming. <br> 
       </p>
   </div>
 
@@ -268,8 +274,9 @@
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
       <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Radar Chart</h1>
-      <p class="description text-neutral-600 text-left mt-3">
-        Describe here the radar chart.
+      <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
+        Our second visualization are three radar charts. They show the minimum, average and maximum temperatures of the selected region over the selected years. <br> 
+        Radar chart shows the data in a circular fashion which better conveys the fact that temperatures are increasing over the years, this can be well demonstrated by selecting the years: 1900 and 2020 and noticing that the first area is visibly smaller than the second one in all three charts. <br>
       </p>
   </div>
   
@@ -296,8 +303,10 @@
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
       <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Ridgeline Chart</h1>
-      <p class="description text-neutral-600 text-left mt-3">
-        Describe here the ridgeline chart.
+      <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl mb-8" style="margin-top: 20px; font-size: 18px;">
+        Our third visualization is a ridgeline chart. It only shows the minimum and maximum density distribution of temperatures for the selected region over the selected years. <br>
+        To compute the density distribution we used the Kernel Density Estimation (KDE) algorithm. <br>
+        In our opinion this is the worst visualization of the three because it is not very clear in showing the global warming problem since the density distribution is less intuitive. <br>
       </p>
   </div>
 

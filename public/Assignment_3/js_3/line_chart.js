@@ -22,16 +22,16 @@ function updateLineChart(selectedOption) {
       };*/
       const yearColorDictionary = {
         "1900": "#402365",  
-        "1910": "#6A4C93",
+        "1910": "#8A2BE2",
         "1920": "#4267AC", 
         "1930": "#1982C4", 
         "1940": "#52A675", 
         "1950": "#8AC926",
         "1960": "#C5CA30", 
         "1970": "#FFCA3A", 
-        "1980": "#FFAE43",
-        "1990": "#FF924C",
-        "2000": "#FF595E", 
+        "1980": "#FF924C",
+        "1990": "#B46058",
+        "2000": "#ff59a8",
         "2010": "#FD0A13",
         "2020": "#9d0208"  
       };
@@ -240,7 +240,7 @@ function updateLineChart(selectedOption) {
         .attr("x", width / 2)
         .attr("y", -35)
         .attr("text-anchor", "middle")
-        .style("font-size", "30px")
+        .style("font-size", "20px")
         .style("font-family", "'Fira Sans', sans-serif")
         .text(plotTitle + " in years: ")
         .selectAll("tspan")
