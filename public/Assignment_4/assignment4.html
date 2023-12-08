@@ -109,12 +109,12 @@
     
   <div class="text-center title mt-10">
     <div class="text-5xl"></div>
-      <h1 class="text-neutral-700 text-5xl" >Section 3 - Timelines and Distributions</h1>
-      <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data visualization for monthly temperature time series</h2>
+      <h1 class="text-neutral-700 text-5xl" >Section 4 - Maps</h1>
+      <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data visualization for monthly temperature time series (CAMBIA)</h2>
     </div>
     <div class="text-center mx-auto max-w-2xl">
       <p class="text-neutral-600 text-center mt-3" style=" font-size: 18px;">
-          The purpose of this assignment is to analyze the minimum, maximum, and average temperatures of different regions of the USA over the last 120 years.
+          (CAMBIA) The purpose of this assignment is to analyze the minimum, maximum, and average temperatures of different regions of the USA over the last 120 years.
           <br> The data has been extracted <a href="https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/statewide/time-series" style="text-decoration: underline; color: #525252 " onmouseover="this.style.color='#5e97c6'" onmouseout="this.style.color='#404040'">here</a>.
       </p>
   </div>
@@ -123,199 +123,41 @@
     <div class="text-center">
       <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data preparation</h2>
     <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
-      For the third Assignment: we use the data from the National Centers for Enviromental Information. Just like the second Assignment we decided to visualize the states by grouping them (West, South, Central Region...). To visualize better the change of the temperature over the years, we selected the years by decades, beginning with 1900 until 2020. 
-      We converted the temperatures from Farehnheit to Celcius. In the end for each region we computed the absolute minimum and maximum temperature for each region to scale better the charts.
+      Add data preparation here...
     </p>
     </div>
   </div>
 
   
 
-  <!-- Line Chart -->
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
-      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Line Chart</h1>
+      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Chart 1</h1>
       <p class="text-center text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
-        Our first visualization is a line chart, it shows the minimum, average and maximum temperatures of the selected region over the selected years. <br>
-        This type of chart is excellent for representing sequential data, such as time series indeed in our case we can notice that in general the temperatures are increasing over the years because of the global warming. <br> 
+        Add description here...
       </p>
   </div>
 
 
-  <!-- Dropdown region selection -->
-  <div class="bg-white p-2 rounded-lg text-center mt-4">
-    <h2 class="text-lg font-semibold mb-2 text-neutral-700">Region:</h2>
-    <div class="relative inline-block">
-        <select id="regionSelector" class="block appearance-none w-30 bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 pr-6 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-          <option value="west" selected>West</option>
-          <option value="south">South</option>
-          <option value="west_north_central">West North Central</option>
-          <option value="central">Central</option>
-          <option value="east_north_central">East North Central</option>
-          <option value="northwest">Northwest</option>
-          <option value="northeast">Northeast</option>
-          <option value="southwest">Southwest</option>
-          <option value="southeast">Southeast</option>
-        </select>
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-700">
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9 11l-5-5 1.41-1.41L9 8.17l3.59-3.59L14 6l-5 5z"/></svg>
-        </div>
-    </div>
-  </div>
 
-  <script>
-    window.onload = function() {
-      // Get the topNSelector element.
-      var regionSelector = document.getElementById('regionSelector');
-  
-      // Set the value of the topNSelector element to "5".
-      regionSelector.value = "west";
-    };
-  </script>
-
-  <!--Checkbox year selection -->
-  <div class="checkbox-container" style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
-    <input type="checkbox" id="c_1900" onclick="saveCheckboxValue('c_1900')" checked>
-    <label for="c_1900">1900</label>
-
-    <input type="checkbox" id="c_1910" onclick="saveCheckboxValue('c_1910')">
-    <label for="c_1910">1910</label>
-
-    <input type="checkbox" id="c_1920" onclick="saveCheckboxValue('c_1920')">
-    <label for="c_1920">1920</label>
-
-    <input type="checkbox" id="c_1930" onclick="saveCheckboxValue('c_1930')">
-    <label for="c_1930">1930</label>
-
-    <input type="checkbox" id="c_1940" onclick="saveCheckboxValue('c_1940')">
-    <label for="c_1940">1940</label>
-
-    <input type="checkbox" id="c_1950" onclick="saveCheckboxValue('c_1950')">
-    <label for="c_1950">1950</label>
-
-    <input type="checkbox" id="c_1960" onclick="saveCheckboxValue('c_1960')">
-    <label for="c_1960">1960</label>
-
-    <input type="checkbox" id="c_1970" onclick="saveCheckboxValue('c_1970')">
-    <label for="c_1970">1970</label>
-
-    <input type="checkbox" id="c_1980" onclick="saveCheckboxValue('c_1980')">
-    <label for="c_1980">1980</label>
-
-    <input type="checkbox" id="c_1990" onclick="saveCheckboxValue('c_1990')">
-    <label for="c_1990">1990</label>
-
-    <input type="checkbox" id="c_2000" onclick="saveCheckboxValue('c_2000')">
-    <label for="c_2000">2000</label>
-
-    <input type="checkbox" id="c_2010" onclick="saveCheckboxValue('c_2010')">
-    <label for="c_2010">2010</label>
-
-    <input type="checkbox" id="c_2020" onclick="saveCheckboxValue('c_2020')">
-    <label for="c_2020">2020</label>
-
-  </div>
-
-  
-  <script>
-    let checkedValues = [];
-
-    // Function to save checkbox values
-    function saveCheckboxValue(id) {
-      const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
-      checkedValues = [];
-
-      checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-          checkedValues.push(checkbox.id);
-        }
-      });
-
-      // Save the checked values in local storage
-      localStorage.setItem('checkedValues', JSON.stringify(checkedValues));
-    }
-
-    // Function to initialize checkboxes on page load
-    function initializeCheckboxes() {
-      const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
-      const defaultCheckedValue = 'c_1900';
-
-      // Get stored checked values from local storage
-      const storedCheckedValues = JSON.parse(localStorage.getItem('checkedValues')) || [];
-
-      checkboxes.forEach(checkbox => {
-        if (checkbox.id === defaultCheckedValue) {
-          // If the checkbox is the default one (c_1900), make sure it stays checked
-          checkbox.checked = true;
-        } else {
-          // Uncheck other checkboxes
-          checkbox.checked = false;
-        }
-      });
-
-      // Save the initial state with only the default checkbox checked
-      saveCheckboxValue(defaultCheckedValue);
-    }
-
-    // Initialize checkboxes on page load
-    initializeCheckboxes();
-  </script>
-
-
-
-  <!-- Line chart js -->
-  <div class="flex justify-center items-center ">
-    <div id="my_dataviz" style="width: 1000px; height: 500px;" >
-      <script type="module" src="../Assignment_3/js_3/line_chart.js"></script>
-    </div>
-  </div>
-  
-
-  <!-- Radar Chart -->
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
-      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Radar Chart</h1>
+      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Chart 2</h1>
       <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
-        Our second visualization are three radar charts. They show the minimum, average and maximum temperatures of the selected region over the selected years. <br> 
-        Radar chart shows the data in a circular fashion which better conveys the fact that temperatures are increasing over the years, this can be well demonstrated by selecting the years: 1900 and 2020 and noticing that the first area is visibly smaller than the second one in all three charts. <br>
+        Add description here...
       </p>
   </div>
-  
 
-    <div class="container_radar_chart">
-      <div id="my_radarchart_1" style="width: 500px; height: 500px;">
-        <h3 class="chart-title text-center text-2xl">Min</h3>
-        <script type="module" src="../Assignment_3/js_3/radarChart.js"></script> 
-        <script type="module" src="../Assignment_3/js_3/radar_chart.js"></script>
-      </div>
-
-      <div id="my_radarchart_2" style="width: 500px; height: 500px;">
-        <h3 class="chart-title text-center text-2xl">Avg</h3>
-      </div>
-
-      <div id="my_radarchart_3" style="width: 500px; height: 500px;">
-        <h3 class="chart-title text-center text-2xl">Max</h3>
-      </div>
-    </div>
     
 
 
-  <!-- Ridgeline Chart -->
+
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
-      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Ridgeline Chart</h1>
+      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Chart 3</h1>
       <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl mb-8" style="margin-top: 20px; font-size: 18px;">
-        Our third visualization is a ridgeline chart. It only shows the minimum and maximum density distribution of temperatures for the selected region over the selected years. <br>
-        To compute the density distribution we used the Kernel Density Estimation (KDE) algorithm. <br>
-        In our opinion this is the worst visualization of the three because it is not very clear in showing the global warming problem since the density distribution is less intuitive. <br>
+        Add description here...
       </p>
-  </div>
-
-  <!-- js -->
-  <div class="flex justify-center items-center ">
-    <div id="my_ridge_chart" style="width: 1100px; height: 800px;" >
-      <script type="module" src="../Assignment_3/js_3/ridge_chart.js"></script>
-    </div>
   </div>
 
 

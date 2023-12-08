@@ -150,7 +150,7 @@ function RadarChart(id, data, options) {
 	//Append the labels at each axis
 	axis.append("text")
 		.attr("class", "legend")
-		.style("font-size", "11px")
+		.style("font-size", "13px")
 		.attr("text-anchor", "middle")
 		.attr("dy", "0.35em")
 		.attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
@@ -249,6 +249,17 @@ function RadarChart(id, data, options) {
 		.style("font", "15px Fira Sans")
 		.style("color", "#333");
 		
+
+	var label = "";
+	if (id === "#my_radarchart_3") {
+		label = "Max"
+		console.log("id: " + id);
+	} else if (id === "#my_radarchart_1") {
+		label = "Min"
+	} else if (id === "#my_radarchart_2") {
+		label = "Avg"
+	}
+
 	//Append a set of invisible circles on top for the mouseover pop-up
 	blobCircleWrapper.selectAll(".radarInvisibleCircle")
 		.data(function(d,i) { return d; })
@@ -266,8 +277,9 @@ function RadarChart(id, data, options) {
 				.style("opacity", 0.9);
 			tooltip.html(
 				"<div style='text-align: center;'>" +
-				"<span style='font-size: 18px; color: " + yearColorDictionary[d.year] + ";'> <strong>" + d.value + " °C</strong></span><br>" +
-				"<span style='font-size: 18px; color: " + yearColorDictionary[d.year] + ";'> <strong> Year: " + d.year + " </strong></span><br>" +
+				"<span style='font-size: 18px; color: " + yearColorDictionary[d.year] + ";'> <strong>" + label + "</strong></span><br>" +
+				"<span style='color: #333;'> <strong> Value: </strong>" + d.value + " °C</span><br>" +
+				"<span style='color: #333;'> <strong> Year: </strong>" + d.year + " </span><br>" +
 				"</div>"
 			)
 			.style("left", (d3.event.pageX + 10) + "px")

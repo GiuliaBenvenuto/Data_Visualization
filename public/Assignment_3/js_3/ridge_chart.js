@@ -269,61 +269,57 @@ function updateRidgeChart(selectedOption) {
 
             // LEGEND
             // Assuming you have a color dictionary
-var colorDictionary = {
-    'Max': 'red',
-    'Min': 'blue'
-};
+            var colorDictionary = {
+                'Max': 'red',
+                'Min': 'blue'
+            };
 
 
-// Create a legend container
-var legend = svg.append("g")
-    .attr("class", "legend")
-    //.attr("transform", "translate(" + (width / 2) + ", -10)")
-    .attr("transform",
-            "translate(" + 390 + "," + -80 + ")")
-    
-    ; // Adjust the translation for vertical position
+        // Create a legend container
+        var legend = svg.append("g")
+            .attr("class", "legend")
+            //.attr("transform", "translate(" + (width / 2) + ", -10)")
+            .attr("transform",
+                    "translate(" + 390 + "," + -80 + ")")
+            
+            ; // Adjust the translation for vertical position
 
-// Function to update the legend based on the selected years
-function updateLegend(selectedYears) {
-    // Remove existing legend items
-    legend.selectAll("*").remove();
+        // Function to update the legend based on the selected years
+        function updateLegend(selectedYears) {
+            // Remove existing legend items
+            legend.selectAll("*").remove();
 
-    // Add a colored square and text for each selected year
-    var legendItems = legend.selectAll(".legend-item")
-        .data(selectedYears)
-        .enter().append("g")
-        .attr("class", "legend-item")
-        .attr("transform", function(d, i) {
-            return "translate(" + (i * 80) + ", 0)"; // Adjust the spacing between squares
-        });
+            // Add a colored square and text for each selected year
+            var legendItems = legend.selectAll(".legend-item")
+                .data(selectedYears)
+                .enter().append("g")
+                .attr("class", "legend-item")
+                .attr("transform", function(d, i) {
+                    return "translate(" + (i * 80) + ", 0)"; // Adjust the spacing between squares
+                });
 
-    legendItems.append("rect")
-        .attr("width", 15)
-        .attr("height", 15)
-        .style("fill", function(d) {
-            return colorDictionary[d];
-        })
-        .style("stroke", "black") // Add black border
-        .style("stroke-width", 1);
+            legendItems.append("rect")
+                .attr("width", 15)
+                .attr("height", 15)
+                .style("fill", function(d) {
+                    return colorDictionary[d];
+                })
+                .style("stroke", "black") // Add black border
+                .style("stroke-width", 1);
 
-    legendItems.append("text")
-        .attr("x", 20)
-        .attr("y", 10)
-        .attr("dy", ".35em")
-        .style("text-anchor", "start")
-        .text(function(d) {
-            return d;
-        });
-}
+            legendItems.append("text")
+                .attr("x", 20)
+                .attr("y", 10)
+                .attr("dy", ".35em")
+                .style("text-anchor", "start")
+                .text(function(d) {
+                    return d;
+                });
+        }
 
-// Call the function with the desired legend items
-updateLegend(['Max', 'Min']);
-
-
-
-
-
+        // Call the function with the desired legend items
+        updateLegend(['Max', 'Min']);
+                                                    
         }) // d3.csv
     }); // fileUrls.forEach
 
