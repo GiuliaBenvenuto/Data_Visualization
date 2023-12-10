@@ -1,0 +1,1 @@
+console.log("Assignment_4/js_4/dot_density_map.js loaded");
