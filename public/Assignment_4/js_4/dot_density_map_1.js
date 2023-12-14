@@ -1,124 +1,153 @@
-// console.log("Assignment_4/js_4/dot_density_map.js loaded");
-// https://observablehq.com/@vizbiz/map
+//Width and height of map
+var width = 1000;
+var height = 500;
 
-let drawChart = function() {
-    const radius = {
-      scale: d3.scaleSqrt()
-        .domain([0, 2e7])
-        .range([0, 35]),
-      scaleData:  [2e6, 1e7, 2e7],
-      metric: "dep_delay"
-    };
-    
-    const fill = {
-      scale: d3.scaleSequential(d3.interpolateRdYlBu)
-        .domain([0, 20]),
-      metric: "dep_delay"
-    };
-    
-    const chart = new Chart(data, radius, fill);
-    return chart.div;
-}
+// D3 Projection
+var projection = d3.geo.albersUsa()
+				   .translate([width/2, height/2])    // translate to center of screen
+				   .scale([1100]);          // scale things down so see entire US
+        
+// Define path generator
+var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
+		  	 .projection(projection);  // tell path generator to use albersUsa projection
 
-class Chart {
-    constructor(dataMap, radius, fill = {}) {
-      const data = Array.from(dataMap).map((d) => d[1]);
-      const interval = 500;
-      const width = 960;
-      const height = 600;
-      const path = d3.geoPath();
-      const projection = d3.geoAlbersUsa().scale(1280).translate([width / 2, height / 2]);
-      
-      this.radius = radius;
-      this.fill = fill;
-      
-      //this.radiusTransition = d3.transition().duration(interval);
-      
-      const svg = d3.select(DOM.svg(width, height))
-        .style("width", "100%")
-        .style("font-family", "sans-serif")
-        .style("height", "auto");
+		
+// Define linear scale for output
+var color = d3.scale.linear()
+			  .range(["rgb(213,222,217)","rgb(69,173,168)","rgb(84,36,55)","rgb(217,91,67)"]);
+
+var legendText = ["Cities Lived", "States Lived", "States Visited", "Nada"];
+
+/*
+var svg = d3.select("#my_dot_density_map")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+Create SVG element and append map to the SVG
+var svg = d3.select("body")
+			.append("svg")
+			.attr("width", width)
+			.attr("height", height);*/
+
+    var svg = d3.select("#my_dot_density_map")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+        
+    // Append Div for tooltip to SVG
+    var div = d3.select("body")
+        .append("div")   
+        .attr("class", "tooltip")               
+        .style("opacity", 0);
+
+// Load in my states data!
+
+
+// Load GeoJSON data and merge with states data
+d3.json("../Assignment_4/json_4/us-states.json", function(json) {
+		
+    // Bind the data to the SVG and create one path per GeoJSON feature
+    svg.selectAll("path")
+        .data(json.features)
+        .enter()
+        .append("path")
+        .attr("d", path)
+        .style("stroke", "#fff")
+        .style("stroke-width", "3")
+        .style("fill", "#e1e1e1")
+
+    
+
+		 
+    // Map the cities I have lived in!
+    // d3.csv("../Assignment_4/cities-lived.csv", function(data) {
+    // d3.csv("../Assignment_4/Coord_trees_state.csv", function(data) {
+    d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQoZ2K9t0hRKfh9CsosvhXHArNGujt8K8EBvZXhUSXGOJzYKbgrHhOI1jnOaaaWe4vrCKmHjnVS2Gv_/pub?output=csv", function(data) {
+
+
+    var tooltip = d3.select('body')
+            .append("div")
+            .style("position", "absolute")
+            .style("background", "#f0f0f0") // Use a light grey color for the background
+            .style("padding", "10px")
+            .style("border", "1px solid #ccc") // Use a darker grey for the border
+            .style("border-radius", "8px")
+            .style("pointer-events", "none")
+            .style("opacity", 0)
+            .style("font", "15px Fira Sans")
+            .style("color", "#333");
+
+    svg.selectAll("circle")
+    .data(data)
+    .enter()
+    .append("circle")
+    .attr("cx", function(d) {
+        return projection([d.long_coor, d.lat_coor])[0];
+    })
+    .attr("cy", function(d) {
+        return projection([d.long_coor, d.lat_coor])[1];
+    })
+    .attr("r", function(d) {
+            // console.log(Math.sqrt(d.value) * 0.05);
+            return Math.sqrt(d.value) * 0.05; // Adjust radius calculation as needed
+        })
+    .style("fill", "#107b42")
+    .style("opacity", 0.75) // Ensure this is high enough to be visible
+    .style("stroke", "#0c6b38") // setting the stroke color to grey
+    .style("stroke-width", 1)
+
+        
+
+	// Modification of custom tooltip code provided by Malcolm Maclean, "D3 Tips and Tricks" 
+	// http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html
+	.on("mouseover", function(d) {      
+    	tooltip.transition()        
+      	   .duration(100)      
+           .style("opacity", .9); 
+           
+           tooltip.html(
+                "<span style='color: #333;'> <strong>State: </strong> " + d.state + "</span><br>" + 
+                "<span style='color: #333;'> <strong>City: </strong> " + d.city + "</span><br>" +
+                "<span style='color: #333;'> <strong>Value: </strong> " + d.value + "</span><br>"
+            )
+           .style("left", (d3.event.pageX) + "px")     
+           .style("top", (d3.event.pageY - 28) + "px");    
+	})   
+
+    // fade out tooltip on mouse out               
+    .on("mouseout", function(d) {       
+        tooltip.transition()        
+           .duration(100)      
+           .style("opacity", 0);   
+    });
+});  
      
-      svg.append("path")
-          .datum(topojson.feature(us, us.objects.nation))
-          .attr("fill", "#ccc")
-          .attr("d", path);
-  
-      svg.append("path")
-          .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
-          .attr("fill", "none")
-          .attr("stroke", "white")
-          .attr("stroke-linejoin", "round")
-          .attr("d", path);
-      
-      this.circles = svg.append("g")
-        .attr("stroke", "#fff")
-        .attr("opacity", () => (this.fill.scale !== undefined) ? 1 : 0.5)
-        .attr("stroke-width", 0.5)
-        .selectAll("circle")
-          .data(data).enter()
-        .append("circle")
-          .attr("transform", d => `translate(${projection(d.geometry.coordinates)})`)
-          .attr("r", 5);
-      
-      this.div = DOM.element("div");
-      const input = this.drawInput(1, 12);
-      this.div.appendChild(svg.node());
-      this.div.appendChild(input);
-    }
-    
-    drawInput(min, max) {
-      const div = html`
-        <input type=range min=${min} max=${max} value=${min} step=1>
-        <input type=number min=${min} max=${max} value=${min} style="width:50px">
-      `;      
-      const range = div.querySelector("[type=range]");
-      const number = div.querySelector("[type=number]");
-      div.value = range.value = number.value = min;
-      
-      const update = _.debounce(() => { this.update(div.value); }, 300);
-      
-      range.addEventListener("input", () => {
-        number.value = div.value = range.valueAsNumber;
-        update();
-      });
-      number.addEventListener("input", () => {
-        range.value = div.value = number.valueAsNumber;
-        update();
-      });
-      
-       return div;
-      
-    }
-}
 
-d3.csv("https://gist.githubusercontent.com/vizbiz/" +
-       "0a651bbe43013b80c03dbd1c13f49a8b/raw/303fd2dbfc63761e6614e89dd6b0d7b382e68cad/" +
-       "latlongmeans.csv", (error, dataArray) => {
-  if (error) throw error;
+// Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
+var legend = d3.select("body").append("svg")
+      			.attr("class", "legend")
+     			.attr("width", 140)
+    			.attr("height", 200)
+   				.selectAll("g")
+   				.data(color.domain().slice().reverse())
+   				.enter()
+   				.append("g")
+     			.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-  // Convert the array to a Map
-  const dataMap = new Map(dataArray.map(d => [d.Origin.toLowerCase(), {
-    "type": "Feature",
-    "properties": {
-      "month": d.Month,
-      "origin": d.Origin,
-      "origin_name": d.OriginName,
-      "dep_delay": +d.DepDelay
-    },
-    "geometry": {
-      "type": "Point",
-      "coordinates": [d.Longitude, d.Latitude]
-    }
-  }]));
+  	legend.append("rect")
+   		  .attr("width", 18)
+   		  .attr("height", 18)
+   		  .style("fill", color);
 
-  // Now you can use dataMap
-  // For example, logging the map
-  console.log(dataMap);
-
-  // Rest of your code that uses dataMap
-});
-
-
-
+  	legend.append("text")
+  		  .data(legendText)
+      	  .attr("x", 24)
+      	  .attr("y", 9)
+      	  .attr("dy", ".35em")
+      	  .text(function(d) { return d; });
+	});
 
