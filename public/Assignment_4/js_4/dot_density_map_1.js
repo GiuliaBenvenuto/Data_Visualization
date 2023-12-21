@@ -33,7 +33,7 @@ var svg = d3.select("body")
 			.attr("width", width)
 			.attr("height", height);*/
 
-    var svg = d3.select("#my_dot_density_map")
+    var svg = d3.select("#my_dot_density_map_1")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
@@ -62,13 +62,9 @@ d3.json("../Assignment_4/json_4/us-states.json", function(json) {
 
     
 
-		 
-    // Map the cities I have lived in!
-    // d3.csv("../Assignment_4/cities-lived.csv", function(data) {
-    // d3.csv("../Assignment_4/Coord_trees_state.csv", function(data) {
     d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQoZ2K9t0hRKfh9CsosvhXHArNGujt8K8EBvZXhUSXGOJzYKbgrHhOI1jnOaaaWe4vrCKmHjnVS2Gv_/pub?output=csv", function(data) {
-
-
+    // d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSgVCcVZo8wQEH4Rijbwprt-VySj2xhIuh8zMW2i-SGW5PSzi7wy_62m2Amu3wBwaroyEeRA1zV0lqC/pub?output=csv", function(data) {
+    
     var tooltip = d3.select('body')
             .append("div")
             .style("position", "absolute")
@@ -93,17 +89,14 @@ d3.json("../Assignment_4/json_4/us-states.json", function(json) {
     })
     .attr("r", function(d) {
             // console.log(Math.sqrt(d.value) * 0.05);
-            return Math.sqrt(d.value) * 0.05; // Adjust radius calculation as needed
+            return Math.sqrt(d.value) * 0.07; // Adjust radius calculation as needed
         })
     .style("fill", "#107b42")
-    .style("opacity", 0.75) // Ensure this is high enough to be visible
+    .style("opacity", 0.65) // Ensure this is high enough to be visible
     .style("stroke", "#0c6b38") // setting the stroke color to grey
     .style("stroke-width", 1)
 
         
-
-	// Modification of custom tooltip code provided by Malcolm Maclean, "D3 Tips and Tricks" 
-	// http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html
 	.on("mouseover", function(d) {      
     	tooltip.transition()        
       	   .duration(100)      
@@ -127,27 +120,5 @@ d3.json("../Assignment_4/json_4/us-states.json", function(json) {
 });  
      
 
-// Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-var legend = d3.select("body").append("svg")
-      			.attr("class", "legend")
-     			.attr("width", 140)
-    			.attr("height", 200)
-   				.selectAll("g")
-   				.data(color.domain().slice().reverse())
-   				.enter()
-   				.append("g")
-     			.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
-  	legend.append("rect")
-   		  .attr("width", 18)
-   		  .attr("height", 18)
-   		  .style("fill", color);
-
-  	legend.append("text")
-  		  .data(legendText)
-      	  .attr("x", 24)
-      	  .attr("y", 9)
-      	  .attr("dy", ".35em")
-      	  .text(function(d) { return d; });
-	});
+});
 

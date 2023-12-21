@@ -1,1 +1,0 @@
-console.log("Assignment_4/js_4/choropleth_map.js loaded");

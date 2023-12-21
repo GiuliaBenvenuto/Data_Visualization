@@ -23,6 +23,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!--D3.js-->
     <script src="https://d3js.org/d3.v4.js"></script>
+    <!-- Include TopoJSON -->
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
     
     <!--Font awesome-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
@@ -131,7 +133,8 @@
   <!-- Dot density map 1 -->
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
-      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Dot density map (1)</h1>
+      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Dot density map</h1>
+      <h1 class="text-neutral-700 text-2xl" >Only one symbol, only one color</h1>
       <p class="text-center text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
         Add description here...
       </p>
@@ -139,17 +142,19 @@
 
   <!-- Dot density map 1 js -->
   <div class="flex justify-center items-center ">
-    <div id="my_dot_density_map" style="width: 1000px; height: 600px;" >
+    <div id="my_dot_density_map_1" style="width: 1000px; height: 600px;" >
       <!-- <script type="module" src="../Assignment_4/js_4/dot_density_map_1.js"></script> -->
       <script src="http://d3js.org/d3.v3.min.js"></script>
       <script type="module" src="../Assignment_4/js_4/dot_density_map_1.js"></script>
     </div>
   </div>
 
+
   <!-- Dot density map 2 -->
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
-      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Dot density map (2)</h1>
+      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Dot density map</h1>
+      <h1 class="text-neutral-700 text-2xl" >Only one symbol, several colors</h1>
       <p class="text-center text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
         Add description here...
       </p>
@@ -157,39 +162,51 @@
 
   <!-- Dot density map 2 js -->
   <div class="flex justify-center items-center ">
-    <div id="my_dot_density_map" style="width: 1000px; height: 500px;" >
+    <div id="my_dot_density_map_2" style="width: 1500px; height: 500px;" >
+      <script src="http://d3js.org/d3.v3.min.js"></script>
       <script type="module" src="../Assignment_4/js_4/dot_density_map_2.js"></script>
     </div>
   </div>
 
 
-  <!-- Choropleth map -->
+  <!-- Choropleth map - Tree number aboundance -->
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
       <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Choropleth map</h1>
+      <h1 class="text-neutral-700 text-2xl" >Tree aboundance</h1>
       <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
         Add description here...
       </p>
   </div>
 
-  <!-- Choropleth map js -->
+  <!-- Choropleth map tree aboundance js -->
   <div class="flex justify-center items-center ">
-    <div id="my_dot_density_map" style="width: 1000px; height: 500px;" >
-      <script type="module" src="../Assignment_4/js_4/choropleth_map.js"></script>
+    <div id="my_choropleth_aboundance" style="width: 1000px; height: 500px;" >
+      <script src="https://d3js.org/d3.v6.js"></script>
+      <script type="module" src="../Assignment_4/js_4/choropleth_map_aboundance.js"></script>
     </div>
   </div>
 
-    
 
+  <!-- Choropleth map - Tree density -->
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
-      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Cartogram</h1>
-      <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl mb-8" style="margin-top: 20px; font-size: 18px;">
+      <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Choropleth map</h1>
+      <h1 class="text-neutral-700 text-2xl" >Tree density</h1>
+      <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
         Add description here...
       </p>
   </div>
 
-  
+  <!-- Choropleth map tree density js -->
+  <div class="flex justify-center items-center ">
+    <div id="my_choropleth_density" style="width: 1000px; height: 500px; margin-bottom: 70px;" >
+      <script src="https://d3js.org/d3.v4.js"></script>
+      <script type="module" src="../Assignment_4/js_4/choropleth_map_density.js"></script>
+    </div>
+  </div>
+
+    
 
 
   <!-- Footer -->
