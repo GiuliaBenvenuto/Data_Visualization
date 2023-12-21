@@ -111,12 +111,12 @@
   <div class="text-center title mt-10">
     <div class="text-5xl"></div>
       <h1 class="text-neutral-700 text-5xl" >Section 4 - Maps</h1>
-      <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data visualization for monthly temperature time series (CAMBIA)</h2>
+      <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Spatial data visualization of the trees in the United States </h2>
     </div>
     <div class="text-center mx-auto max-w-2xl">
       <p class="text-neutral-600 text-center mt-3" style=" font-size: 18px;">
-          (CAMBIA) The purpose of this assignment is to analyze the minimum, maximum, and average temperatures of different regions of the USA over the last 120 years.
-          <br> The data has been extracted <a href="https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/statewide/time-series" style="text-decoration: underline; color: #525252 " onmouseover="this.style.color='#5e97c6'" onmouseout="this.style.color='#404040'">here</a>.
+        In this assignment we will use the <a href="https://www.kaggle.com/datasets/mexwell/5m-trees-dataset " style="text-decoration: underline; color: #404040 " onmouseover="this.style.color='#15803d'" onmouseout="this.style.color='#404040'">5M Trees Dataset</a> from Kaggle in order to 
+        analyze the spatial distribution of the trees in the United States. 
       </p>
   </div>
   
@@ -124,7 +124,10 @@
     <div class="text-center">
       <h2 class="text-neutral-700 text-2xl" style="margin-top: 20px;">Data preparation</h2>
     <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
-      Add data preparation here...
+      Firstly we loaded the 5MTree Dataset, we delete all the rows with incomplete information. Doing so the number of states in our data decresed to 23 states in total. <br>
+      Due to the huge amount of data at our disposal we decided to group near trees with the same scientific name and simiar location.
+      While this help us reduce the dimension of the data, the number of data is still high amounting to 46435 rows. <br>
+      Additionally, to compute the density of tree for each state, we had to insert by hand the area of each state. <br>
     </p>
     </div>
   </div>
@@ -135,8 +138,9 @@
     <div class="text-5xl"></div>
       <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Dot density map</h1>
       <h1 class="text-neutral-700 text-2xl" >Only one symbol, only one color</h1>
-      <p class="text-center text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
-        Add description here...
+      <p class="text-center text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; margin-bottom: 40px; font-size: 18px;">
+        Our first visualization is a dot density map with only one symbol and only one color. <br> Initially we noticed that the total number of trees was 3912954, but the visualization of them was impossible because the size of the dataset was too big.
+        Thus we decided to group together trees with the same scientific name that were in similar locations basing on latitude and longitude coordinates saving the number of trees in each group and using it to give a radius to the circle representing the group.  
       </p>
   </div>
 
@@ -155,14 +159,16 @@
     <div class="text-5xl"></div>
       <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Dot density map</h1>
       <h1 class="text-neutral-700 text-2xl" >Only one symbol, several colors</h1>
-      <p class="text-center text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
-        Add description here...
+      <p class="text-center text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; margin-bottom: 40px; font-size: 18px;">
+        Our second visualization is a dot density map with only one symbol and several colors. <br>
+        For the displacement of the dots and for their radius we made the same reasonment as the previous chart.<br>
+        In this case we also selected the top 10 most common scientific names and we assigned to them a specific color which is used to color the dots. 
       </p>
   </div>
 
   <!-- Dot density map 2 js -->
   <div class="flex justify-center items-center ">
-    <div id="my_dot_density_map_2" style="width: 1500px; height: 500px;" >
+    <div id="my_dot_density_map_2" style="width: 1500px; height: 600px;" >
       <script src="http://d3js.org/d3.v3.min.js"></script>
       <script type="module" src="../Assignment_4/js_4/dot_density_map_2.js"></script>
     </div>
@@ -173,17 +179,19 @@
   <div class="text-center title mt-14">
     <div class="text-5xl"></div>
       <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Choropleth map</h1>
-      <h1 class="text-neutral-700 text-2xl" >Tree aboundance</h1>
-      <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
-        Add description here...
+      <h1 class="text-neutral-700 text-2xl" >Tree abundance</h1>
+      <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; margin-bottom: 40px; font-size: 18px;">
+        Our third visualization is a choropleth map. <br>
+        In this case the chart shows the tree abundance in each state, this information is conveyed by the color of the states. <br>
+        We can notice that the state with the highest number of trees is California indeed its color is the darkes one and we can also notice that there are some states without available data due to the incompleteness of the dataset which are colored with a light grey. <br>
       </p>
   </div>
 
   <!-- Choropleth map tree aboundance js -->
   <div class="flex justify-center items-center ">
-    <div id="my_choropleth_aboundance" style="width: 1000px; height: 500px;" >
+    <div id="my_choropleth_abundance" style="width: 1000px; height: 600px;" >
       <script src="https://d3js.org/d3.v6.js"></script>
-      <script type="module" src="../Assignment_4/js_4/choropleth_map_aboundance.js"></script>
+      <script type="module" src="../Assignment_4/js_4/choropleth_map_abundance.js"></script>
     </div>
   </div>
 
@@ -193,14 +201,16 @@
     <div class="text-5xl"></div>
       <h1 class="text-neutral-700 text-3xl" style="margin-top: 20px;" >Choropleth map</h1>
       <h1 class="text-neutral-700 text-2xl" >Tree density</h1>
-      <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; font-size: 18px;">
-        Add description here...
+      <p class="text-center text-neutral-600 text-left mt-3 mx-auto max-w-4xl" style="margin-top: 20px; margin-bottom: 40px; font-size: 18px;">
+        Our fourth visualization is a choropleth map. <br>
+        In this case the chart shows the tree density in each state, again, this information is conveyed by the color of the states. <br>
+        The density value is computed by dividing the number of trees in each state by the area of the state. <br>
       </p>
   </div>
 
   <!-- Choropleth map tree density js -->
   <div class="flex justify-center items-center ">
-    <div id="my_choropleth_density" style="width: 1000px; height: 500px; margin-bottom: 70px;" >
+    <div id="my_choropleth_density" style="width: 1000px; height: 600px; margin-bottom: 70px;" >
       <script src="https://d3js.org/d3.v4.js"></script>
       <script type="module" src="../Assignment_4/js_4/choropleth_map_density.js"></script>
     </div>

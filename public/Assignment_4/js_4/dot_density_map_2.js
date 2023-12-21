@@ -18,7 +18,7 @@ const treeColorDictionary = {
 
 //Width and height of map
 var width = 1500;
-var height = 500;
+var height = 600;
 
 // D3 Projection
 var projection = d3.geo.albersUsa()
@@ -57,7 +57,19 @@ var svg = d3.select("body")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
+
+    // Append title to SVG
+    svg.append("text")
+    .attr("x", width / 2)             
+    .attr("y", 30) // You can adjust this value to move the title up or down
+    .attr("text-anchor", "middle")  
+    .style("font-size", "20px")
+    .style("font-family", "'Fira Sans', sans-serif")  
+    .style("font-weight", "bold")
+    .style("fill", "#333") // Use a dark color for the text for better readability
+    .text("Tree concentration of the top-10 scientific name + other in the United States");
         
+
     // Append Div for tooltip to SVG
     var div = d3.select("body")
         .append("div")   
@@ -122,7 +134,7 @@ d3.json("../Assignment_4/json_4/us-states.json", function(json) {
     // d3.csv("../Assignment_4/Coord_trees_state.csv", function(data) {
     // d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQoZ2K9t0hRKfh9CsosvhXHArNGujt8K8EBvZXhUSXGOJzYKbgrHhOI1jnOaaaWe4vrCKmHjnVS2Gv_/pub?output=csv", function(data) {
 
-    d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vT1x9iuNt9qyb3i-CvSppvvGmJlWc8uziTrmXAbKadPZ3q894cyEwiQKjuMKHdg35_oBW4WzAzCsWql/pub?output=csv", function(data) {
+    d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQGFgFbKBipYl0R-ftaRoQ91xlg37UXXNfVMcM3kOtV_7twbmG287juwuatcAymp10kBORqp7K8DoGv/pub?output=csv", function(data) {
 
     var tooltip = d3.select('body')
             .append("div")
@@ -142,10 +154,10 @@ d3.json("../Assignment_4/json_4/us-states.json", function(json) {
     .enter()
     .append("circle")
     .attr("cx", function(d) {
-        return projection([d.long_coor, d.lat_coor])[0];
+        return projection([d.longitude_coordinate, d.latitude_coordinate])[0];
     })
     .attr("cy", function(d) {
-        return projection([d.long_coor, d.lat_coor])[1];
+        return projection([d.longitude_coordinate, d.latitude_coordinate])[1];
     })
     .attr("r", function(d) {
             // console.log(Math.sqrt(d.value) * 0.05);

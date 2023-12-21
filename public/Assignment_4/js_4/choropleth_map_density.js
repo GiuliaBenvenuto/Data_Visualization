@@ -3,7 +3,7 @@
 
 //Width and height of map
 var width = 1000;
-var height = 500;
+var height = 600;
 
 // D3 Projection
 var projection = d3.geo.albersUsa()
@@ -22,6 +22,18 @@ var svg = d3.select("#my_choropleth_density")
 	.attr("width", width)
 	.attr("height", height);
 	
+
+svg.append("text")
+.attr("x", width / 2)             
+.attr("y", 30) // You can adjust this value to move the title up or down
+.attr("text-anchor", "middle")  
+.style("font-size", "20px")
+.style("font-family", "'Fira Sans', sans-serif")  
+.style("font-weight", "bold")
+.style("fill", "#333") // Use a dark color for the text for better readability
+.text("Tree density in the United States");
+
+
 // Append Div for tooltip to SVG
 var div = d3.select("body")
 	.append("div")   
@@ -40,24 +52,12 @@ d3.json("../Assignment_4/json_4/us-states.json", function(json) {
     // d3.csv("../Assignment_4/Coord_trees_state.csv", function(data) {
     // d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQoZ2K9t0hRKfh9CsosvhXHArNGujt8K8EBvZXhUSXGOJzYKbgrHhOI1jnOaaaWe4vrCKmHjnVS2Gv_/pub?output=csv", function(data) {
 
-    d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTIfkrSeR2r1eMPvQcmraEQVWOY9th4GM-sOGLZb_It_KUKRTrtLIxKhqwKR9wCbsN6UHwkhvDimvxS/pub?output=csv", function(data) {
+    d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vT3Cs2JwEDfrG-Be1PpoUA2zQUne9Aql_We5XIx_DUIDNvrQfeh-De9hl6BNhPraekmwwI3hdurWVQA/pub?output=csv", function(data) {
 
-
-	var maxColumn = data.map(function(d) {
-		return d.max;
-	});
-	var max_value = maxColumn[0];
-	max_value = parseFloat(max_value);
-	
-	var minColumn = data.map(function(d) {
-		return d.min;
-	});
-	var min_value = minColumn[0];
-	min_value = parseFloat(min_value);
 
 	// Define linear scale for output
 	var colorScale = d3.scaleLinear();
-        colorScale.domain([min_value, 5.46])
+        colorScale.domain([0.01, 5.46])
         colorScale.range(['#bbf7d0', '#15803d'])
 
 
@@ -65,6 +65,16 @@ d3.json("../Assignment_4/json_4/us-states.json", function(json) {
 	var dataMap = {};
 	data.forEach(function(d) {
 		dataMap[d.state] = +d.Density; // Convert value to a number if it's a string
+	});
+
+	var dataMap2 = {};
+	data.forEach(function(d) {
+		dataMap2[d.state] = +d.totTree; // Convert value to a number if it's a string
+	});
+
+	var dataMap3 = {};
+	data.forEach(function(d) {
+		dataMap3[d.state] = +d.Area_sqkm; // Convert value to a number if it's a string
 	});
 
 	var tooltip = d3.select('body')
@@ -102,9 +112,20 @@ d3.json("../Assignment_4/json_4/us-states.json", function(json) {
 		.on("mouseover", function(d) {
 			// Get the value for this state
 			var value = dataMap[d.properties.name];
+			var totTree = dataMap2[d.properties.name];
+			var area = dataMap3[d.properties.name];
+
 			// If the value is undefined, set it to 0
 			if (value === undefined) {
-				value = 0;
+				value = "No data available"
+			}
+
+			if (totTree === undefined) {
+				totTree = "No data available"
+			}
+
+			if (area === undefined) {
+				area = "No data available"
 			}
 			
 			tooltip.transition()
@@ -112,7 +133,9 @@ d3.json("../Assignment_4/json_4/us-states.json", function(json) {
 				.style("opacity", .9);
 			tooltip.html(
 				"<strong>State:</strong> " + d.properties.name + "<br>" +
-				"<strong>Value:</strong> " + value
+				"<strong>Density:</strong> " + value + (value !== "No data available" ? " trees/km<sup>2</sup><br>": "<br>") +
+				"<strong>Tree number:</strong> " + totTree + "<br>" +
+				"<strong>State area:</strong> " + area + (area !== "No data available" ? " km<sup>2</sup>" : "")
 			)
 			.style("left", (d3.event.pageX) + "px")
 			.style("top", (d3.event.pageY - 28) + "px");

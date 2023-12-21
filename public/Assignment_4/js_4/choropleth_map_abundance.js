@@ -3,7 +3,7 @@
 
 //Width and height of map
 var width = 1000;
-var height = 500;
+var height = 600;
 
 // D3 Projection
 var projection = d3.geo.albersUsa()
@@ -20,10 +20,21 @@ var path = d3.geo.path()               // path generator that will convert GeoJS
 
             
 
-var svg = d3.select("#my_choropleth_aboundance")
+var svg = d3.select("#my_choropleth_abundance")
 	.append("svg")
 	.attr("width", width)
 	.attr("height", height);
+
+
+svg.append("text")
+.attr("x", width / 2)             
+.attr("y", 30) // You can adjust this value to move the title up or down
+.attr("text-anchor", "middle")  
+.style("font-size", "20px")
+.style("font-family", "'Fira Sans', sans-serif")  
+.style("font-weight", "bold")
+.style("fill", "#333") // Use a dark color for the text for better readability
+.text("Tree abundance in the United States");
 	
 // Append Div for tooltip to SVG
 var div = d3.select("body")
