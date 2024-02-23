@@ -289,20 +289,20 @@ function updateLineChart(selectedOption) {
             .style("font-family", "Fira Sans")
 
             // Add horizontal grid lines
-        // Add horizontal grid lines
-svg.append("g")
-.attr("class", "grid")
-.call(d3.axisLeft(y)
-    .tickSize(-width)
-    .tickFormat("")
-    .tickSizeOuter(0) // Exclude the outer tick at the top
-);
+            // Add horizontal grid lines
+            svg.append("g")
+            .attr("class", "grid")
+            .call(d3.axisLeft(y)
+                .tickSize(-width)
+                .tickFormat("")
+                .tickSizeOuter(0) // Exclude the outer tick at the top
+            );
 
-// Style the grid lines
-svg.selectAll(".grid line")
-.style("stroke", "#ccc")  // Grey color
-.style("stroke-dasharray", "3 3")  // Dashed line
-.style("opacity", 0.5);  // Opacity 
+            // Style the grid lines
+            svg.selectAll(".grid line")
+            .style("stroke", "#ccc")  // Grey color
+            .style("stroke-dasharray", "3 3")  // Dashed line
+            .style("opacity", 0.5);  // Opacity 
             
 
         /*
@@ -323,31 +323,6 @@ svg.selectAll(".grid line")
             .style("font", "15px Fira Sans")
             .style("color", "#333"); // Use a dark grey color for the text
 
-
-        /* Draw the line
-        svg.selectAll(".line")
-            .data(filteredColumns) // Use the filtered columns as the data
-            .enter()
-            .append("path")
-            .attr("fill", "none")
-            //.attr("stroke", function(column) { return color(column); })
-            .attr("stroke", function (column, i) {
-                // Use the color scale to assign color based on file URL index
-
-                // CHANGE HERE
-                // return yearColorDictionary[filteredColumns[index]];
-                // return color(fileUrls[index]);
-                return lineColors[i];
-            })
-            .attr("stroke-width", 1.8)
-            .attr("d", function(column) {
-                return d3.line()
-                    .x(function(d) { return x(d.Months); }) // Assuming 'Months' is the x-axis variable
-                    .y(function(d) { return y(+d[column]); }) // Use the current column for the y-axis
-                    (data.filter(function(d) {
-                        return filteredColumns.includes(column); // Filter the data to include only the selected columns
-                    }));
-            })*/
 
         svg.selectAll(".line")
             .data(filteredColumns)
